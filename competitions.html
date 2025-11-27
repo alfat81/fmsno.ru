@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Соревнования - Нижегородская Федерация Мотоциклетного Спорта</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logos-container">
+                <img src="images/gerb_nno.png" alt="Герб Нижегородской области">
+                <img src="images/mfr_logo.png" alt="Эмблема Мотофедерации России">
+                <img src="images/fmsno_logo.png" alt="Эмблема ФМСНО">
+            </div>
+            <h1>Нижегородская Федерация<br>Мотоциклетного Спорта</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="competitions.html" class="active">Соревнования</a></li>
+                    <li><a href="videos.html">Видео</a></li>
+                    <li><a href="news.html">Новости</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="competitions-section">
+            <div class="container">
+                <h2 class="section-title">Все соревнования</h2>
+                
+                <div class="competitions-controls">
+                    <button id="add-competition-btn" class="btn">
+                        <i class="fas fa-plus"></i> Добавить соревнование
+                    </button>
+                    <button id="refresh-competitions-btn" class="btn">
+                        <i class="fas fa-sync-alt"></i> Обновить
+                    </button>
+                </div>
+                
+                <div id="competitions-container" class="competitions-grid">
+                    <!-- Соревнования будут загружены здесь -->
+                </div>
+                
+                <div id="competition-form-container" class="form-container hidden">
+                    <h3 id="form-title">Добавить новое соревнование</h3>
+                    <form id="competition-form">
+                        <input type="hidden" id="competition-id">
+                        <div class="form-group">
+                            <label for="competition-title">Название соревнования*</label>
+                            <input type="text" id="competition-title" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="competition-date">Дата*</label>
+                                <input type="date" id="competition-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="competition-time">Время*</label>
+                                <input type="time" id="competition-time" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="competition-location">Место проведения*</label>
+                            <input type="text" id="competition-location" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="competition-discipline">Дисциплина*</label>
+                            <select id="competition-discipline" required>
+                                <option value="">Выберите дисциплину</option>
+                                <option value="motocross">Мотокросс</option>
+                                <option value="supermoto">Супермото</option>
+                                <option value="motodzhimkhana">Мотоджимхана</option>
+                                <option value="enduro">Эндуро</option>
+                                <option value="sxcup">SX Cup</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="competition-description">Описание</label>
+                            <textarea id="competition-description" rows="4"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn save-btn">
+                                <i class="fas fa-save"></i> Сохранить
+                            </button>
+                            <button type="button" id="cancel-btn" class="btn cancel-btn">
+                                <i class="fas fa-times"></i> Отмена
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="empty-state hidden" id="empty-state">
+                    <div class="empty-content">
+                        <i class="fas fa-trophy empty-icon"></i>
+                        <h3>Нет запланированных соревнований</h3>
+                        <p>Добавьте первое соревнование, нажав кнопку "Добавить соревнование"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Нижегородская Федерация<br>Мотоциклетного Спорта</h3>
+                </div>
+                <div class="footer-links">
+                    <h4>Ссылки</h4>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="competitions.html">Соревнования</a></li>
+                        <li><a href="videos.html">Видео</a></li>
+                        <li><a href="news.html">Новости</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Мы в соцсетях</h4>
+                    <div class="social-icons">
+                        <a href="https://vk.com/fmsno" target="_blank" class="social-icon vk">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="#" class="social-icon telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </div>
+                    <p>4 698 подписчиков</p>
+                </div>
+            </div>
+            <div class="footer-logos">
+                <img src="images/gerb_nno.png" alt="Герб Нижегородской области">
+                <img src="images/mfr_logo.png" alt="Эмблема Мотофедерации России">
+                <img src="images/fmsno_logo.png" alt="Эмблема ФМСНО">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Нижегородская Федерация Мотоциклетного Спорта. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация
+            loadCompetitions();
+            
+            // Обработчики событий
+            document.getElementById('add-competition-btn').addEventListener('click', showAddForm);
+            document.getElementById('refresh-competitions-btn').addEventListener('click', loadCompetitions);
+            document.getElementById('cancel-btn').addEventListener('click', hideForm);
+            document.getElementById('competition-form').addEventListener('submit', saveCompetition);
+        });
+        
+        function loadCompetitions() {
+            try {
+                const competitions = JSON.parse(localStorage.getItem('competitions')) || [];
+                
+                const container = document.getElementById('competitions-container');
+                const emptyState = document.getElementById('empty-state');
+                
+                if (competitions.length === 0) {
+                    container.innerHTML = '';
+                    emptyState.classList.remove('hidden');
+                    return;
+                }
+                
+                emptyState.classList.add('hidden');
+                container.innerHTML = '';
+                
+                // Сортируем по дате
+                competitions.sort((a, b) => new Date(a.date) - new Date(b.date));
+                
+                // Создаем карточки для каждого соревнования
+                competitions.forEach(comp => {
+                    const compCard = document.createElement('div');
+                    compCard.className = 'competition-card';
+                    compCard.dataset.id = comp.id;
+                    
+                    const compDate = new Date(comp.date);
+                    const day = compDate.getDate();
+                    const month = compDate.toLocaleString('ru-RU', { month: 'long' });
+                    const year = compDate.getFullYear();
+                    
+                    compCard.innerHTML = `
+                        <div class="competition-header">
+                            <div class="competition-date">
+                                <span class="day">${day}</span>
+                                <span class="month-year">${month} ${year}</span>
+                            </div>
+                            <div class="competition-label ${getDisciplineClass(comp.discipline)}">
+                                ${getDisciplineName(comp.discipline)}
+                            </div>
+                        </div>
+                        <h3 class="competition-title">${comp.title}</h3>
+                        <div class="competition-details">
+                            <p><i class="fas fa-map-marker-alt"></i> ${comp.location}</p>
+                            <p><i class="far fa-clock"></i> ${comp.time}</p>
+                        </div>
+                        <div class="competition-description">
+                            ${comp.description || 'Описание отсутствует'}
+                        </div>
+                        <div class="competition-actions">
+                            <button class="btn edit-btn" data-id="${comp.id}">
+                                <i class="fas fa-edit"></i> Редактировать
+                            </button>
+                            <button class="btn delete-btn" data-id="${comp.id}">
+                                <i class="fas fa-trash"></i> Удалить
+                            </button>
+                            <a href="https://vk.com/fmsno" target="_blank" class="btn more-btn">
+                                <i class="fab fa-vk"></i> Подробнее в VK
+                            </a>
+                        </div>
+                    `;
+                    
+                    container.appendChild(compCard);
+                });
+                
+                // Навешиваем обработчики на кнопки
+                document.querySelectorAll('.edit-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        editCompetition(id);
+                    });
+                });
+                
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.dataset.id;
+                        deleteCompetition(id);
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Ошибка при загрузке соревнований:', error);
+                alert('Ошибка при загрузке соревнований. Попробуйте обновить страницу.');
+            }
+        }
+        
+        function showAddForm() {
+            document.getElementById('form-title').textContent = 'Добавить новое соревнование';
+            document.getElementById('competition-id').value = '';
+            document.getElementById('competition-form').reset();
+            document.getElementById('competition-form-container').classList.remove('hidden');
+        }
+        
+        function hideForm() {
+            document.getElementById('competition-form-container').classList.add('hidden');
+        }
+        
+        function editCompetition(id) {
+            try {
+                const competitions = JSON.parse(localStorage.getItem('competitions')) || [];
+                const competition = competitions.find(comp => comp.id === id);
+                
+                if (!competition) return;
+                
+                // Заполняем форму данными
+                document.getElementById('form-title').textContent = 'Редактировать соревнование';
+                document.getElementById('competition-id').value = competition.id;
+                document.getElementById('competition-title').value = competition.title;
+                document.getElementById('competition-date').value = competition.date;
+                document.getElementById('competition-time').value = competition.time;
+                document.getElementById('competition-location').value = competition.location;
+                document.getElementById('competition-discipline').value = competition.discipline;
+                document.getElementById('competition-description').value = competition.description || '';
+                
+                // Показываем форму
+                document.getElementById('competition-form-container').classList.remove('hidden');
+            } catch (error) {
+                console.error('Ошибка при редактировании соревнования:', error);
+            }
+        }
+        
+        function saveCompetition(e) {
+            e.preventDefault();
+            
+            try {
+                let competitions = JSON.parse(localStorage.getItem('competitions')) || [];
+                const id = document.getElementById('competition-id').value;
+                const now = new Date().toISOString();
+                
+                const newCompetition = {
+                    id: id || `comp_${Date.now()}`,
+                    title: document.getElementById('competition-title').value,
+                    date: document.getElementById('competition-date').value,
+                    time: document.getElementById('competition-time').value,
+                    location: document.getElementById('competition-location').value,
+                    discipline: document.getElementById('competition-discipline').value,
+                    description: document.getElementById('competition-description').value,
+                    createdAt: id ? null : now,
+                    updatedAt: now
+                };
+                
+                if (id) {
+                    // Редактируем существующее соревнование
+                    const index = competitions.findIndex(comp => comp.id === id);
+                    if (index !== -1) {
+                        competitions[index] = newCompetition;
+                    }
+                } else {
+                    // Добавляем новое соревнование
+                    competitions.push(newCompetition);
+                }
+                
+                // Сохраняем в localStorage
+                localStorage.setItem('competitions', JSON.stringify(competitions));
+                
+                // Обновляем отображение
+                loadCompetitions();
+                
+                // Скрываем форму
+                hideForm();
+                
+                // Показываем уведомление
+                showNotification(id ? 'Соревнование успешно обновлено!' : 'Соревнование успешно добавлено!', 'success');
+            } catch (error) {
+                console.error('Ошибка при сохранении соревнования:', error);
+                showNotification('Ошибка при сохранении соревнования', 'error');
+            }
+        }
+        
+        function deleteCompetition(id) {
+            if (!confirm('Вы уверены, что хотите удалить это соревнование?')) return;
+            
+            try {
+                let competitions = JSON.parse(localStorage.getItem('competitions')) || [];
+                competitions = competitions.filter(comp => comp.id !== id);
+                localStorage.setItem('competitions', JSON.stringify(competitions));
+                loadCompetitions();
+                showNotification('Соревнование успешно удалено!', 'success');
+            } catch (error) {
+                console.error('Ошибка при удалении соревнования:', error);
+                showNotification('Ошибка при удалении соревнования', 'error');
+            }
+        }
+        
+        function getDisciplineName(discipline) {
+            const names = {
+                'motocross': 'Мотокросс',
+                'supermoto': 'Супермото',
+                'motodzhimkhana': 'Мотоджимхана',
+                'enduro': 'Эндуро',
+                'sxcup': 'SX Cup'
+            };
+            return names[discipline] || 'Другое';
+        }
+        
+        function getDisciplineClass(discipline) {
+            return discipline || 'other';
+        }
+        
+        function showNotification(message, type = 'info') {
+            // Создаем уведомление
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+                <span>${message}</span>
+                <button class="close-notification">&times;</button>
+            `;
+            
+            // Добавляем в body
+            document.body.appendChild(notification);
+            
+            // Показываем
+            setTimeout(() => notification.classList.add('show'), 10);
+            
+            // Удаляем через 5 секунд
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+            
+            // Закрытие по клику
+            notification.querySelector('.close-notification').addEventListener('click', () => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            });
+        }
+        
+        // Инициализация начальных данных (если localStorage пуст)
+        window.addEventListener('load', function() {
+            if (!localStorage.getItem('competitions')) {
+                const initialCompetitions = [
+                    {
+                        id: 'comp_1',
+                        title: 'Чемпионат Нижегородской области по мотокроссу',
+                        date: '2025-06-15',
+                        time: '10:00',
+                        location: 'г. Бор, трасса "Борская горка"',
+                        discipline: 'motocross',
+                        description: 'Главное соревнование региона по мотокроссу. Призовой фонд 150 000 рублей.',
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString()
+                    },
+                    {
+                        id: 'comp_2',
+                        title: 'Открытый кубок по мотоджимхане',
+                        date: '2025-06-22',
+                        time: '11:00',
+                        location: 'Автодром "Кстово"',
+                        discipline: 'motodzhimkhana',
+                        description: 'Традиционный кубок по фигурному вождению мотоциклов.',
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString()
+                    },
+                    {
+                        id: 'comp_3',
+                        title: 'KTM SX Cup 2025',
+                        date: '2025-07-06',
+                        time: '09:00',
+                        location: 'г. Дзержинск',
+                        discipline: 'sxcup',
+                        description: 'Ежегодные соревнования на мотоциклах KTM.',
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString()
+                    }
+                ];
+                
+                localStorage.setItem('competitions', JSON.stringify(initialCompetitions));
+            }
+        });
+    </script>
+</body>
+</html>
