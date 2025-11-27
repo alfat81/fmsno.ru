@@ -653,6 +653,15 @@ footer {
     .parallax-section p {
         font-size: 1.3rem;
     }
+    
+    /* Исправление для мобильных устройств */
+    .logos-container img {
+        height: 60px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -662,15 +671,20 @@ footer {
     }
     
     .logos-container img {
+        height: 50px;
         max-width: 100%;
     }
     
+    h1 {
+        font-size: 1.3rem;
+    }
+    
     .hero {
-        padding: 60px 0;
+        padding: 40px 0;
     }
     
     .hero h2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
     
     .section-title {
@@ -690,7 +704,7 @@ footer {
     }
     
     .parallax-section h2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
     
     .parallax-section p {
