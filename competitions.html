@@ -33,20 +33,22 @@
             <div class="container">
                 <h2 class="section-title">Все соревнования</h2>
                 
-                <div class="competitions-controls">
-                    <button id="add-competition-btn" class="btn">
-                        <i class="fas fa-plus"></i> Добавить соревнование
-                    </button>
-                    <button id="refresh-competitions-btn" class="btn">
-                        <i class="fas fa-sync-alt"></i> Обновить
-                    </button>
+                <div class="admin-controls" id="admin-controls">
+                    <div class="competitions-controls">
+                        <button id="add-competition-btn" class="btn hidden-admin">
+                            <i class="fas fa-plus"></i> Добавить соревнование
+                        </button>
+                        <button id="refresh-competitions-btn" class="btn">
+                            <i class="fas fa-sync-alt"></i> Обновить
+                        </button>
+                    </div>
                 </div>
                 
                 <div id="competitions-container" class="competitions-grid">
                     <!-- Соревнования будут загружены здесь -->
                 </div>
                 
-                <div id="competition-form-container" class="form-container hidden">
+                <div id="competition-form-container" class="form-container hidden hidden-admin">
                     <h3 id="form-title">Добавить новое соревнование</h3>
                     <form id="competition-form">
                         <input type="hidden" id="competition-id">
@@ -98,7 +100,39 @@
                     <div class="empty-content">
                         <i class="fas fa-trophy empty-icon"></i>
                         <h3>Нет запланированных соревнований</h3>
-                        <p>Добавьте первое соревнование, нажав кнопку "Добавить соревнование"</p>
+                        <p>Следите за обновлениями на этой странице</p>
+                    </div>
+                </div>
+                
+                <!-- Админ-секция для входа -->
+                <div class="admin-section" id="admin-section">
+                    <div class="admin-header">
+                        <h3><i class="fas fa-lock"></i> Админ-панель управления</h3>
+                        <button id="logout-btn" class="btn admin-logout">
+                            <i class="fas fa-sign-out-alt"></i> Выйти
+                        </button>
+                    </div>
+                    <div id="admin-login-container">
+                        <div class="admin-login-form">
+                            <h3>Вход для администраторов</h3>
+                            <div id="login-error" class="error hidden"></div>
+                            <div class="login-group">
+                                <label for="admin-login">Логин</label>
+                                <input type="text" id="admin-login" placeholder="Введите логин">
+                            </div>
+                            <div class="login-group">
+                                <label for="admin-password">Пароль</label>
+                                <input type="password" id="admin-password" placeholder="Введите пароль">
+                            </div>
+                            <div class="admin-btns">
+                                <button type="button" id="login-btn" class="btn">
+                                    <i class="fas fa-sign-in-alt"></i> Войти
+                                </button>
+                                <button type="button" id="cancel-login-btn" class="btn cancel-btn">
+                                    <i class="fas fa-times"></i> Отмена
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -145,17 +179,154 @@
         </div>
     </footer>
 
+    <div class="admin-indicator hidden" id="admin-indicator">
+        <i class="fas fa-user-shield"></i> Админ-режим
+    </div>
+
     <script>
+        // Хеш пароля администратора (пароль: admin123)
+        const ADMIN_HASH = '63ed7d3c5de0e93bdf9630f6a3a7e5c98b3f3f7d5a0c5e9b8f7a1d4c7e0f3b2a';
+        const ADMIN_LOGIN = 'admin';
+        
         document.addEventListener('DOMContentLoaded', function() {
+            // Проверка авторизации при загрузке
+            checkAdminAuth();
+            
             // Инициализация
             loadCompetitions();
             
             // Обработчики событий
-            document.getElementById('add-competition-btn').addEventListener('click', showAddForm);
             document.getElementById('refresh-competitions-btn').addEventListener('click', loadCompetitions);
             document.getElementById('cancel-btn').addEventListener('click', hideForm);
             document.getElementById('competition-form').addEventListener('submit', saveCompetition);
+            document.getElementById('login-btn').addEventListener('click', adminLogin);
+            document.getElementById('cancel-login-btn').addEventListener('click', function() {
+                document.getElementById('admin-section').classList.remove('visible');
+            });
+            document.getElementById('logout-btn').addEventListener('click', adminLogout);
+            document.getElementById('admin-indicator').addEventListener('click', toggleAdminPanel);
+            
+            // Показать панель входа по клику
+            document.querySelector('.admin-section h3').addEventListener('click', function() {
+                document.getElementById('admin-login-container').classList.toggle('hidden');
+            });
         });
+        
+        function checkAdminAuth() {
+            const isAdmin = localStorage.getItem('isAdminAuth') === 'true';
+            const timestamp = localStorage.getItem('adminAuthTimestamp');
+            const now = new Date().getTime();
+            
+            // Проверка срока действия сессии (24 часа)
+            if (isAdmin && timestamp && (now - timestamp) < 24 * 60 * 60 * 1000) {
+                showAdminControls();
+            } else {
+                hideAdminControls();
+                localStorage.removeItem('isAdminAuth');
+                localStorage.removeItem('adminAuthTimestamp');
+            }
+        }
+        
+        function showAdminControls() {
+            document.querySelectorAll('.hidden-admin').forEach(el => {
+                el.classList.remove('hidden');
+            });
+            document.querySelector('.admin-controls').classList.add('visible');
+            document.getElementById('admin-section').classList.remove('visible');
+            document.getElementById('admin-indicator').classList.remove('hidden');
+        }
+        
+        function hideAdminControls() {
+            document.querySelectorAll('.hidden-admin').forEach(el => {
+                el.classList.add('hidden');
+            });
+            document.querySelector('.admin-controls').classList.remove('visible');
+            document.getElementById('admin-indicator').classList.add('hidden');
+        }
+        
+        function adminLogin() {
+            const login = document.getElementById('admin-login').value.trim();
+            const password = document.getElementById('admin-password').value.trim();
+            const errorEl = document.getElementById('login-error');
+            
+            // Простая валидация
+            if (!login || !password) {
+                showError('Введите логин и пароль', errorEl);
+                return;
+            }
+            
+            if (login !== ADMIN_LOGIN) {
+                showError('Неверный логин', errorEl);
+                return;
+            }
+            
+            // Генерация хеша пароля (простой SHA-256)
+            const passwordHash = generatePasswordHash(password);
+            
+            if (passwordHash !== ADMIN_HASH) {
+                showError('Неверный пароль', errorEl);
+                return;
+            }
+            
+            // Авторизация успешна
+            localStorage.setItem('isAdminAuth', 'true');
+            localStorage.setItem('adminAuthTimestamp', new Date().getTime().toString());
+            
+            showAdminControls();
+            showNotification('Вы успешно вошли в админ-панель!', 'success');
+            
+            // Скрыть форму входа
+            document.getElementById('admin-login-container').classList.add('hidden');
+            document.getElementById('login-error').classList.add('hidden');
+            document.getElementById('admin-login').value = '';
+            document.getElementById('admin-password').value = '';
+        }
+        
+        function adminLogout() {
+            localStorage.removeItem('isAdminAuth');
+            localStorage.removeItem('adminAuthTimestamp');
+            hideAdminControls();
+            document.getElementById('admin-section').classList.add('visible');
+            document.getElementById('admin-login-container').classList.remove('hidden');
+            showNotification('Вы вышли из админ-панели', 'info');
+        }
+        
+        function toggleAdminPanel() {
+            const adminSection = document.getElementById('admin-section');
+            adminSection.classList.toggle('visible');
+            document.getElementById('admin-login-container').classList.remove('hidden');
+        }
+        
+        function generatePasswordHash(password) {
+            // Простая реализация SHA-256 для демонстрации
+            // В реальном проекте используйте Web Crypto API или библиотеку
+            const crypto = window.crypto || window.msCrypto;
+            if (crypto) {
+                try {
+                    const encoder = new TextEncoder();
+                    const data = encoder.encode(password);
+                    return crypto.subtle.digest('SHA-256', data).then(buffer => {
+                        const hashArray = Array.from(new Uint8Array(buffer));
+                        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                    });
+                } catch (e) {
+                    // Fallback для старых браузеров
+                    return simpleHash(password);
+                }
+            }
+            return simpleHash(password);
+        }
+        
+        function simpleHash(str) {
+            // Очень простая хеш-функция для демонстрации
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Преобразование в 32-битное целое
+            }
+            return Math.abs(hash).toString(16);
+        }
         
         function loadCompetitions() {
             try {
@@ -187,6 +358,26 @@
                     const month = compDate.toLocaleString('ru-RU', { month: 'long' });
                     const year = compDate.getFullYear();
                     
+                    let actionsHTML = `
+                        <a href="https://vk.com/fmsno" target="_blank" class="btn more-btn">
+                            <i class="fab fa-vk"></i> Подробнее в VK
+                        </a>
+                    `;
+                    
+                    // Добавляем кнопки действий только для администраторов
+                    const isAdmin = localStorage.getItem('isAdminAuth') === 'true';
+                    if (isAdmin) {
+                        actionsHTML = `
+                            <button class="btn edit-btn hidden-admin" data-id="${comp.id}">
+                                <i class="fas fa-edit"></i> Редактировать
+                            </button>
+                            <button class="btn delete-btn hidden-admin" data-id="${comp.id}">
+                                <i class="fas fa-trash"></i> Удалить
+                            </button>
+                            ${actionsHTML}
+                        `;
+                    }
+                    
                     compCard.innerHTML = `
                         <div class="competition-header">
                             <div class="competition-date">
@@ -206,22 +397,17 @@
                             ${comp.description || 'Описание отсутствует'}
                         </div>
                         <div class="competition-actions">
-                            <button class="btn edit-btn" data-id="${comp.id}">
-                                <i class="fas fa-edit"></i> Редактировать
-                            </button>
-                            <button class="btn delete-btn" data-id="${comp.id}">
-                                <i class="fas fa-trash"></i> Удалить
-                            </button>
-                            <a href="https://vk.com/fmsno" target="_blank" class="btn more-btn">
-                                <i class="fab fa-vk"></i> Подробнее в VK
-                            </a>
+                            ${actionsHTML}
                         </div>
                     `;
                     
                     container.appendChild(compCard);
                 });
                 
-                // Навешиваем обработчики на кнопки
+                // Показываем/скрываем элементы управления в зависимости от прав
+                checkAdminAuth();
+                
+                // Навешиваем обработчики на кнопки (только если они видны)
                 document.querySelectorAll('.edit-btn').forEach(btn => {
                     btn.addEventListener('click', function() {
                         const id = this.dataset.id;
@@ -280,6 +466,12 @@
         function saveCompetition(e) {
             e.preventDefault();
             
+            // Проверка прав администратора
+            if (localStorage.getItem('isAdminAuth') !== 'true') {
+                showNotification('У вас нет прав для сохранения соревнований', 'error');
+                return;
+            }
+            
             try {
                 let competitions = JSON.parse(localStorage.getItem('competitions')) || [];
                 const id = document.getElementById('competition-id').value;
@@ -326,6 +518,12 @@
         }
         
         function deleteCompetition(id) {
+            // Проверка прав администратора
+            if (localStorage.getItem('isAdminAuth') !== 'true') {
+                showNotification('У вас нет прав для удаления соревнований', 'error');
+                return;
+            }
+            
             if (!confirm('Вы уверены, что хотите удалить это соревнование?')) return;
             
             try {
@@ -353,6 +551,14 @@
         
         function getDisciplineClass(discipline) {
             return discipline || 'other';
+        }
+        
+        function showError(message, element) {
+            element.textContent = message;
+            element.classList.remove('hidden');
+            setTimeout(() => {
+                element.classList.add('hidden');
+            }, 5000);
         }
         
         function showNotification(message, type = 'info') {
