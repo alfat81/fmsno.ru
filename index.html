@@ -172,7 +172,14 @@
         </div>
     </footer>
 
+    <div class="admin-indicator hidden" id="admin-indicator">
+        <i class="fas fa-user-shield"></i> Админ-режим
+    </div>
+
     <script>
+        // Хеш пароля администратора для индикатора
+        const ADMIN_HASH_SIMPLE = '63ed7d3c5de0e93bdf9630f6a3a7e5c98b3f3f7d5a0c5e9b8f7a1d4c7e0f3b2a';
+        
         // Простой параллакс-эффект
         document.addEventListener('DOMContentLoaded', function() {
             const parallaxSections = document.querySelectorAll('.parallax-section');
@@ -187,6 +194,9 @@
             
             // Загрузка соревнований для главной страницы
             loadUpcomingEvents();
+            
+            // Проверка админки
+            checkAdminStatus();
         });
         
         function loadUpcomingEvents() {
@@ -231,6 +241,20 @@
                 });
             } catch (error) {
                 console.error('Ошибка при загрузке соревнований:', error);
+            }
+        }
+        
+        function checkAdminStatus() {
+            const isAdmin = localStorage.getItem('isAdminAuth') === 'true';
+            const timestamp = localStorage.getItem('adminAuthTimestamp');
+            const now = new Date().getTime();
+            
+            // Проверка срока действия сессии (24 часа)
+            if (isAdmin && timestamp && (now - timestamp) < 24 * 60 * 60 * 1000) {
+                document.getElementById('admin-indicator').classList.remove('hidden');
+                document.getElementById('admin-indicator').addEventListener('click', function() {
+                    window.location.href = 'competitions.html';
+                });
             }
         }
     </script>
