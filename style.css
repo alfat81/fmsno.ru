@@ -1090,7 +1090,103 @@ footer {
         padding: 10px;
         font-size: 0.9rem;
     }
+}
+
+/* Адаптивность для планшетов и больших экранов */
+@media (max-width: 992px) {
+    .about-content,
+    .contacts-grid {
+        grid-template-columns: 1fr;
+    }
     
+    .contact-map {
+        order: -1;
+    }
+    
+    .parallax-section {
+        min-height: 400px;
+    }
+    
+    .parallax-section h2 {
+        font-size: 2.5rem;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .competition-actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        margin-top: 12px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    nav ul li {
+        margin: 4px 0;
+        margin-left: 0;
+    }
+    
+    nav ul li a {
+        font-size: 0.95rem;
+    }
+    
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .event-card {
+        flex-direction: column;
+    }
+    
+    .event-date {
+        min-width: 100%;
+    }
+    
+    .parallax-section h2 {
+        font-size: 2.2rem;
+    }
+    
+    .parallax-section p {
+        font-size: 1.3rem;
+    }
+    
+    /* Уменьшение размера логотипов на планшетах */
+    .logos-container img {
+        height: 50px;
+    }
+    
+    .logos-container {
+        gap: 12px;
+        margin: 6px 0;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+@media (max-width: 480px) {
     .logos-container {
         flex-direction: row;
         overflow-x: auto;
@@ -1199,99 +1295,5 @@ footer {
     
     .notification.show {
         transform: translateY(0);
-    }
-}
-
-/* Адаптивность для планшетов и больших экранов */
-@media (max-width: 992px) {
-    .about-content,
-    .contacts-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .contact-map {
-        order: -1;
-    }
-    
-    .parallax-section {
-        min-height: 400px;
-    }
-    
-    .parallax-section h2 {
-        font-size: 2.5rem;
-    }
-    
-    h1 {
-        font-size: 1.5rem;
-    }
-    
-    .competition-actions {
-        flex-direction: column;
-    }
-    
-    .btn {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        margin-top: 12px;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    nav ul li {
-        margin: 4px 0;
-        margin-left: 0;
-    }
-    
-    nav ul li a {
-        font-size: 0.95rem;
-    }
-    
-    .hero h2 {
-        font-size: 2.2rem;
-    }
-    
-    .hero p {
-        font-size: 1.1rem;
-    }
-    
-    .section-title {
-        font-size: 1.8rem;
-    }
-    
-    .event-card {
-        flex-direction: column;
-    }
-    
-    .event-date {
-        min-width: 100%;
-    }
-    
-    .parallax-section h2 {
-        font-size: 2.2rem;
-    }
-    
-    .parallax-section p {
-        font-size: 1.3rem;
-    }
-    
-    /* Уменьшение размера логотипов на планшетах */
-    .logos-container img {
-        height: 50px;
-    }
-    
-    .logos-container {
-        gap: 12px;
-        margin: 6px 0;
-    }
-    
-    .form-row {
-        flex-direction: column;
-        gap: 0;
     }
 }
