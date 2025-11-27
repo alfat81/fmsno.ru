@@ -885,102 +885,212 @@ footer {
     opacity: 0.8;
 }
 
-/* Адаптивность */
-@media (max-width: 992px) {
-    .about-content,
-    .contacts-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .contact-map {
-        order: -1;
-    }
-    
-    .parallax-section {
-        min-height: 400px;
-    }
-    
-    .parallax-section h2 {
-        font-size: 2.5rem;
-    }
-    
-    h1 {
-        font-size: 1.5rem;
-    }
-    
-    .competition-actions {
-        flex-direction: column;
-    }
-    
-    .btn {
-        width: 100%;
-        justify-content: center;
-    }
+/* Стили для всплывающей админ-панели */
+.admin-toggle-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #e53935;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
 }
 
+.admin-toggle-btn:hover {
+    background: #c62828;
+    transform: scale(1.1);
+}
+
+.admin-bottom-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    box-shadow: 0 -2px 15px rgba(0,0,0,0.2);
+    z-index: 999;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.admin-bottom-panel.visible {
+    transform: translateY(0);
+}
+
+.admin-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #1a237e, #283593);
+    color: white;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.admin-panel-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.admin-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.admin-close-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.admin-panel-content {
+    padding: 20px;
+}
+
+.admin-form-section {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.admin-login-btn {
+    width: 100%;
+    margin-top: 15px;
+    background: #1e88e5 !important;
+}
+
+.admin-login-btn:hover {
+    background: #1565c0 !important;
+}
+
+.login-group {
+    margin-bottom: 15px;
+}
+
+.login-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #1a237e;
+}
+
+.login-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.admin-help-text {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #546e7a;
+    text-align: center;
+}
+
+.admin-controls-panel {
+    text-align: center;
+}
+
+.admin-welcome {
+    margin-bottom: 20px;
+}
+
+.admin-welcome h4 {
+    color: #1a237e;
+    margin-bottom: 8px;
+}
+
+.admin-welcome p {
+    color: #546e7a;
+    font-size: 0.95rem;
+}
+
+.admin-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.admin-action-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-action-btn i {
+    margin-right: 10px;
+}
+
+.admin-logout-btn {
+    background: #e53935 !important;
+}
+
+.admin-logout-btn:hover {
+    background: #c62828 !important;
+}
+
+/* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        margin-top: 12px;
-        justify-content: center;
-        align-items: center;
+    .admin-toggle-btn {
+        bottom: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
     }
     
-    nav ul li {
-        margin: 4px 0;
-        margin-left: 0;
+    .admin-panel-content {
+        padding: 15px;
     }
     
-    nav ul li a {
-        font-size: 0.95rem;
-    }
-    
-    .hero h2 {
-        font-size: 2.2rem;
-    }
-    
-    .hero p {
-        font-size: 1.1rem;
-    }
-    
-    .section-title {
-        font-size: 1.8rem;
-    }
-    
-    .event-card {
-        flex-direction: column;
-    }
-    
-    .event-date {
-        min-width: 100%;
-    }
-    
-    .parallax-section h2 {
-        font-size: 2.2rem;
-    }
-    
-    .parallax-section p {
-        font-size: 1.3rem;
-    }
-    
-    /* Уменьшение размера логотипов на планшетах */
-    .logos-container img {
-        height: 50px;
-    }
-    
-    .logos-container {
-        gap: 12px;
-        margin: 6px 0;
-    }
-    
-    .form-row {
-        flex-direction: column;
-        gap: 0;
+    .admin-actions {
+        gap: 10px;
     }
 }
 
 @media (max-width: 480px) {
-    /* Горизонтальное расположение логотипов на мобильных */
+    .admin-toggle-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .admin-panel-header h3 {
+        font-size: 1rem;
+    }
+    
+    .admin-actions {
+        gap: 8px;
+    }
+    
+    .admin-action-btn {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    
     .logos-container {
         flex-direction: row;
         overflow-x: auto;
@@ -1090,105 +1200,98 @@ footer {
     .notification.show {
         transform: translateY(0);
     }
-    /* Админ-панель */
-.admin-section {
-    margin-top: 40px;
-    padding: 20px;
-    background: #e3f2fd;
-    border-radius: 8px;
-    display: none;
 }
 
-.admin-section.visible {
-    display: block;
+/* Адаптивность для планшетов и больших экранов */
+@media (max-width: 992px) {
+    .about-content,
+    .contacts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-map {
+        order: -1;
+    }
+    
+    .parallax-section {
+        min-height: 400px;
+    }
+    
+    .parallax-section h2 {
+        font-size: 2.5rem;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .competition-actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
-.admin-login-form {
-    max-width: 400px;
-    margin: 0 auto;
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
-
-.admin-login-form h3 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #1a237e;
-}
-
-.login-group {
-    margin-bottom: 20px;
-}
-
-.login-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: #1a237e;
-}
-
-.login-group input {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.admin-btns {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
-.admin-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.admin-logout {
-    background: #e53935 !important;
-}
-
-.admin-logout:hover {
-    background: #c62828 !important;
-}
-
-.admin-controls {
-    display: none;
-}
-
-.admin-controls.visible {
-    display: block;
-    margin-bottom: 20px;
-}
-
-.hidden-admin {
-    display: none !important;
-}
-
-/* Стили для индикатора админа */
-.admin-indicator {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background: #1a237e;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    cursor: pointer;
-}
-
-.admin-indicator:hover {
-    background: #283593;
-}
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        margin-top: 12px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    nav ul li {
+        margin: 4px 0;
+        margin-left: 0;
+    }
+    
+    nav ul li a {
+        font-size: 0.95rem;
+    }
+    
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .event-card {
+        flex-direction: column;
+    }
+    
+    .event-date {
+        min-width: 100%;
+    }
+    
+    .parallax-section h2 {
+        font-size: 2.2rem;
+    }
+    
+    .parallax-section p {
+        font-size: 1.3rem;
+    }
+    
+    /* Уменьшение размера логотипов на планшетах */
+    .logos-container img {
+        height: 50px;
+    }
+    
+    .logos-container {
+        gap: 12px;
+        margin: 6px 0;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
 }
