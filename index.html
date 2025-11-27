@@ -28,13 +28,15 @@
     </header>
 
     <main>
-        <section class="hero">
-            <div class="container">
-                <h2>Официальный сайт Федерации мотоспорта Нижегородской области</h2>
-                <p>Информация о соревнованиях, результатах и событиях мотоспорта региона</p>
-                <a href="https://vk.com/fmsno" class="btn" target="_blank">
-                    <i class="fab fa-vk"></i> Наша группа ВКонтакте
-                </a>
+        <section class="parallax-section" data-parallax="0.5">
+            <div class="parallax-content">
+                <div class="container">
+                    <h2>Официальный сайт Федерации мотоспорта Нижегородской области</h2>
+                    <p>Информация о соревнованиях, результатах и событиях мотоспорта региона</p>
+                    <a href="https://vk.com/fmsno" class="btn" target="_blank">
+                        <i class="fab fa-vk"></i> Наша группа ВКонтакте
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -80,6 +82,32 @@
                 </div>
                 <div class="more-events">
                     <a href="#" class="btn">Все соревнования</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="parallax-section" data-parallax="0.3" style="background-image: url('images/parallax-bg2.jpg');">
+            <div class="parallax-content">
+                <div class="container">
+                    <h2 class="section-title">Достижения Федерации</h2>
+                    <div class="achievements">
+                        <div class="achievement-card">
+                            <div class="achievement-number">15+</div>
+                            <div class="achievement-text">Ежегодных соревнований</div>
+                        </div>
+                        <div class="achievement-card">
+                            <div class="achievement-number">200+</div>
+                            <div class="achievement-text">Участников в сезоне</div>
+                        </div>
+                        <div class="achievement-card">
+                            <div class="achievement-number">8</div>
+                            <div class="achievement-text">Годов на рынке</div>
+                        </div>
+                        <div class="achievement-card">
+                            <div class="achievement-number">4</div>
+                            <div class="achievement-text">Дисциплин</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -139,5 +167,20 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Простой параллакс-эффект
+        document.addEventListener('DOMContentLoaded', function() {
+            const parallaxSections = document.querySelectorAll('.parallax-section');
+            
+            window.addEventListener('scroll', function() {
+                parallaxSections.forEach(section => {
+                    const speed = section.getAttribute('data-parallax') || 0.5;
+                    const yPos = -(window.scrollY * speed);
+                    section.style.backgroundPosition = `center ${yPos}px`;
+                });
+            });
+        });
+    </script>
 </body>
 </html>
