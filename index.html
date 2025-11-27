@@ -19,8 +19,9 @@
             <nav>
                 <ul>
                     <li><a href="index.html" class="active">Главная</a></li>
+                    <li><a href="competitions.html">Соревнования</a></li>
                     <li><a href="videos.html">Видео</a></li>
-                    <li><a href="#">Новости</a></li>
+                    <li><a href="news.html">Новости</a></li>
                     <li><a href="contacts.html">Контакты</a></li>
                 </ul>
             </nav>
@@ -43,7 +44,8 @@
         <section class="events">
             <div class="container">
                 <h2 class="section-title">Ближайшие соревнования</h2>
-                <div class="events-grid">
+                <div id="upcoming-events" class="events-grid">
+                    <!-- События будут загружены сюда из localStorage -->
                     <div class="event-card">
                         <div class="event-date">
                             <span class="day">15</span>
@@ -81,11 +83,12 @@
                     </div>
                 </div>
                 <div class="more-events">
-                    <a href="#" class="btn">Все соревнования</a>
+                    <a href="competitions.html" class="btn">Все соревнования</a>
                 </div>
             </div>
         </section>
 
+        <!-- Остальной контент без изменений -->
         <section class="parallax-section" data-parallax="0.3" style="background-image: url('images/parallax-bg2.jpg');">
             <div class="parallax-content">
                 <div class="container">
@@ -139,8 +142,9 @@
                     <h4>Ссылки</h4>
                     <ul>
                         <li><a href="index.html">Главная</a></li>
+                        <li><a href="competitions.html">Соревнования</a></li>
                         <li><a href="videos.html">Видео</a></li>
-                        <li><a href="#">Новости</a></li>
+                        <li><a href="news.html">Новости</a></li>
                         <li><a href="contacts.html">Контакты</a></li>
                     </ul>
                 </div>
@@ -180,7 +184,55 @@
                     section.style.backgroundPosition = `center ${yPos}px`;
                 });
             });
+            
+            // Загрузка соревнований для главной страницы
+            loadUpcomingEvents();
         });
+        
+        function loadUpcomingEvents() {
+            const eventsContainer = document.getElementById('upcoming-events');
+            if (!eventsContainer) return;
+            
+            try {
+                const competitions = JSON.parse(localStorage.getItem('competitions')) || [];
+                if (competitions.length === 0) return;
+                
+                // Сортируем по дате и берем ближайшие 3 события
+                const upcoming = competitions
+                    .filter(comp => new Date(comp.date) >= new Date())
+                    .sort((a, b) => new Date(a.date) - new Date(b.date))
+                    .slice(0, 3);
+                
+                if (upcoming.length === 0) return;
+                
+                // Очищаем контейнер
+                eventsContainer.innerHTML = '';
+                
+                // Добавляем соревнования
+                upcoming.forEach(comp => {
+                    const eventDate = new Date(comp.date);
+                    const day = eventDate.getDate();
+                    const month = eventDate.toLocaleString('ru-RU', { month: 'long' }).slice(0, 3);
+                    
+                    const eventCard = document.createElement('div');
+                    eventCard.className = 'event-card';
+                    eventCard.innerHTML = `
+                        <div class="event-date">
+                            <span class="day">${day}</span>
+                            <span class="month">${month}</span>
+                        </div>
+                        <div class="event-content">
+                            <h3>${comp.title}</h3>
+                            <p class="event-location"><i class="fas fa-map-marker-alt"></i> ${comp.location}</p>
+                            <p class="event-time"><i class="far fa-clock"></i> ${comp.time}</p>
+                        </div>
+                    `;
+                    eventsContainer.appendChild(eventCard);
+                });
+            } catch (error) {
+                console.error('Ошибка при загрузке соревнований:', error);
+            }
+        }
     </script>
 </body>
 </html>
