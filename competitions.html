@@ -1,3 +1,4 @@
+<!-- Замените весь код в competitions.html на этот исправленный вариант -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -132,6 +133,11 @@
                                     <i class="fas fa-times"></i> Отмена
                                 </button>
                             </div>
+                            <div class="help-text">
+                                <p>Контактные данные для получения доступа:<br>
+                                email: admin@fmsno.ru<br>
+                                тел.: +7 (900) 123-45-67</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -184,9 +190,9 @@
     </div>
 
     <script>
-        // Хеш пароля администратора (пароль: admin123)
-        const ADMIN_HASH = '63ed7d3c5de0e93bdf9630f6a3a7e5c98b3f3f7d5a0c5e9b8f7a1d4c7e0f3b2a';
+        // Правильные данные для входа администратора
         const ADMIN_LOGIN = 'admin';
+        const ADMIN_PASSWORD = 'fmsno2025'; // Исправлен пароль
         
         document.addEventListener('DOMContentLoaded', function() {
             // Проверка авторизации при загрузке
@@ -260,10 +266,7 @@
                 return;
             }
             
-            // Генерация хеша пароля (простой SHA-256)
-            const passwordHash = generatePasswordHash(password);
-            
-            if (passwordHash !== ADMIN_HASH) {
+            if (password !== ADMIN_PASSWORD) {
                 showError('Неверный пароль', errorEl);
                 return;
             }
@@ -295,37 +298,6 @@
             const adminSection = document.getElementById('admin-section');
             adminSection.classList.toggle('visible');
             document.getElementById('admin-login-container').classList.remove('hidden');
-        }
-        
-        function generatePasswordHash(password) {
-            // Простая реализация SHA-256 для демонстрации
-            // В реальном проекте используйте Web Crypto API или библиотеку
-            const crypto = window.crypto || window.msCrypto;
-            if (crypto) {
-                try {
-                    const encoder = new TextEncoder();
-                    const data = encoder.encode(password);
-                    return crypto.subtle.digest('SHA-256', data).then(buffer => {
-                        const hashArray = Array.from(new Uint8Array(buffer));
-                        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-                    });
-                } catch (e) {
-                    // Fallback для старых браузеров
-                    return simpleHash(password);
-                }
-            }
-            return simpleHash(password);
-        }
-        
-        function simpleHash(str) {
-            // Очень простая хеш-функция для демонстрации
-            let hash = 0;
-            for (let i = 0; i < str.length; i++) {
-                const char = str.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash = hash & hash; // Преобразование в 32-битное целое
-            }
-            return Math.abs(hash).toString(16);
         }
         
         function loadCompetitions() {
