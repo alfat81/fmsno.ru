@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новости - НФМС</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logos-container">
+                <img src="images/gerb_nno.png" alt="Герб Нижегородской области">
+                <img src="images/mfr_logo.png" alt="Эмблема Мотофедерации России">
+                <img src="images/fmsno_logo.png" alt="Эмблема ФМСНО">
+            </div>
+            <h1>Нижегородская Федерация<br>Мотоциклетного Спорта</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="videos.html">Видео</a></li>
+                    <li><a href="news.html" class="active">Новости</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="news-section">
+            <div class="container">
+                <h2 class="section-title">Новости Федерации</h2>
+                <div id="news-container" class="news-container">
+                    <div class="loading">Загрузка новостей из ВКонтакте...</div>
+                </div>
+                <div class="more-news">
+                    <a href="https://vk.com/fmsno" class="btn" target="_blank">
+                        <i class="fab fa-vk"></i> Все новости в группе ВКонтакте
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Нижегородская Федерация<br>Мотоциклетного Спорта</h3>
+                </div>
+                <div class="footer-links">
+                    <h4>Ссылки</h4>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="videos.html">Видео</a></li>
+                        <li><a href="news.html">Новости</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Мы в соцсетях</h4>
+                    <div class="social-icons">
+                        <a href="https://vk.com/fmsno" target="_blank" class="social-icon vk">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="#" class="social-icon telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </div>
+                    <p>4 698 подписчиков</p>
+                </div>
+            </div>
+            <div class="footer-logos">
+                <img src="images/gerb_nno.png" alt="Герб Нижегородской области">
+                <img src="images/mfr_logo.png" alt="Эмблема Мотофедерации России">
+                <img src="images/fmsno_logo.png" alt="Эмблема ФМСНО">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Нижегородская Федерация Мотоциклетного Спорта. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Функция для получения новостей из VK
+        function fetchVKNews() {
+            const groupId = -206852382; // ID группы fmsno (отрицательный для групп)
+            const accessToken = 'vk1.a.bJ5sQZzD2NfN5HqXzN9c6k0W7l3YqP5v7J6mK8o0pL2tR4sU9vW2xY1zA0bC7dE8fG6hI5jK'; 
+            const apiUrl = `https://api.vk.com/method/wall.get?owner_id=${groupId}&count=10&access_token=${accessToken}&v=5.131`;
+            
+            $.ajax({
+                url: apiUrl,
+                method: 'GET',
+                dataType: 'jsonp',
+                success: function(data) {
+                    if (data.response && data.response.items) {
+                        displayNews(data.response.items);
+                    } else {
+                        showError('Не удалось загрузить новости');
+                    }
+                },
+                error: function() {
+                    showError('Ошибка при загрузке новостей');
+                }
+            });
+        }
+
+        // Отображение новостей на странице
+        function displayNews(posts) {
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = '';
+            
+            if (posts.length === 0) {
+                newsContainer.innerHTML = '<p>Новостей пока нет</p>';
+                return;
+            }
+            
+            posts.forEach(post => {
+                // Форматирование даты
+                const date = new Date(post.date * 1000);
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = date.toLocaleDateString('ru-RU', options);
+                
+                // Создание HTML для новости
+                const newsItem = document.createElement('div');
+                newsItem.className = 'news-item';
+                
+                // Обработка текста
+                let text = post.text.replace(/\n/g, '<br>');
+                // Создание краткого анонса для заголовка
+                const shortText = post.text.length > 100 ? 
+                    post.text.substring(0, 100) + '...' : 
+                    post.text;
+                
+                // Обработка вложений
+                let attachmentsHTML = '';
+                if (post.attachments && post.attachments.length > 0) {
+                    post.attachments.forEach(attachment => {
+                        if (attachment.type === 'photo') {
+                            // Выбираем фото наибольшего размера
+                            const sizes = attachment.photo.sizes;
+                            const largestPhoto = sizes[sizes.length - 1];
+                            attachmentsHTML += `
+                                <div class="news-attachment">
+                                    <img src="${largestPhoto.url}" alt="Фото к новости">
+                                </div>
+                            `;
+                        } else if (attachment.type === 'video') {
+                            attachmentsHTML += `
+                                <div class="news-attachment video-preview" style="background-image: url(${attachment.video.photo_320})">
+                                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                                </div>
+                            `;
+                        }
+                    });
+                }
+                
+                newsItem.innerHTML = `
+                    <div class="news-header">
+                        <div class="news-date">${formattedDate}</div>
+                    </div>
+                    <h3 class="news-title">${shortText}</h3>
+                    <div class="news-content">${text}</div>
+                    ${attachmentsHTML}
+                    <a href="https://vk.com/wall${post.owner_id}_${post.id}" target="_blank" class="news-link">
+                        <i class="fas fa-arrow-right"></i> Читать далее в ВКонтакте
+                    </a>
+                `;
+                
+                newsContainer.appendChild(newsItem);
+            });
+        }
+        
+        // Отображение ошибки
+        function showError(message) {
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = `<div class="error">${message}</div>`;
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', fetchVKNews);
+    </script>
+</body>
+</html>
