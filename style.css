@@ -352,73 +352,6 @@ nav ul li a.active:after {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* Видео */
-.videos-section {
-    padding: 60px 0;
-}
-
-.page-title {
-    text-align: center;
-    font-size: 2.3rem;
-    margin-bottom: 40px;
-    color: #1a237e;
-}
-
-.videos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    margin-bottom: 30px;
-}
-
-.video-card {
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.video-card h3 {
-    padding: 12px 15px;
-    background: #1a237e;
-    color: white;
-    font-size: 1.1rem;
-}
-
-.video-wrapper {
-    position: relative;
-    padding-top: 56.25%; /* Соотношение 16:9 */
-    height: 0;
-    overflow: hidden;
-}
-
-.video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-.video-views {
-    padding: 8px 15px;
-    color: #546e7a;
-    font-weight: 500;
-    font-size: 0.9rem;
-}
-
-.video-views i {
-    color: #e53935;
-    margin-right: 4px;
-    font-size: 0.9rem;
-}
-
-.more-videos {
-    text-align: center;
-    margin-top: 20px;
-}
-
 /* Контакты */
 .contacts-section {
     padding: 60px 0;
@@ -839,6 +772,164 @@ footer {
     font-size: 1.1rem;
 }
 
+/* Стили для раздела Нормативных документов */
+.documents-section {
+    padding: 80px 0;
+}
+
+.documents-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.documents-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: #e3f2fd;
+    color: #1a237e;
+    border: 1px solid #bbdefb;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+}
+
+.filter-btn:hover {
+    background: #bbdefb;
+}
+
+.filter-btn.active {
+    background: #1a237e;
+    color: white;
+    border-color: #1a237e;
+}
+
+.documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.document-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.document-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.document-icon {
+    background: linear-gradient(135deg, #1a237e, #283593);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.document-content {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.document-content h3 {
+    color: #1a237e;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.document-meta {
+    display: flex;
+    gap: 15px;
+    color: #546e7a;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.document-meta i {
+    color: #e53935;
+    margin-right: 5px;
+}
+
+.document-description {
+    color: #546e7a;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.document-actions {
+    padding: 0 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.view-btn {
+    background: #2196f3 !important;
+}
+
+.view-btn:hover {
+    background: #1976d2 !important;
+}
+
+.download-btn {
+    background: #4caf50 !important;
+}
+
+.download-btn:hover {
+    background: #388e3c !important;
+}
+
+.admin-document-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.admin-document-actions .btn {
+    padding: 8px;
+    min-width: 36px;
+}
+
+.file-hint {
+    font-size: 0.85rem;
+    color: #546e7a;
+    margin-top: 5px;
+}
+
+/* Цвета для разных типов документов */
+.regulation .document-icon {
+    background: linear-gradient(135deg, #e53935, #c62828);
+}
+
+.order .document-icon {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+}
+
+.position .document-icon {
+    background: linear-gradient(135deg, #1565c0, #0d47a1);
+}
+
+.other .document-icon {
+    background: linear-gradient(135deg, #6a1b9a, #4a148c);
+}
+
 /* Уведомления */
 .notification {
     position: fixed;
@@ -1090,103 +1181,7 @@ footer {
         padding: 10px;
         font-size: 0.9rem;
     }
-}
-
-/* Адаптивность для планшетов и больших экранов */
-@media (max-width: 992px) {
-    .about-content,
-    .contacts-grid {
-        grid-template-columns: 1fr;
-    }
     
-    .contact-map {
-        order: -1;
-    }
-    
-    .parallax-section {
-        min-height: 400px;
-    }
-    
-    .parallax-section h2 {
-        font-size: 2.5rem;
-    }
-    
-    h1 {
-        font-size: 1.5rem;
-    }
-    
-    .competition-actions {
-        flex-direction: column;
-    }
-    
-    .btn {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        margin-top: 12px;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    nav ul li {
-        margin: 4px 0;
-        margin-left: 0;
-    }
-    
-    nav ul li a {
-        font-size: 0.95rem;
-    }
-    
-    .hero h2 {
-        font-size: 2.2rem;
-    }
-    
-    .hero p {
-        font-size: 1.1rem;
-    }
-    
-    .section-title {
-        font-size: 1.8rem;
-    }
-    
-    .event-card {
-        flex-direction: column;
-    }
-    
-    .event-date {
-        min-width: 100%;
-    }
-    
-    .parallax-section h2 {
-        font-size: 2.2rem;
-    }
-    
-    .parallax-section p {
-        font-size: 1.3rem;
-    }
-    
-    /* Уменьшение размера логотипов на планшетах */
-    .logos-container img {
-        height: 50px;
-    }
-    
-    .logos-container {
-        gap: 12px;
-        margin: 6px 0;
-    }
-    
-    .form-row {
-        flex-direction: column;
-        gap: 0;
-    }
-}
-
-@media (max-width: 480px) {
     .logos-container {
         flex-direction: row;
         overflow-x: auto;
@@ -1281,6 +1276,11 @@ footer {
         flex-direction: column;
     }
     
+    .documents-filters {
+        flex-direction: column;
+        align-items: center;
+    }
+    
     .btn {
         width: 100%;
         justify-content: center;
@@ -1295,5 +1295,100 @@ footer {
     
     .notification.show {
         transform: translateY(0);
+    }
+}
+
+/* Адаптивность для планшетов и больших экранов */
+@media (max-width: 992px) {
+    .about-content,
+    .contacts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-map {
+        order: -1;
+    }
+    
+    .parallax-section {
+        min-height: 400px;
+    }
+    
+    .parallax-section h2 {
+        font-size: 2.5rem;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .competition-actions,
+    .document-actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        margin-top: 12px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    nav ul li {
+        margin: 4px 0;
+        margin-left: 0;
+    }
+    
+    nav ul li a {
+        font-size: 0.95rem;
+    }
+    
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .event-card {
+        flex-direction: column;
+    }
+    
+    .event-date {
+        min-width: 100%;
+    }
+    
+    .parallax-section h2 {
+        font-size: 2.2rem;
+    }
+    
+    .parallax-section p {
+        font-size: 1.3rem;
+    }
+    
+    /* Уменьшение размера логотипов на планшетах */
+    .logos-container img {
+        height: 50px;
+    }
+    
+    .logos-container {
+        gap: 12px;
+        margin: 6px 0;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
     }
 }
