@@ -1335,10 +1335,7 @@ footer {
     }
     
     .about-content,
-    .contacts-grid {
-        grid-template-columns: 1fr;
-    }
-    
+    .contacts-grid,
     .disciplines-grid {
         grid-template-columns: 1fr;
     }
