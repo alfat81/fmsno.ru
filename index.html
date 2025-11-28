@@ -17,8 +17,11 @@
                 <img src="images/fmsno_logo.png" alt="Эмблема ФМСНО">
             </div>
             <h1>Нижегородская Федерация<br>Мотоциклетного Спорта</h1>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
             <nav>
-                <ul>
+                <ul id="main-menu">
                     <li><a href="index.html" class="active">Главная</a></li>
                     <li><a href="competitions.html">Соревнования</a></li>
                     <li><a href="documents.html">Нормативные документы</a></li>
@@ -30,6 +33,7 @@
     </header>
 
     <main>
+        <!-- Контент страницы -->
         <section class="parallax-section" data-parallax="0.5" style="background-image: url('images/hero-background.jpg');">
             <div class="parallax-content">
                 <div class="container">
@@ -46,6 +50,7 @@
             <div class="container">
                 <h2 class="section-title">Ближайшие соревнования</h2>
                 <div id="upcoming-events" class="events-grid">
+                    <!-- События будут загружены здесь -->
                     <div class="event-card">
                         <div class="event-date">
                             <span class="day">15</span>
@@ -171,19 +176,45 @@
         </div>
     </footer>
 
-    <div class="admin-indicator hidden" id="admin-indicator">
-        <i class="fas fa-user-shield"></i> Админ-режим
-    </div>
-
     <button class="admin-toggle-btn" id="admin-toggle-btn">
         <i class="fas fa-user-shield"></i>
     </button>
 
+    <div class="overlay" id="menu-overlay"></div>
+
     <script>
-        // Простой параллакс-эффект
+        // Адаптивное меню
         document.addEventListener('DOMContentLoaded', function() {
-            const parallaxSections = document.querySelectorAll('.parallax-section');
+            const menuToggle = document.getElementById('menu-toggle');
+            const menu = document.getElementById('main-menu');
+            const overlay = document.getElementById('menu-overlay');
+            const adminToggleBtn = document.getElementById('admin-toggle-btn');
             
+            // Обработчик для burger-меню
+            menuToggle.addEventListener('click', function() {
+                menu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
+            });
+            
+            // Закрытие меню при клике на оверлей
+            overlay.addEventListener('click', function() {
+                menu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Закрытие меню при клике на ссылку
+            document.querySelectorAll('#main-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    menu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Простой параллакс-эффект
+            const parallaxSections = document.querySelectorAll('.parallax-section');
             window.addEventListener('scroll', function() {
                 parallaxSections.forEach(section => {
                     const speed = section.getAttribute('data-parallax') || 0.5;
@@ -192,101 +223,16 @@
                 });
             });
             
-            // Загрузка соревнований для главной страницы
-            loadUpcomingEvents();
-            
-            // Проверка админки
-            checkAdminStatus();
-            
-            // Обработчики для админ-панели
-            document.getElementById('admin-toggle-btn').addEventListener('click', toggleAdminPanel);
-            document.addEventListener('click', handleOutsideClick);
-        });
-        
-        function handleOutsideClick(event) {
-            const adminPanel = document.getElementById('admin-bottom-panel');
-            const toggleBtn = document.getElementById('admin-toggle-btn');
-            
-            if (adminPanel && !adminPanel.contains(event.target) && !toggleBtn.contains(event.target) && 
-                adminPanel.classList.contains('visible')) {
-                closeAdminPanel();
-            }
-        }
-        
-        function toggleAdminPanel() {
-            const panel = document.getElementById('admin-bottom-panel');
-            if (panel) {
-                panel.classList.toggle('visible');
-            }
-        }
-        
-        function closeAdminPanel() {
-            const panel = document.getElementById('admin-bottom-panel');
-            if (panel) {
-                panel.classList.remove('visible');
-            }
-        }
-        
-        function loadUpcomingEvents() {
-            const eventsContainer = document.getElementById('upcoming-events');
-            if (!eventsContainer) return;
-            
-            try {
-                const competitions = JSON.parse(localStorage.getItem('competitions')) || [];
-                if (competitions.length === 0) return;
-                
-                // Сортируем по дате и берем ближайшие 3 события
-                const upcoming = competitions
-                    .filter(comp => new Date(comp.date) >= new Date())
-                    .sort((a, b) => new Date(a.date) - new Date(b.date))
-                    .slice(0, 3);
-                
-                if (upcoming.length === 0) return;
-                
-                // Очищаем контейнер
-                eventsContainer.innerHTML = '';
-                
-                // Добавляем соревнования
-                upcoming.forEach(comp => {
-                    const eventDate = new Date(comp.date);
-                    const day = eventDate.getDate();
-                    const month = eventDate.toLocaleString('ru-RU', { month: 'long' }).slice(0, 3);
-                    
-                    const eventCard = document.createElement('div');
-                    eventCard.className = 'event-card';
-                    eventCard.innerHTML = `
-                        <div class="event-date">
-                            <span class="day">${day}</span>
-                            <span class="month">${month}</span>
-                        </div>
-                        <div class="event-content">
-                            <h3>${comp.title}</h3>
-                            <p class="event-location"><i class="fas fa-map-marker-alt"></i> ${comp.location}</p>
-                            <p class="event-time"><i class="far fa-clock"></i> ${comp.time}</p>
-                        </div>
-                    `;
-                    eventsContainer.appendChild(eventCard);
+            // Админ-панель
+            if (adminToggleBtn) {
+                adminToggleBtn.addEventListener('click', function() {
+                    const panel = document.getElementById('admin-bottom-panel');
+                    if (panel) {
+                        panel.classList.toggle('visible');
+                    }
                 });
-            } catch (error) {
-                console.error('Ошибка при загрузке соревнований:', error);
             }
-        }
-        
-        function checkAdminStatus() {
-            const isAdmin = localStorage.getItem('isAdminAuth') === 'true';
-            const timestamp = localStorage.getItem('adminAuthTimestamp');
-            const now = new Date().getTime();
-            
-            // Проверка срока действия сессии (24 часа)
-            if (isAdmin && timestamp && (now - timestamp) < 24 * 60 * 60 * 1000) {
-                if (document.getElementById('admin-indicator')) {
-                    document.getElementById('admin-indicator').classList.remove('hidden');
-                    document.getElementById('admin-indicator').addEventListener('click', function() {
-                        window.location.href = 'competitions.html';
-                    });
-                }
-            }
-        }
+        });
     </script>
 </body>
 </html>
