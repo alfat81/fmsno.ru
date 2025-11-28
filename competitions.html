@@ -207,6 +207,7 @@
 
     <div class="overlay" id="menu-overlay"></div>
 
+    <script src="telegram.js"></script>
     <script>
         // Правильные данные для входа администратора
         const ADMIN_LOGIN = 'admin';
@@ -543,6 +544,21 @@
                 } else {
                     // Добавляем новое соревнование
                     competitions.push(newCompetition);
+                    
+                    // Отправляем в Telegram только при добавлении нового соревнования
+                    if (window.telegramBot && window.telegramBot.sendNewCompetition) {
+                        window.telegramBot.sendNewCompetition(newCompetition)
+                            .then(result => {
+                                if (result && result.ok) {
+                                    console.log('Соревнование успешно отправлено в Telegram');
+                                } else {
+                                    console.warn('Не удалось отправить соревнование в Telegram');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Ошибка отправки в Telegram:', error);
+                            });
+                    }
                 }
                 
                 // Сохраняем в localStorage
