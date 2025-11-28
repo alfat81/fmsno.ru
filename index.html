@@ -21,7 +21,7 @@
                 <ul>
                     <li><a href="index.html" class="active">Главная</a></li>
                     <li><a href="competitions.html">Соревнования</a></li>
-                    <li><a href="videos.html">Видео</a></li>
+                    <li><a href="documents.html">Нормативные документы</a></li>
                     <li><a href="#">Новости</a></li>
                     <li><a href="contacts.html">Контакты</a></li>
                 </ul>
@@ -142,7 +142,7 @@
                     <ul>
                         <li><a href="index.html">Главная</a></li>
                         <li><a href="competitions.html">Соревнования</a></li>
-                        <li><a href="videos.html">Видео</a></li>
+                        <li><a href="documents.html">Нормативные документы</a></li>
                         <li><a href="#">Новости</a></li>
                         <li><a href="contacts.html">Контакты</a></li>
                     </ul>
@@ -175,10 +175,11 @@
         <i class="fas fa-user-shield"></i> Админ-режим
     </div>
 
+    <button class="admin-toggle-btn" id="admin-toggle-btn">
+        <i class="fas fa-user-shield"></i>
+    </button>
+
     <script>
-        // Хеш пароля администратора для индикатора
-        const ADMIN_HASH_SIMPLE = '63ed7d3c5de0e93bdf9630f6a3a7e5c98b3f3f7d5a0c5e9b8f7a1d4c7e0f3b2a';
-        
         // Простой параллакс-эффект
         document.addEventListener('DOMContentLoaded', function() {
             const parallaxSections = document.querySelectorAll('.parallax-section');
@@ -196,7 +197,35 @@
             
             // Проверка админки
             checkAdminStatus();
+            
+            // Обработчики для админ-панели
+            document.getElementById('admin-toggle-btn').addEventListener('click', toggleAdminPanel);
+            document.addEventListener('click', handleOutsideClick);
         });
+        
+        function handleOutsideClick(event) {
+            const adminPanel = document.getElementById('admin-bottom-panel');
+            const toggleBtn = document.getElementById('admin-toggle-btn');
+            
+            if (adminPanel && !adminPanel.contains(event.target) && !toggleBtn.contains(event.target) && 
+                adminPanel.classList.contains('visible')) {
+                closeAdminPanel();
+            }
+        }
+        
+        function toggleAdminPanel() {
+            const panel = document.getElementById('admin-bottom-panel');
+            if (panel) {
+                panel.classList.toggle('visible');
+            }
+        }
+        
+        function closeAdminPanel() {
+            const panel = document.getElementById('admin-bottom-panel');
+            if (panel) {
+                panel.classList.remove('visible');
+            }
+        }
         
         function loadUpcomingEvents() {
             const eventsContainer = document.getElementById('upcoming-events');
@@ -250,10 +279,12 @@
             
             // Проверка срока действия сессии (24 часа)
             if (isAdmin && timestamp && (now - timestamp) < 24 * 60 * 60 * 1000) {
-                document.getElementById('admin-indicator').classList.remove('hidden');
-                document.getElementById('admin-indicator').addEventListener('click', function() {
-                    window.location.href = 'competitions.html';
-                });
+                if (document.getElementById('admin-indicator')) {
+                    document.getElementById('admin-indicator').classList.remove('hidden');
+                    document.getElementById('admin-indicator').addEventListener('click', function() {
+                        window.location.href = 'competitions.html';
+                    });
+                }
             }
         }
     </script>
