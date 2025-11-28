@@ -4,20 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Контакты - Нижегородская Федерация Мотоциклетного Спорта</title>
+    <link rel="icon" href="images/short.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <div class="logo">
-                <h1>Нижегородская Федерация<br>Мотоциклетного Спорта</h1>
+            <div class="logos-container">
+                <img src="images/gerb_nno.png" alt="Герб Нижегородской области">
+                <img src="images/mfr_logo.png" alt="Эмблема Мотофедерации России">
+                <img src="images/fmsno_logo.png" alt="Эмблема ФМСНО">
             </div>
+            <h1>Нижегородская Федерация<br>Мотоциклетного Спорта</h1>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
             <nav>
-                <ul>
+                <ul id="main-menu">
                     <li><a href="index.html">Главная</a></li>
-                    <li><a href="videos.html">Видео</a></li>
-                    <li><a href="#">Новости</a></li>
+                    <li><a href="competitions.html">Соревнования</a></li>
+                    <li><a href="documents.html">Нормативные документы</a></li>
+                    <li><a href="news.html">Новости</a></li>
                     <li><a href="contacts.html" class="active">Контакты</a></li>
                 </ul>
             </nav>
@@ -27,7 +35,7 @@
     <main>
         <section class="contacts-section">
             <div class="container">
-                <h1 class="page-title">Контактная информация</h1>
+                <h2 class="section-title">Контактная информация</h2>
                 
                 <div class="contacts-grid">
                     <div class="contact-info">
@@ -71,7 +79,7 @@
                     <div class="contact-map">
                         <h3>Места проведения соревнований</h3>
                         <div class="map-placeholder">
-                            <img src="https://via.placeholder.com/600x400/333/fff?text=Карта+трасс+Нижегородской+области" alt="Карта трасс">
+                            <img src="images/map.jpg" alt="Карта трасс">
                             <p class="map-note">* На карте отмечены основные трассы для проведения соревнований</p>
                         </div>
                     </div>
@@ -79,7 +87,7 @@
                 
                 <div class="contact-form-section">
                     <h2>Обратная связь</h2>
-                    <form class="contact-form">
+                    <form class="contact-form" id="contact-form">
                         <div class="form-group">
                             <label for="name">Имя*</label>
                             <input type="text" id="name" required>
@@ -113,8 +121,9 @@
                     <h4>Ссылки</h4>
                     <ul>
                         <li><a href="index.html">Главная</a></li>
-                        <li><a href="videos.html">Видео</a></li>
-                        <li><a href="#">Новости</a></li>
+                        <li><a href="competitions.html">Соревнования</a></li>
+                        <li><a href="documents.html">Нормативные документы</a></li>
+                        <li><a href="news.html">Новости</a></li>
                         <li><a href="contacts.html">Контакты</a></li>
                     </ul>
                 </div>
@@ -131,10 +140,64 @@
                     <p>4 698 подписчиков</p>
                 </div>
             </div>
+            <div class="footer-logos">
+                <img src="images/gerb_nno.png" alt="Герб Нижегородской области">
+                <img src="images/mfr_logo.png" alt="Эмблема Мотофедерации России">
+                <img src="images/fmsno_logo.png" alt="Эмблема ФМСНО">
+            </div>
             <div class="copyright">
                 <p>&copy; 2025 Нижегородская Федерация Мотоциклетного Спорта. Все права защищены.</p>
             </div>
         </div>
     </footer>
+
+    <button class="admin-toggle-btn" id="admin-toggle-btn">
+        <i class="fas fa-user-shield"></i>
+    </button>
+
+    <div class="overlay" id="menu-overlay"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Адаптивное меню
+            const menuToggle = document.getElementById('menu-toggle');
+            const menu = document.getElementById('main-menu');
+            const overlay = document.getElementById('menu-overlay');
+            
+            menuToggle.addEventListener('click', function() {
+                menu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
+            });
+            
+            overlay.addEventListener('click', function() {
+                menu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            document.querySelectorAll('#main-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    menu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Обработка формы обратной связи
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // В реальном приложении здесь была бы отправка формы на сервер
+                    alert('Сообщение успешно отправлено! Мы ответим вам в ближайшее время.');
+                    
+                    // Очистка формы
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
 </body>
 </html>
