@@ -156,6 +156,175 @@ ul {
     box-shadow: 0 6px 15px rgba(0,0,0,0.4);
 }
 
+/* Кнопка админки - перенесена в верхний правый угол */
+.admin-toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    color: var(--light-text);
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.admin-toggle-btn:hover {
+    background: #c62828;
+    transform: scale(1.1);
+}
+
+/* Всплывающая админ-панель */
+.admin-bottom-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--light-text);
+    box-shadow: 0 -2px 15px rgba(0,0,0,0.2);
+    z-index: 999;
+    transform: translateY(100%);
+    transition: var(--transition);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.admin-bottom-panel.visible {
+    transform: translateY(0);
+}
+
+.admin-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--light-text);
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.admin-panel-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.admin-close-btn {
+    background: none;
+    border: none;
+    color: var(--light-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.admin-close-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.admin-panel-content {
+    padding: 20px;
+}
+
+.admin-form-section {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.admin-login-btn {
+    width: 100%;
+    margin-top: 15px;
+    background: #1e88e5 !important;
+}
+
+.admin-login-btn:hover {
+    background: #1565c0 !important;
+}
+
+.login-group {
+    margin-bottom: 15px;
+}
+
+.login-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.login-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.admin-help-text {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #546e7a;
+    text-align: center;
+}
+
+.admin-controls-panel {
+    text-align: center;
+}
+
+.admin-welcome {
+    margin-bottom: 20px;
+}
+
+.admin-welcome h4 {
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.admin-welcome p {
+    color: #546e7a;
+    font-size: 0.95rem;
+}
+
+.admin-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.admin-action-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-action-btn i {
+    margin-right: 10px;
+}
+
+.admin-logout-btn {
+    background: var(--accent-color) !important;
+}
+
+.admin-logout-btn:hover {
+    background: #c62828 !important;
+}
+
 /* Адаптивное меню */
 .menu-toggle {
     display: none;
@@ -297,6 +466,14 @@ nav ul li a.active:after {
     .overlay.active {
         opacity: 1;
         visibility: visible;
+    }
+    
+    /* Адаптация позиции кнопки админки на мобильных устройствах */
+    .admin-toggle-btn {
+        top: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
     }
 }
 
@@ -1163,178 +1340,10 @@ footer {
     opacity: 0.8;
 }
 
-/* Стили для всплывающей админ-панели */
-.admin-toggle-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--accent-color);
-    color: var(--light-text);
-    border: none;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    font-size: 1.2rem;
-    cursor: pointer;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition);
-}
-
-.admin-toggle-btn:hover {
-    background: #c62828;
-    transform: scale(1.1);
-}
-
-.admin-bottom-panel {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: var(--light-text);
-    box-shadow: 0 -2px 15px rgba(0,0,0,0.2);
-    z-index: 999;
-    transform: translateY(100%);
-    transition: var(--transition);
-    max-height: 80vh;
-    overflow-y: auto;
-}
-
-.admin-bottom-panel.visible {
-    transform: translateY(0);
-}
-
-.admin-panel-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--light-text);
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.admin-panel-header h3 {
-    margin: 0;
-    font-size: 1.2rem;
-}
-
-.admin-close-btn {
-    background: none;
-    border: none;
-    color: var(--light-text);
-    font-size: 1.5rem;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s;
-}
-
-.admin-close-btn:hover {
-    background: rgba(255,255,255,0.2);
-}
-
-.admin-panel-content {
-    padding: 20px;
-}
-
-.admin-form-section {
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.admin-login-btn {
-    width: 100%;
-    margin-top: 15px;
-    background: #1e88e5 !important;
-}
-
-.admin-login-btn:hover {
-    background: #1565c0 !important;
-}
-
-.login-group {
-    margin-bottom: 15px;
-}
-
-.login-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-    color: var(--primary-color);
-}
-
-.login-group input {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.admin-help-text {
-    margin-top: 15px;
-    font-size: 0.9rem;
-    color: #546e7a;
-    text-align: center;
-}
-
-.admin-controls-panel {
-    text-align: center;
-}
-
-.admin-welcome {
-    margin-bottom: 20px;
-}
-
-.admin-welcome h4 {
-    color: var(--primary-color);
-    margin-bottom: 8px;
-}
-
-.admin-welcome p {
-    color: #546e7a;
-    font-size: 0.95rem;
-}
-
-.admin-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.admin-action-btn {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.admin-action-btn i {
-    margin-right: 10px;
-}
-
-.admin-logout-btn {
-    background: var(--accent-color) !important;
-}
-
-.admin-logout-btn:hover {
-    background: #c62828 !important;
-}
-
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
     .admin-toggle-btn {
-        bottom: 15px;
+        top: 15px;
         right: 15px;
         width: 45px;
         height: 45px;
