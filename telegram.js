@@ -5,9 +5,19 @@ class TelegramBot {
         this.botToken = botToken;
         this.chatId = chatId;
         this.apiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+        this.lastMessageTime = 0;
+        this.minDelay = 5000; // Минимальная задержка между сообщениями (5 секунд)
     }
 
     async sendMessage(message, options = {}) {
+        const now = Date.now();
+        if (now - this.lastMessageTime < this.minDelay) {
+            console.warn('Сообщение не отправлено: слишком частые запросы');
+            return null;
+        }
+        
+        this.lastMessageTime = now;
+        
         const defaultOptions = {
             parse_mode: 'HTML',
             disable_web_page_preview: false
@@ -36,6 +46,25 @@ class TelegramBot {
             console.error('Ошибка отправки сообщения в Telegram:', error);
             return null;
         }
+    }
+
+    async sendMessageWithRetry(message, options = {}, retries = 3) {
+        for (let i = 0; i < retries; i++) {
+            try {
+                const result = await this.sendMessage(message, options);
+                if (result && result.ok) {
+                    return result;
+                }
+            } catch (error) {
+                console.warn(`Попытка ${i + 1} не удалась:`, error);
+            }
+            
+            // Задержка перед повторной попыткой
+            await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+        }
+        
+        console.error('Все попытки отправки сообщения неудачны');
+        return null;
     }
 
     formatCompetitionMessage(competition) {
@@ -93,8 +122,8 @@ ${previewText}
 }
 
 // Инициализация бота (замените значения на ваши)
-const botToken = '8461977678:AAHXGOs2mSyHsAEXsHHUro58j638iIHwm6U'; // Замените на ваш токен
-const chatId = '-1003455512571'; // Замените на ID вашего канала
+const botToken = window.ENV?.TELEGRAM_BOT_TOKEN || 'YOUR_BOT_TOKEN'; // Ваш реальный токен
+const chatId = window.ENV?.TELEGRAM_CHAT_ID || '-1001234567890'; // ID вашего канала
 
 const telegramBot = new TelegramBot(botToken, chatId);
 
@@ -103,7 +132,7 @@ async function sendNewCompetition(competition) {
     if (!competition || !competition.title) return;
     
     const message = telegramBot.formatCompetitionMessage(competition);
-    return await telegramBot.sendMessage(message);
+    return await telegramBot.sendMessageWithRetry(message);
 }
 
 // Функция для отправки новой новости
@@ -111,7 +140,7 @@ async function sendNewNews(news) {
     if (!news || !news.title) return;
     
     const message = telegramBot.formatNewsMessage(news);
-    return await telegramBot.sendMessage(message);
+    return await telegramBot.sendMessageWithRetry(message);
 }
 
 // Экспорт функций для использования в других файлах
