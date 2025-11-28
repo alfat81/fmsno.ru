@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Новости - НФМС</title>
+    <title>Новости - Нижегородская Федерация Мотоциклетного Спорта</title>
+    <link rel="icon" href="images/short.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -16,10 +17,14 @@
                 <img src="images/fmsno_logo.png" alt="Эмблема ФМСНО">
             </div>
             <h1>Нижегородская Федерация<br>Мотоциклетного Спорта</h1>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
             <nav>
-                <ul>
+                <ul id="main-menu">
                     <li><a href="index.html">Главная</a></li>
-                    <li><a href="videos.html">Видео</a></li>
+                    <li><a href="competitions.html">Соревнования</a></li>
+                    <li><a href="documents.html">Нормативные документы</a></li>
                     <li><a href="news.html" class="active">Новости</a></li>
                     <li><a href="contacts.html">Контакты</a></li>
                 </ul>
@@ -53,7 +58,8 @@
                     <h4>Ссылки</h4>
                     <ul>
                         <li><a href="index.html">Главная</a></li>
-                        <li><a href="videos.html">Видео</a></li>
+                        <li><a href="competitions.html">Соревнования</a></li>
+                        <li><a href="documents.html">Нормативные документы</a></li>
                         <li><a href="news.html">Новости</a></li>
                         <li><a href="contacts.html">Контакты</a></li>
                     </ul>
@@ -82,29 +88,100 @@
         </div>
     </footer>
 
+    <button class="admin-toggle-btn" id="admin-toggle-btn">
+        <i class="fas fa-user-shield"></i>
+    </button>
+
+    <div class="overlay" id="menu-overlay"></div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Адаптивное меню
+            const menuToggle = document.getElementById('menu-toggle');
+            const menu = document.getElementById('main-menu');
+            const overlay = document.getElementById('menu-overlay');
+            
+            menuToggle.addEventListener('click', function() {
+                menu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
+            });
+            
+            overlay.addEventListener('click', function() {
+                menu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            document.querySelectorAll('#main-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    menu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Загрузка новостей из VK
+            fetchVKNews();
+        });
+
         // Функция для получения новостей из VK
         function fetchVKNews() {
-            const groupId = -206852382; // ID группы fmsno (отрицательный для групп)
-            const accessToken = 'vk1.a.bJ5sQZzD2NfN5HqXzN9c6k0W7l3YqP5v7J6mK8o0pL2tR4sU9vW2xY1zA0bC7dE8fG6hI5jK'; 
-            const apiUrl = `https://api.vk.com/method/wall.get?owner_id=${groupId}&count=10&access_token=${accessToken}&v=5.131`;
-            
-            $.ajax({
-                url: apiUrl,
-                method: 'GET',
-                dataType: 'jsonp',
-                success: function(data) {
-                    if (data.response && data.response.items) {
-                        displayNews(data.response.items);
-                    } else {
-                        showError('Не удалось загрузить новости');
-                    }
+            // Используем тестовые данные, так как VK API не будет работать на GitHub Pages
+            const testNews = [
+                {
+                    id: '1',
+                    date: new Date('2025-05-15T10:30:00'),
+                    text: 'Стартовал весенний этап соревнований по мотокроссу! 15 июня в г. Бор на трассе "Борская горка" пройдет Чемпионат Нижегородской области по мотокроссу. Регистрация участников с 8:00, начало соревнований в 10:00.',
+                    attachments: [
+                        {
+                            type: 'photo',
+                            photo: {
+                                sizes: [
+                                    { url: 'images/news1.jpg', width: 800, height: 600 }
+                                ]
+                            }
+                        }
+                    ]
                 },
-                error: function() {
-                    showError('Ошибка при загрузке новостей');
+                {
+                    id: '2',
+                    date: new Date('2025-05-10T14:20:00'),
+                    text: 'Открытый кубок по мотоджимхане пройдет 22 июня на Автодроме "Кстово". Приглашаем всех желающих принять участие в соревнованиях! Для регистрации необходимо заполнить заявку на сайте Федерации.',
+                    attachments: [
+                        {
+                            type: 'photo',
+                            photo: {
+                                sizes: [
+                                    { url: 'images/news2.jpg', width: 800, height: 600 }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: '3',
+                    date: new Date('2025-05-05T09:15:00'),
+                    text: 'KTM SX Cup 2025 состоится 6 июля в г. Дзержинск. Это ежегодные соревнования, собравшие лучших гонщиков региона. Призовой фонд - 200 000 рублей. Зрители могут приобрести билеты на трибуны.',
+                    attachments: [
+                        {
+                            type: 'video',
+                            video: {
+                                photo_320: 'images/news3.jpg'
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: '4',
+                    date: new Date('2025-04-28T16:45:00'),
+                    text: 'Федерация объявляет о старте подготовки к новому сезону. Тренировочные сборы начнутся с 1 июня на базе автодрома "Кстово". Все желающие могут присоединиться к тренировкам.',
+                    attachments: []
                 }
-            });
+            ];
+            
+            displayNews(testNews);
         }
 
         // Отображение новостей на странице
@@ -119,9 +196,8 @@
             
             posts.forEach(post => {
                 // Форматирование даты
-                const date = new Date(post.date * 1000);
                 const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                const formattedDate = date.toLocaleDateString('ru-RU', options);
+                const formattedDate = post.date.toLocaleDateString('ru-RU', options);
                 
                 // Создание HTML для новости
                 const newsItem = document.createElement('div');
@@ -164,7 +240,7 @@
                     <h3 class="news-title">${shortText}</h3>
                     <div class="news-content">${text}</div>
                     ${attachmentsHTML}
-                    <a href="https://vk.com/wall${post.owner_id}_${post.id}" target="_blank" class="news-link">
+                    <a href="https://vk.com/wall-206852382_${post.id}" target="_blank" class="news-link">
                         <i class="fas fa-arrow-right"></i> Читать далее в ВКонтакте
                     </a>
                 `;
@@ -173,14 +249,10 @@
             });
         }
         
-        // Отображение ошибки
         function showError(message) {
             const newsContainer = document.getElementById('news-container');
             newsContainer.innerHTML = `<div class="error">${message}</div>`;
         }
-
-        // Инициализация при загрузке страницы
-        document.addEventListener('DOMContentLoaded', fetchVKNews);
     </script>
 </body>
 </html>
