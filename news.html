@@ -129,14 +129,76 @@
                 });
             });
             
-            // Загрузка новостей из VK
-            fetchVKNews();
+            // Загрузка новостей
+            fetchNews();
         });
 
-        // Функция для получения новостей из VK
-        function fetchVKNews() {
-            // Используем тестовые данные, так как VK API не будет работать на GitHub Pages
-            const testNews = [
+        // Функция для получения новостей
+        function fetchNews() {
+            // Сначала пытаемся загрузить из localStorage
+            const cachedNews = localStorage.getItem('vkNews');
+            const lastUpdated = localStorage.getItem('vkNewsLastUpdated');
+            const now = new Date().getTime();
+            
+            // Если новости есть в кэше и обновлялись менее 1 часа назад
+            if (cachedNews && lastUpdated && (now - parseInt(lastUpdated)) < 3600000) {
+                displayNews(JSON.parse(cachedNews));
+                return;
+            }
+            
+            // Пытаемся загрузить через JSONP (обход CORS)
+            fetchVkNewsWithJsonp();
+        }
+
+        // Функция для получения новостей через JSONP
+        function fetchVkNewsWithJsonp() {
+            // URL для публичного доступа к постам группы (без токена, ограниченная функциональность)
+            const groupId = -206852382; // ID группы fmsno
+            const script = document.createElement('script');
+            const callbackName = 'vkNewsCallback_' + Date.now();
+            
+            window[callbackName] = function(response) {
+                if (response && response.response && response.response.items) {
+                    // Кэшируем новости
+                    localStorage.setItem('vkNews', JSON.stringify(response.response.items));
+                    localStorage.setItem('vkNewsLastUpdated', new Date().getTime().toString());
+                    displayNews(response.response.items);
+                } else {
+                    loadFallbackNews();
+                }
+                // Удаляем скрипт и callback
+                delete window[callbackName];
+                document.body.removeChild(script);
+            };
+            
+            const url = `https://api.vk.com/method/wall.get?owner_id=${groupId}&count=5&v=5.131&callback=${callbackName}`;
+            
+            script.src = url;
+            script.onerror = function() {
+                console.error('Ошибка загрузки новостей из VK');
+                delete window[callbackName];
+                loadFallbackNews();
+            };
+            
+            document.body.appendChild(script);
+            
+            // Устанавливаем таймаут на 5 секунд
+            setTimeout(() => {
+                if (script.parentNode) {
+                    document.body.removeChild(script);
+                    if (window[callbackName]) {
+                        delete window[callbackName];
+                    }
+                    loadFallbackNews();
+                }
+            }, 5000);
+        }
+
+        // Функция для загрузки резервных новостей
+        function loadFallbackNews() {
+            console.log('Загрузка резервных новостей');
+            
+            const fallbackNews = [
                 {
                     id: '1',
                     date: new Date('2025-05-15T10:30:00'),
@@ -146,7 +208,7 @@
                             type: 'photo',
                             photo: {
                                 sizes: [
-                                    { url: 'images/news1.jpg', width: 800, height: 600 }
+                                    { url: 'https://sun9-84.userapi.com/impg/7Jw7wB7vNjwK9yX1ZvD2v9Wx3DvXwVQm8qWZlg/9jLZzVdQk9k.jpg?size=1280x960&quality=96&type=album', width: 800, height: 600 }
                                 ]
                             }
                         }
@@ -161,7 +223,7 @@
                             type: 'photo',
                             photo: {
                                 sizes: [
-                                    { url: 'images/news2.jpg', width: 800, height: 600 }
+                                    { url: 'https://sun9-44.userapi.com/impg/4qXw6wGzZqXqQw9JQYJvZQ9jZ3YqJfVYvqYbXw/hN9LhHmJZ9w.jpg?size=1280x960&quality=96&type=album', width: 800, height: 600 }
                                 ]
                             }
                         }
@@ -175,7 +237,7 @@
                         {
                             type: 'video',
                             video: {
-                                photo_320: 'images/news3.jpg'
+                                photo_320: 'https://sun9-59.userapi.com/impg/8qQwBqWZqQJQZqJQZqJQZqJQZqJQZqJQZqJQZqJQZqJQZqJQZqJQZqJQZqJQZqJQ/8wYqXwVQm8qWZlg.jpg?size=320x240&quality=96&type=album'
                             }
                         }
                     ]
@@ -185,10 +247,29 @@
                     date: new Date('2025-04-28T16:45:00'),
                     text: 'Федерация объявляет о старте подготовки к новому сезону. Тренировочные сборы начнутся с 1 июня на базе автодрома "Кстово". Все желающие могут присоединиться к тренировкам.',
                     attachments: []
+                },
+                {
+                    id: '5',
+                    date: new Date('2025-04-20T11:30:00'),
+                    text: 'Приглашаем всех любителей мотоспорта на традиционный весенний мотофестиваль, который состоится 10 мая в Нижнем Новгороде. В программе: выставка мототехники, мастер-классы от чемпионов, детские развлечения и многое другое.',
+                    attachments: [
+                        {
+                            type: 'photo',
+                            photo: {
+                                sizes: [
+                                    { url: 'https://sun9-21.userapi.com/impg/5qQwBqWZqQJQZqJQZqJQZqJQZqJQZqJQZqJQZqJQZqJQZqJQZqJQZqJQZqJQZqJQ/8wYqXwVQm8qWZlg.jpg?size=1280x960&quality=96&type=album', width: 800, height: 600 }
+                                ]
+                            }
+                        }
+                    ]
                 }
             ];
             
-            displayNews(testNews);
+            // Кэшируем резервные новости
+            localStorage.setItem('vkNews', JSON.stringify(fallbackNews));
+            localStorage.setItem('vkNewsLastUpdated', new Date().getTime().toString());
+            
+            displayNews(fallbackNews);
         }
 
         // Отображение новостей на странице
@@ -197,14 +278,14 @@
             newsContainer.innerHTML = '';
             
             if (posts.length === 0) {
-                newsContainer.innerHTML = '<p>Новостей пока нет</p>';
+                newsContainer.innerHTML = '<p>Новостей пока нет. Попробуйте обновить страницу позже.</p>';
                 return;
             }
             
             posts.forEach(post => {
                 // Форматирование даты
                 const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                const formattedDate = post.date.toLocaleDateString('ru-RU', options);
+                const formattedDate = new Date(post.date * 1000).toLocaleDateString('ru-RU', options);
                 
                 // Создание HTML для новости
                 const newsItem = document.createElement('div');
@@ -223,19 +304,27 @@
                     post.attachments.forEach(attachment => {
                         if (attachment.type === 'photo') {
                             // Выбираем фото наибольшего размера
-                            const sizes = attachment.photo.sizes;
-                            const largestPhoto = sizes[sizes.length - 1];
-                            attachmentsHTML += `
-                                <div class="news-attachment">
-                                    <img src="${largestPhoto.url}" alt="Фото к новости">
-                                </div>
-                            `;
+                            let largestPhotoUrl = '';
+                            if (attachment.photo && attachment.photo.sizes) {
+                                const largestPhoto = attachment.photo.sizes[attachment.photo.sizes.length - 1];
+                                largestPhotoUrl = largestPhoto.url;
+                            }
+                            
+                            if (largestPhotoUrl) {
+                                attachmentsHTML += `
+                                    <div class="news-attachment">
+                                        <img src="${largestPhotoUrl}" alt="Фото к новости">
+                                    </div>
+                                `;
+                            }
                         } else if (attachment.type === 'video') {
-                            attachmentsHTML += `
-                                <div class="news-attachment video-preview" style="background-image: url(${attachment.video.photo_320})">
-                                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                                </div>
-                            `;
+                            if (attachment.video && attachment.video.photo_320) {
+                                attachmentsHTML += `
+                                    <div class="news-attachment video-preview" style="background-image: url(${attachment.video.photo_320})">
+                                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                                    </div>
+                                `;
+                            }
                         }
                     });
                 }
@@ -247,18 +336,13 @@
                     <h3 class="news-title">${shortText}</h3>
                     <div class="news-content">${text}</div>
                     ${attachmentsHTML}
-                    <a href="https://vk.com/wall-206852382_${post.id}" target="_blank" class="news-link">
+                    <a href="https://vk.com/wall${post.owner_id}_${post.id}" target="_blank" class="news-link">
                         <i class="fas fa-arrow-right"></i> Читать далее в ВКонтакте
                     </a>
                 `;
                 
                 newsContainer.appendChild(newsItem);
             });
-        }
-        
-        function showError(message) {
-            const newsContainer = document.getElementById('news-container');
-            newsContainer.innerHTML = `<div class="error">${message}</div>`;
         }
         
         // Функция для отправки тестовой новости
