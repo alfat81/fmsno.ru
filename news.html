@@ -97,6 +97,7 @@
     <div class="overlay" id="menu-overlay"></div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="telegram.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Адаптивное меню
@@ -255,6 +256,48 @@
             const newsContainer = document.getElementById('news-container');
             newsContainer.innerHTML = `<div class="error">${message}</div>`;
         }
+        
+        // Функция для отправки тестовой новости
+        function sendTestNews() {
+            const testNews = {
+                id: `news_${Date.now()}`,
+                title: 'Тестовая новость из сайта',
+                date: new Date().toISOString(),
+                text: 'Это тестовая новость, отправленная автоматически с сайта Федерации. В будущем здесь будут публиковаться реальные новости о соревнованиях и событиях.',
+                attachments: []
+            };
+            
+            if (window.telegramBot && window.telegramBot.sendNewNews) {
+                window.telegramBot.sendNewNews(testNews)
+                    .then(result => {
+                        if (result && result.ok) {
+                            alert('Тестовая новость успешно отправлена в Telegram!');
+                        } else {
+                            alert('Не удалось отправить тестовую новость в Telegram.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка отправки тестовой новости:', error);
+                        alert('Произошла ошибка при отправке тестовой новости.');
+                    });
+            } else {
+                alert('Telegram-бот не инициализирован.');
+            }
+        }
+        
+        // Добавляем кнопку для тестовой отправки (только для администраторов)
+        document.addEventListener('DOMContentLoaded', function() {
+            const isAdmin = localStorage.getItem('isAdminAuth') === 'true';
+            if (isAdmin) {
+                const container = document.querySelector('.container');
+                const testBtn = document.createElement('button');
+                testBtn.className = 'btn admin-test-btn';
+                testBtn.innerHTML = '<i class="fas fa-rocket"></i> Отправить тестовую новость в Telegram';
+                testBtn.style.marginBottom = '20px';
+                testBtn.addEventListener('click', sendTestNews);
+                container.insertBefore(testBtn, container.firstChild);
+            }
+        });
     </script>
 </body>
 </html>
