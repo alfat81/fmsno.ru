@@ -17,8 +17,11 @@
                 <img src="images/fmsno_logo.png" alt="Эмблема ФМСНО">
             </div>
             <h1>Нижегородская Федерация<br>Мотоциклетного Спорта</h1>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
             <nav>
-                <ul>
+                <ul id="main-menu">
                     <li><a href="index.html">Главная</a></li>
                     <li><a href="competitions.html">Соревнования</a></li>
                     <li><a href="documents.html" class="active">Нормативные документы</a></li>
@@ -49,71 +52,6 @@
                 
                 <div id="documents-container" class="documents-grid">
                     <!-- Документы будут загружены здесь -->
-                    <div class="document-card regulation">
-                        <div class="document-icon">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <div class="document-content">
-                            <h3>Регламент соревнований по мотокроссу 2025</h3>
-                            <p class="document-meta">
-                                <span class="document-date"><i class="far fa-calendar-alt"></i> 15.01.2025</span>
-                                <span class="document-size"><i class="fas fa-file-download"></i> 1.2 МБ</span>
-                            </p>
-                            <p class="document-description">Официальный регламент проведения соревнований по мотокроссу в Нижегородской области на 2025 год</p>
-                        </div>
-                        <div class="document-actions">
-                            <a href="documents/reglament-motocross-2025.pdf" class="btn view-btn" target="_blank">
-                                <i class="fas fa-eye"></i> Просмотреть
-                            </a>
-                            <a href="documents/reglament-motocross-2025.pdf" download class="btn download-btn">
-                                <i class="fas fa-download"></i> Скачать
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="document-card order">
-                        <div class="document-icon">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <div class="document-content">
-                            <h3>Приказ о проведении Кубка области</h3>
-                            <p class="document-meta">
-                                <span class="document-date"><i class="far fa-calendar-alt"></i> 10.02.2025</span>
-                                <span class="document-size"><i class="fas fa-file-download"></i> 0.8 МБ</span>
-                            </p>
-                            <p class="document-description">Приказ председателя Федерации о проведении Кубка Нижегородской области по мотоспорту</p>
-                        </div>
-                        <div class="document-actions">
-                            <a href="documents/prikaz-kubok-2025.pdf" class="btn view-btn" target="_blank">
-                                <i class="fas fa-eye"></i> Просмотреть
-                            </a>
-                            <a href="documents/prikaz-kubok-2025.pdf" download class="btn download-btn">
-                                <i class="fas fa-download"></i> Скачать
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="document-card position">
-                        <div class="document-icon">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <div class="document-content">
-                            <h3>Положение о проведении SX Cup</h3>
-                            <p class="document-meta">
-                                <span class="document-date"><i class="far fa-calendar-alt"></i> 05.03.2025</span>
-                                <span class="document-size"><i class="fas fa-file-download"></i> 1.5 МБ</span>
-                            </p>
-                            <p class="document-description">Положение о проведении серии соревнований SX Cup 2025 года в Нижегородской области</p>
-                        </div>
-                        <div class="document-actions">
-                            <a href="documents/position-sx-cup-2025.pdf" class="btn view-btn" target="_blank">
-                                <i class="fas fa-eye"></i> Просмотреть
-                            </a>
-                            <a href="documents/position-sx-cup-2025.pdf" download class="btn download-btn">
-                                <i class="fas fa-download"></i> Скачать
-                            </a>
-                        </div>
-                    </div>
                 </div>
                 
                 <div id="document-form-container" class="form-container hidden hidden-admin">
@@ -250,9 +188,6 @@
                     <button id="add-document-btn-panel" class="btn admin-action-btn">
                         <i class="fas fa-file-pdf"></i> Добавить документ
                     </button>
-                    <button id="manage-competitions-btn" class="btn admin-action-btn">
-                        <i class="fas fa-list"></i> Управление соревнованиями
-                    </button>
                     <button id="logout-btn" class="btn admin-logout-btn">
                         <i class="fas fa-sign-out-alt"></i> Выйти
                     </button>
@@ -265,6 +200,8 @@
     <button class="admin-toggle-btn" id="admin-toggle-btn">
         <i class="fas fa-user-shield"></i>
     </button>
+
+    <div class="overlay" id="menu-overlay"></div>
 
     <script>
         // Правильные данные для входа администратора
@@ -282,7 +219,6 @@
             document.getElementById('logout-btn').addEventListener('click', adminLogout);
             document.getElementById('add-document-btn-panel').addEventListener('click', showAddDocumentForm);
             document.getElementById('add-competition-btn-panel').addEventListener('click', showAddCompetitionForm);
-            document.getElementById('manage-competitions-btn').addEventListener('click', goToCompetitionsPage);
             document.addEventListener('click', handleOutsideClick);
             
             // Обработчики для документов
@@ -296,6 +232,31 @@
                     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     filterDocuments(this.dataset.filter);
+                });
+            });
+            
+            // Адаптивное меню
+            const menuToggle = document.getElementById('menu-toggle');
+            const menu = document.getElementById('main-menu');
+            const overlay = document.getElementById('menu-overlay');
+            
+            menuToggle.addEventListener('click', function() {
+                menu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
+            });
+            
+            overlay.addEventListener('click', function() {
+                menu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            document.querySelectorAll('#main-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    menu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
                 });
             });
         });
@@ -376,7 +337,7 @@
             }
             
             if (password !== ADMIN_PASSWORD) {
-                showError('Неверный пароль, fmsno2025', errorEl);
+                showError('Неверный пароль', errorEl);
                 return;
             }
             
@@ -403,10 +364,6 @@
             showNotification('Вы вышли из админ-панели', 'info');
         }
         
-        function goToCompetitionsPage() {
-            window.location.href = 'competitions.html';
-        }
-        
         function showAddDocumentForm() {
             closeAdminPanel();
             document.getElementById('form-title').textContent = 'Добавить новый документ';
@@ -421,7 +378,7 @@
         
         function showAddCompetitionForm() {
             closeAdminPanel();
-            window.location.href = 'competitions.html#add-competition';
+            window.location.href = 'competitions.html';
         }
         
         function saveDocument(e) {
@@ -485,9 +442,6 @@
                 
                 // Сохраняем в localStorage
                 localStorage.setItem('documents', JSON.stringify(documents));
-                
-                // Для реального приложения здесь нужно было бы загружать файл на сервер
-                // В данном случае эмулируем сохранение
                 
                 // Обновляем отображение
                 loadDocuments();
@@ -588,43 +542,6 @@
             }
         }
         
-        function editDocument(id) {
-            try {
-                const documents = JSON.parse(localStorage.getItem('documents')) || [];
-                const document = documents.find(doc => doc.id === id);
-                
-                if (!document) return;
-                
-                // Заполняем форму данными
-                document.getElementById('form-title').textContent = 'Редактировать документ';
-                document.getElementById('document-id').value = document.id;
-                document.getElementById('document-title').value = document.title;
-                document.getElementById('document-type').value = document.type;
-                document.getElementById('document-date').value = document.date;
-                document.getElementById('document-description').value = document.description || '';
-                
-                // Показываем форму
-                document.getElementById('document-form-container').classList.remove('hidden');
-            } catch (error) {
-                console.error('Ошибка при редактировании документа:', error);
-            }
-        }
-        
-        function deleteDocument(id) {
-            if (!confirm('Вы уверены, что хотите удалить этот документ?')) return;
-            
-            try {
-                let documents = JSON.parse(localStorage.getItem('documents')) || [];
-                documents = documents.filter(doc => doc.id !== id);
-                localStorage.setItem('documents', JSON.stringify(documents));
-                loadDocuments();
-                showNotification('Документ успешно удален!', 'success');
-            } catch (error) {
-                console.error('Ошибка при удалении документа:', error);
-                showNotification('Ошибка при удалении документа', 'error');
-            }
-        }
-        
         function filterDocuments(type) {
             const cards = document.querySelectorAll('.document-card');
             
@@ -669,7 +586,7 @@
         }
         
         function showNotification(message, type = 'info') {
-            // Уведомление (копия из competitions.html)
+            // Создаем уведомление
             const notification = document.createElement('div');
             notification.className = `notification ${type}`;
             notification.innerHTML = `
@@ -678,9 +595,13 @@
                 <button class="close-notification">&times;</button>
             `;
             
+            // Добавляем в body
             document.body.appendChild(notification);
+            
+            // Показываем
             setTimeout(() => notification.classList.add('show'), 10);
             
+            // Удаляем через 5 секунд
             setTimeout(() => {
                 notification.classList.remove('show');
                 setTimeout(() => {
@@ -690,6 +611,7 @@
                 }, 300);
             }, 5000);
             
+            // Закрытие по клику
             notification.querySelector('.close-notification').addEventListener('click', () => {
                 notification.classList.remove('show');
                 setTimeout(() => {
