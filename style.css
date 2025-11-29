@@ -156,7 +156,7 @@ ul {
     box-shadow: 0 6px 15px rgba(0,0,0,0.4);
 }
 
-/* Кнопка админки - перенесена в верхний правый угол */
+/* Кнопка админки - для десктопа в верхнем правом углу */
 .admin-toggle-btn {
     position: fixed;
     top: 20px;
@@ -480,98 +480,6 @@ ul {
     color: var(--primary-color);
 }
 
-/* Стили для автономного виджета ВКонтакте */
-.vk-autonomous-widget {
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    padding: 20px;
-}
-
-.vk-group-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.vk-group-avatar {
-    width: 60px;
-    height: 60px;
-    background: #4c75a3;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    margin-right: 15px;
-}
-
-.vk-group-info h4 {
-    color: var(--primary-color);
-    margin-bottom: 5px;
-    font-size: 1.2rem;
-}
-
-.vk-group-members {
-    color: #546e7a;
-    font-size: 0.95rem;
-}
-
-.vk-group-description {
-    background: #e8eaf6;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    font-size: 0.95rem;
-    line-height: 1.5;
-}
-
-.vk-recent-posts h5 {
-    color: var(--primary-color);
-    margin-bottom: 10px;
-    font-size: 1.1rem;
-}
-
-.vk-recent-posts ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.vk-recent-posts li {
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
-    color: #333;
-}
-
-.vk-recent-posts li:last-child {
-    border-bottom: none;
-}
-
-.vk-group-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-}
-
-.vk-primary-btn {
-    background: #4c75a3;
-}
-
-.vk-primary-btn:hover {
-    background: #395c81;
-}
-
-.vk-secondary-btn {
-    background: #e53935;
-}
-
-.vk-secondary-btn:hover {
-    background: #c62828;
-}
-
 /* Стили для полного текста новости */
 .news-full-overlay {
     position: fixed;
@@ -855,10 +763,12 @@ nav ul li a.active:after {
         visibility: visible;
     }
     
-    /* Адаптация позиции кнопки админки на мобильных устройствах */
+    /* Адаптивная позиция кнопки админки на мобильных устройствах */
     .admin-toggle-btn {
-        top: 15px;
-        right: 15px;
+        bottom: 20px;
+        top: auto;
+        right: 20px;
+        z-index: 1001;
         width: 45px;
         height: 45px;
     }
@@ -1769,6 +1679,9 @@ footer {
         width: 40px;
         height: 40px;
         font-size: 1rem;
+        bottom: 15px;
+        top: auto;
+        right: 15px;
     }
     
     .admin-panel-header h3 {
@@ -1882,19 +1795,5 @@ footer {
     
     .section-subtitle {
         font-size: 1.5rem;
-    }
-    
-    .vk-group-header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .vk-group-avatar {
-        margin-right: 0;
-        margin-bottom: 15px;
-    }
-    
-    .vk-group-actions {
-        flex-direction: column;
     }
 }
