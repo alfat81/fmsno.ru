@@ -39,7 +39,7 @@
                 <div class="container">
                     <h2>Официальный сайт Федерации мотоспорта Нижегородской области</h2>
                     <p>Информация о соревнованиях, результатах и событиях мотоспорта региона</p>
-                                    </div>
+                </div>
             </div>
         </section>
 
@@ -103,7 +103,7 @@
                             <div class="achievement-text">Участников в сезоне</div>
                         </div>
                         <div class="achievement-card">
-                            <div class="achievement-number">8+</div>
+                            <div class="achievement-number">8</div>
                             <div class="achievement-text">Лет с Вами</div>
                         </div>
                         <div class="achievement-card">
@@ -203,6 +203,7 @@
             const menuToggle = document.getElementById('menu-toggle');
             const menu = document.getElementById('main-menu');
             const overlay = document.getElementById('menu-overlay');
+            const adminToggleBtn = document.getElementById('admin-toggle-btn');
             
             menuToggle.addEventListener('click', function() {
                 menu.classList.toggle('active');
@@ -223,7 +224,33 @@
                     document.body.style.overflow = 'auto';
                 });
             });
+            
+            // Отдельный обработчик для кнопки админки
+            adminToggleBtn.addEventListener('click', function(e) {
+                // Останавливаем всплытие события, чтобы не закрывалось меню
+                e.stopPropagation();
+                toggleAdminPanel();
+            });
+            
+            // Обработчик для кликов вне админ-панели
+            document.addEventListener('click', function(e) {
+                if (!document.querySelector('.admin-bottom-panel').contains(e.target) && 
+                    !adminToggleBtn.contains(e.target) && 
+                    document.querySelector('.admin-bottom-panel').classList.contains('visible')) {
+                    closeAdminPanel();
+                }
+            });
         });
+        
+        function toggleAdminPanel() {
+            const panel = document.querySelector('.admin-bottom-panel');
+            panel.classList.toggle('visible');
+        }
+        
+        function closeAdminPanel() {
+            const panel = document.querySelector('.admin-bottom-panel');
+            panel.classList.remove('visible');
+        }
         
         function loadUpcomingEvents() {
             const eventsContainer = document.getElementById('upcoming-events');
