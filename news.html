@@ -169,6 +169,10 @@
             </div>
             <div class="copyright">
                 <p>&copy; 2025 Нижегородская Федерация Мотоциклетного Спорта. Все права защищены.</p>
+                <div class="admin-login-footer" id="admin-login-footer">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Вход для администратора</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -176,6 +180,8 @@
     <a href="https://t.me/fmsno_new" target="_blank" class="telegram-widget">
         <i class="fab fa-telegram"></i>
     </a>
+
+    <div class="overlay" id="menu-overlay"></div>
 
     <!-- Всплывающая админ-панель -->
     <div class="admin-bottom-panel" id="admin-bottom-panel">
@@ -221,13 +227,6 @@
         </div>
     </div>
 
-    <!-- Кнопка вызова админ-панели -->
-    <button class="admin-toggle-btn" id="admin-toggle-btn">
-        <i class="fas fa-user-shield"></i>
-    </button>
-
-    <div class="overlay" id="menu-overlay"></div>
-
     <script src="telegram.js"></script>
     <script>
         // Правильные данные для входа администратора
@@ -241,29 +240,12 @@
             // Загрузка новостей
             loadNews();
             
-            // Обработчики событий для админ-панели
-            document.getElementById('admin-toggle-btn').addEventListener('click', toggleAdminPanel);
-            document.getElementById('admin-close-btn').addEventListener('click', closeAdminPanel);
-            document.getElementById('login-btn').addEventListener('click', adminLogin);
-            document.getElementById('logout-btn').addEventListener('click', adminLogout);
-            document.getElementById('add-news-btn-panel').addEventListener('click', showAddNewsForm);
-            document.getElementById('add-news-btn').addEventListener('click', showAddNewsForm);
-            document.getElementById('cancel-news-btn').addEventListener('click', hideNewsForm);
-            document.getElementById('news-form').addEventListener('submit', saveNews);
-            
-            // Фильтрация новостей
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    filterNews(this.dataset.filter);
-                });
-            });
-            
-            // Адаптивное меню
+            // Обработчики событий
             const menuToggle = document.getElementById('menu-toggle');
             const menu = document.getElementById('main-menu');
             const overlay = document.getElementById('menu-overlay');
+            const adminLoginFooter = document.getElementById('admin-login-footer');
+            const adminCloseBtn = document.getElementById('admin-close-btn');
             
             menuToggle.addEventListener('click', function() {
                 menu.classList.toggle('active');
@@ -284,26 +266,50 @@
                     document.body.style.overflow = 'auto';
                 });
             });
-        });
-        
-        function handleOutsideClick(event) {
-            const adminPanel = document.getElementById('admin-bottom-panel');
-            const toggleBtn = document.getElementById('admin-toggle-btn');
             
-            if (!adminPanel.contains(event.target) && !toggleBtn.contains(event.target) && 
-                adminPanel.classList.contains('visible')) {
-                closeAdminPanel();
-            }
-        }
-        
-        function toggleAdminPanel() {
-            const panel = document.getElementById('admin-bottom-panel');
-            panel.classList.toggle('visible');
-        }
+            // Обработчик для элемента входа в админку в футере
+            adminLoginFooter.addEventListener('click', function() {
+                document.getElementById('admin-bottom-panel').classList.add('visible');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Обработчик для закрытия админ-панели
+            adminCloseBtn.addEventListener('click', function() {
+                document.getElementById('admin-bottom-panel').classList.remove('visible');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Закрытие админ-панели по клику на оверлей
+            overlay.addEventListener('click', function() {
+                if (document.getElementById('admin-bottom-panel').classList.contains('visible')) {
+                    document.getElementById('admin-bottom-panel').classList.remove('visible');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Основные обработчики
+            document.getElementById('admin-close-btn').addEventListener('click', closeAdminPanel);
+            document.getElementById('login-btn').addEventListener('click', adminLogin);
+            document.getElementById('logout-btn').addEventListener('click', adminLogout);
+            document.getElementById('add-news-btn-panel').addEventListener('click', showAddNewsForm);
+            document.getElementById('add-news-btn').addEventListener('click', showAddNewsForm);
+            document.getElementById('cancel-news-btn').addEventListener('click', hideNewsForm);
+            document.getElementById('news-form').addEventListener('submit', saveNews);
+            
+            // Фильтрация новостей
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    filterNews(this.dataset.filter);
+                });
+            });
+        });
         
         function closeAdminPanel() {
             const panel = document.getElementById('admin-bottom-panel');
             panel.classList.remove('visible');
+            document.body.style.overflow = 'auto';
         }
         
         function checkAdminAuth() {
