@@ -149,6 +149,10 @@
             </div>
             <div class="copyright">
                 <p>&copy; 2025 Нижегородская Федерация Мотоциклетного Спорта. Все права защищены.</p>
+                <div class="admin-login-footer" id="admin-login-footer">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Вход для администратора</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -156,6 +160,8 @@
     <a href="https://t.me/fmsno_new" target="_blank" class="telegram-widget">
         <i class="fab fa-telegram"></i>
     </a>
+
+    <div class="overlay" id="menu-overlay"></div>
 
     <!-- Всплывающая админ-панель -->
     <div class="admin-bottom-panel" id="admin-bottom-panel">
@@ -204,14 +210,6 @@
         </div>
     </div>
 
-    <!-- Кнопка вызова админ-панели -->
-    <button class="admin-toggle-btn" id="admin-toggle-btn">
-        <i class="fas fa-user-shield"></i>
-    </button>
-
-    <div class="overlay" id="menu-overlay"></div>
-
-    <script src="telegram.js"></script>
     <script>
         // Правильные данные для входа администратора
         const ADMIN_LOGIN = 'admin';
@@ -224,24 +222,12 @@
             // Инициализация
             loadCompetitions();
             
-            // Обработчики событий для админ-панели
-            document.getElementById('admin-toggle-btn').addEventListener('click', toggleAdminPanel);
-            document.getElementById('admin-close-btn').addEventListener('click', closeAdminPanel);
-            document.getElementById('login-btn').addEventListener('click', adminLogin);
-            document.getElementById('logout-btn').addEventListener('click', adminLogout);
-            document.getElementById('add-comp-btn').addEventListener('click', showAddFormFromPanel);
-            document.getElementById('manage-competitions-btn').addEventListener('click', goToCompetitionsPage);
-            
-            // Основные обработчики
-            document.getElementById('refresh-competitions-btn').addEventListener('click', loadCompetitions);
-            document.getElementById('cancel-btn').addEventListener('click', hideForm);
-            document.getElementById('competition-form').addEventListener('submit', saveCompetition);
-            document.addEventListener('click', handleOutsideClick);
-            
-            // Адаптивное меню
+            // Обработчики событий
             const menuToggle = document.getElementById('menu-toggle');
             const menu = document.getElementById('main-menu');
             const overlay = document.getElementById('menu-overlay');
+            const adminLoginFooter = document.getElementById('admin-login-footer');
+            const adminCloseBtn = document.getElementById('admin-close-btn');
             
             menuToggle.addEventListener('click', function() {
                 menu.classList.toggle('active');
@@ -262,27 +248,36 @@
                     document.body.style.overflow = 'auto';
                 });
             });
-        });
-        
-        function handleOutsideClick(event) {
-            const adminPanel = document.getElementById('admin-bottom-panel');
-            const toggleBtn = document.getElementById('admin-toggle-btn');
             
-            if (!adminPanel.contains(event.target) && !toggleBtn.contains(event.target) && 
-                adminPanel.classList.contains('visible')) {
-                closeAdminPanel();
-            }
-        }
-        
-        function toggleAdminPanel() {
-            const panel = document.getElementById('admin-bottom-panel');
-            panel.classList.toggle('visible');
-        }
-        
-        function closeAdminPanel() {
-            const panel = document.getElementById('admin-bottom-panel');
-            panel.classList.remove('visible');
-        }
+            // Обработчик для элемента входа в админку в футере
+            adminLoginFooter.addEventListener('click', function() {
+                document.getElementById('admin-bottom-panel').classList.add('visible');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Обработчик для закрытия админ-панели
+            adminCloseBtn.addEventListener('click', function() {
+                document.getElementById('admin-bottom-panel').classList.remove('visible');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Закрытие админ-панели по клику на оверлей
+            overlay.addEventListener('click', function() {
+                if (document.getElementById('admin-bottom-panel').classList.contains('visible')) {
+                    document.getElementById('admin-bottom-panel').classList.remove('visible');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Основные обработчики
+            document.getElementById('refresh-competitions-btn').addEventListener('click', loadCompetitions);
+            document.getElementById('cancel-btn').addEventListener('click', hideForm);
+            document.getElementById('competition-form').addEventListener('submit', saveCompetition);
+            document.getElementById('login-btn').addEventListener('click', adminLogin);
+            document.getElementById('logout-btn').addEventListener('click', adminLogout);
+            document.getElementById('add-comp-btn').addEventListener('click', showAddFormFromPanel);
+            document.getElementById('manage-competitions-btn').addEventListener('click', goToCompetitionsPage);
+        });
         
         function checkAdminAuth() {
             const isAdmin = localStorage.getItem('isAdminAuth') === 'true';
@@ -305,14 +300,12 @@
             document.querySelectorAll('.hidden-admin').forEach(el => {
                 el.classList.remove('hidden');
             });
-            document.querySelector('.admin-controls').classList.add('visible');
         }
         
         function hideAdminControls() {
             document.querySelectorAll('.hidden-admin').forEach(el => {
                 el.classList.add('hidden');
             });
-            document.querySelector('.admin-controls').classList.remove('visible');
         }
         
         function showAdminControlsPanel() {
@@ -365,7 +358,7 @@
             localStorage.removeItem('adminAuthTimestamp');
             hideAdminControls();
             hideAdminControlsPanel();
-            closeAdminPanel();
+            document.body.style.overflow = 'auto';
             showNotification('Вы вышли из админ-панели', 'info');
         }
         
@@ -374,7 +367,8 @@
         }
         
         function showAddFormFromPanel() {
-            closeAdminPanel();
+            document.getElementById('admin-bottom-panel').classList.remove('visible');
+            document.body.style.overflow = 'auto';
             showAddForm();
         }
         
@@ -548,21 +542,6 @@
                 } else {
                     // Добавляем новое соревнование
                     competitions.push(newCompetition);
-                    
-                    // Отправляем в Telegram только при добавлении нового соревнования
-                    if (window.telegramBot && window.telegramBot.sendNewCompetition) {
-                        window.telegramBot.sendNewCompetition(newCompetition)
-                            .then(result => {
-                                if (result && result.ok) {
-                                    console.log('Соревнование успешно отправлено в Telegram');
-                                } else {
-                                    console.warn('Не удалось отправить соревнование в Telegram');
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Ошибка отправки в Telegram:', error);
-                            });
-                    }
                 }
                 
                 // Сохраняем в localStorage
