@@ -41,9 +41,8 @@
                 <div class="news-controls">
                     <div class="news-filters">
                         <button class="filter-btn active" data-filter="all">Все новости</button>
-                        <button class="filter-btn" data-filter="competitions">Соревнования</button>
-                        <button class="filter-btn" data-filter="results">Результаты</button>
-                        <button class="filter-btn" data-filter="other">Другое</button>
+                        <button class="filter-btn" data-filter="manual">Добавленные вручную</button>
+                        <button class="filter-btn" data-filter="vk">Из ВКонтакте</button>
                     </div>
                     <button id="add-news-btn" class="btn hidden-admin">
                         <i class="fas fa-plus"></i> Добавить новость
@@ -58,22 +57,19 @@
                     <h3 id="form-title">Добавить новую новость</h3>
                     <form id="news-form">
                         <input type="hidden" id="news-id">
+                        <input type="hidden" id="news-type" value="manual">
                         <div class="form-group">
                             <label for="news-title">Заголовок*</label>
                             <input type="text" id="news-title" required>
                         </div>
                         <div class="form-group">
-                            <label for="news-category">Категория*</label>
-                            <select id="news-category" required>
-                                <option value="">Выберите категорию</option>
-                                <option value="competitions">Соревнования</option>
-                                <option value="results">Результаты</option>
-                                <option value="other">Другое</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="news-content">Содержание новости*</label>
                             <textarea id="news-content" rows="6" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="news-vk-link">Ссылка на пост ВКонтакте (для новостей из ВК)</label>
+                            <input type="url" id="news-vk-link" placeholder="https://vk.com/wall-206852382_XXXXX">
+                            <p class="file-hint">Только для новостей, добавленных из ВКонтакте</p>
                         </div>
                         <div class="form-group">
                             <label for="news-image">Изображение (опционально)</label>
@@ -92,7 +88,7 @@
                 </div>
                 
                 <div class="vk-widget-section">
-                    <h3 class="section-subtitle">Новости из нашей группы ВКонтакте</h3>
+                    <h3 class="section-subtitle">Последние записи из нашей группы ВКонтакте</h3>
                     <div class="vk-autonomous-widget">
                         <div class="vk-group-header">
                             <div class="vk-group-avatar">
@@ -104,27 +100,26 @@
                             </div>
                         </div>
                         
-                        <div class="vk-group-description">
-                            <p>На этой странице публикуется информация для гонщиков о соревнованиях, фото, видеоотчеты и обсуждаются новости мотоспорта региона.</p>
+                        <div class="vk-iframe-container">
+                            <iframe src="https://vk.com/widget_community.php?gid=fmsno&width=100%&mode=3&height=400" 
+                                    width="100%" 
+                                    height="400" 
+                                    frameborder="0" 
+                                    allowfullscreen>
+                            </iframe>
                         </div>
                         
-                        <div class="vk-recent-posts">
-                            <h5>Последние записи:</h5>
-                            <ul>
-                                <li><strong>Награждение победителей</strong> (видео, 1 456 просмотров)</li>
-                                <li><strong>Старт B и С Бор</strong> (видео, 354 просмотров)</li>
-                                <li><strong>Старт D Бор</strong> (видео, 264 просмотров)</li>
-                                <li><strong>KTM SX Cup 2014</strong> (видео, 2 571 просмотров)</li>
-                            </ul>
+                        <div class="vk-group-description">
+                            <p>На этой странице публикуется информация для гонщиков о соревнованиях, фото, видеоотчеты и обсуждаются новости мотоспорта региона.</p>
                         </div>
                         
                         <div class="vk-group-actions">
                             <a href="https://vk.com/fmsno" target="_blank" class="btn vk-primary-btn">
                                 <i class="fab fa-vk"></i> Перейти в группу
                             </a>
-                            <a href="https://vk.com/fmsno" target="_blank" class="btn vk-secondary-btn">
-                                <i class="fas fa-rss"></i> Подписаться
-                            </a>
+                            <button id="add-vk-news-btn" class="btn vk-secondary-btn hidden-admin">
+                                <i class="fas fa-plus"></i> Добавить из ВК вручную
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -288,13 +283,15 @@
             });
             
             // Основные обработчики
-            document.getElementById('admin-close-btn').addEventListener('click', closeAdminPanel);
-            document.getElementById('login-btn').addEventListener('click', adminLogin);
-            document.getElementById('logout-btn').addEventListener('click', adminLogout);
-            document.getElementById('add-news-btn-panel').addEventListener('click', showAddNewsForm);
             document.getElementById('add-news-btn').addEventListener('click', showAddNewsForm);
+            document.getElementById('add-news-btn-panel').addEventListener('click', showAddNewsForm);
             document.getElementById('cancel-news-btn').addEventListener('click', hideNewsForm);
             document.getElementById('news-form').addEventListener('submit', saveNews);
+            document.getElementById('login-btn').addEventListener('click', adminLogin);
+            document.getElementById('logout-btn').addEventListener('click', adminLogout);
+            document.getElementById('add-vk-news-btn').addEventListener('click', function() {
+                showAddNewsForm('vk');
+            });
             
             // Фильтрация новостей
             document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -395,10 +392,11 @@
             showNotification('Вы вышли из админ-панели', 'info');
         }
         
-        function showAddNewsForm() {
+        function showAddNewsForm(type = 'manual') {
             closeAdminPanel();
-            document.getElementById('form-title').textContent = 'Добавить новую новость';
+            document.getElementById('form-title').textContent = type === 'vk' ? 'Добавить новость из ВКонтакте' : 'Добавить новую новость';
             document.getElementById('news-id').value = '';
+            document.getElementById('news-type').value = type;
             document.getElementById('news-form').reset();
             document.getElementById('news-form-container').classList.remove('hidden');
         }
@@ -435,7 +433,7 @@
                 // Добавляем новости
                 news.forEach(item => {
                     const newsItem = document.createElement('div');
-                    newsItem.className = `news-item ${item.category}`;
+                    newsItem.className = `news-item ${item.type === 'vk' ? 'news-vk' : 'news-manual'}`;
                     
                     const date = new Date(item.date);
                     const formattedDate = date.toLocaleDateString('ru-RU', {
@@ -458,10 +456,21 @@
                         `;
                     }
                     
+                    let vkLinkHTML = '';
+                    if (item.vkLink) {
+                        vkLinkHTML = `
+                            <a href="${item.vkLink}" target="_blank" class="btn vk-link-btn">
+                                <i class="fab fa-vk"></i> Посмотреть в ВКонтакте
+                            </a>
+                        `;
+                    }
+                    
                     newsItem.innerHTML = `
                         <div class="news-header">
                             <div class="news-date">${formattedDate}</div>
-                            <div class="news-category ${item.category}">${getCategoryName(item.category)}</div>
+                            <div class="news-source ${item.type}">
+                                ${item.type === 'vk' ? '<i class="fab fa-vk"></i> ВКонтакте' : '<i class="fas fa-edit"></i> Добавлено вручную'}
+                            </div>
                         </div>
                         <h3 class="news-title">${item.title}</h3>
                         <div class="news-content">${previewText}</div>
@@ -469,14 +478,20 @@
                         <a href="#" class="news-link read-more" data-id="${item.id}">
                             <i class="fas fa-arrow-right"></i> Читать полностью
                         </a>
+                        ${vkLinkHTML}
                         ${localStorage.getItem('isAdminAuth') === 'true' ? `
                         <div class="admin-news-actions">
                             <button class="btn edit-btn hidden-admin" data-id="${item.id}">
-                                <i class="fas fa-edit"></i>
+                                <i class="fas fa-edit"></i> Редактировать
                             </button>
                             <button class="btn delete-btn hidden-admin" data-id="${item.id}">
-                                <i class="fas fa-trash"></i>
+                                <i class="fas fa-trash"></i> Удалить
                             </button>
+                            ${item.type === 'vk' ? `
+                            <button class="btn hide-btn hidden-admin" data-id="${item.id}">
+                                <i class="fas fa-eye-slash"></i> Скрыть
+                            </button>
+                            ` : ''}
                         </div>
                         ` : ''}
                     `;
@@ -503,6 +518,12 @@
                 document.querySelectorAll('.delete-btn').forEach(btn => {
                     btn.addEventListener('click', function() {
                         deleteNews(this.dataset.id);
+                    });
+                });
+                
+                document.querySelectorAll('.hide-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        hideNews(this.dataset.id);
                     });
                 });
                 
@@ -537,6 +558,15 @@
                     `;
                 }
                 
+                let vkLinkHTML = '';
+                if (item.vkLink) {
+                    vkLinkHTML = `
+                        <a href="${item.vkLink}" target="_blank" class="btn vk-link-btn full-width">
+                            <i class="fab fa-vk"></i> Посмотреть полный пост в ВКонтакте
+                        </a>
+                    `;
+                }
+                
                 const fullNewsHTML = `
                     <div class="news-full-overlay active">
                         <div class="news-full-content">
@@ -545,11 +575,14 @@
                                 <h2>${item.title}</h2>
                                 <div class="news-full-meta">
                                     <span class="news-full-date"><i class="far fa-calendar-alt"></i> ${formattedDate}</span>
-                                    <span class="news-full-category ${item.category}">${getCategoryName(item.category)}</span>
+                                    <span class="news-full-source ${item.type}">
+                                        ${item.type === 'vk' ? '<i class="fab fa-vk"></i> ВКонтакте' : '<i class="fas fa-edit"></i> Добавлено вручную'}
+                                    </span>
                                 </div>
                             </div>
                             ${imageHTML}
                             <div class="news-full-text">${item.content}</div>
+                            ${vkLinkHTML}
                             <div class="news-full-footer">
                                 <button class="btn close-full-news-btn">
                                     <i class="fas fa-times"></i> Закрыть
@@ -562,6 +595,11 @@
                                     <button class="btn delete-btn hidden-admin" data-id="${item.id}">
                                         <i class="fas fa-trash"></i> Удалить
                                     </button>
+                                    ${item.type === 'vk' ? `
+                                    <button class="btn hide-btn hidden-admin" data-id="${item.id}">
+                                        <i class="fas fa-eye-slash"></i> Скрыть
+                                    </button>
+                                    ` : ''}
                                 </div>
                                 ` : ''}
                             </div>
@@ -589,6 +627,13 @@
                         closeFullNews();
                         deleteNews(this.dataset.id);
                     });
+                    
+                    if (document.querySelector('.hide-btn')) {
+                        document.querySelector('.hide-btn').addEventListener('click', function() {
+                            closeFullNews();
+                            hideNews(this.dataset.id);
+                        });
+                    }
                 }
             } catch (error) {
                 console.error('Ошибка при показе полной новости:', error);
@@ -612,7 +657,7 @@
             const fileInput = document.getElementById('news-image');
             let imageUrl = null;
             
-            // Обработка изображения (в реальном приложении здесь была бы загрузка на сервер)
+            // Обработка изображения
             if (fileInput.files[0]) {
                 const file = fileInput.files[0];
                 if (file.size > 5 * 1024 * 1024) { // 5 МБ
@@ -623,7 +668,6 @@
                     alert('Пожалуйста, загрузите изображение');
                     return;
                 }
-                // В статическом сайте изображения можно хранить в Base64
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     saveNewsData(e.target.result);
@@ -638,16 +682,19 @@
         function saveNewsData(imageUrl) {
             try {
                 let news = JSON.parse(localStorage.getItem('news')) || [];
+                const newsForm = document.getElementById('news-form');
                 const id = document.getElementById('news-id').value;
+                const type = document.getElementById('news-type').value;
                 const now = new Date().toISOString();
                 
                 const newNews = {
-                    id: id || `news_${Date.now()}`,
+                    id: id || `${type}_${Date.now()}`,
+                    type: type,
                     title: document.getElementById('news-title').value,
-                    category: document.getElementById('news-category').value,
                     content: document.getElementById('news-content').value,
                     date: now,
                     imageUrl: imageUrl,
+                    vkLink: document.getElementById('news-vk-link').value || null,
                     createdAt: id ? null : now,
                     updatedAt: now
                 };
@@ -688,11 +735,12 @@
                 if (!item) return;
                 
                 // Заполняем форму данными
-                document.getElementById('form-title').textContent = 'Редактировать новость';
+                document.getElementById('form-title').textContent = item.type === 'vk' ? 'Редактировать новость из ВК' : 'Редактировать новость';
                 document.getElementById('news-id').value = item.id;
+                document.getElementById('news-type').value = item.type;
                 document.getElementById('news-title').value = item.title;
-                document.getElementById('news-category').value = item.category;
                 document.getElementById('news-content').value = item.content;
+                document.getElementById('news-vk-link').value = item.vkLink || '';
                 // Изображение не заполняем для редактирования
                 
                 // Показываем форму
@@ -723,25 +771,44 @@
             }
         }
         
+        function hideNews(id) {
+            // Проверка прав администратора
+            if (localStorage.getItem('isAdminAuth') !== 'true') {
+                showNotification('У вас нет прав для скрытия новостей', 'error');
+                return;
+            }
+            
+            if (!confirm('Вы уверены, что хотите скрыть эту новость?')) return;
+            
+            try {
+                let news = JSON.parse(localStorage.getItem('news')) || [];
+                const item = news.find(n => n.id === id);
+                
+                if (item) {
+                    // Создаем копию новостей без скрытой
+                    const filteredNews = news.filter(n => n.id !== id);
+                    localStorage.setItem('news', JSON.stringify(filteredNews));
+                    loadNews();
+                    showNotification('Новость успешно скрыта!', 'success');
+                }
+            } catch (error) {
+                console.error('Ошибка при скрытии новости:', error);
+                showNotification('Ошибка при скрытии новости', 'error');
+            }
+        }
+        
         function filterNews(category) {
             const items = document.querySelectorAll('.news-item');
             
             items.forEach(item => {
-                if (category === 'all' || item.classList.contains(category)) {
+                if (category === 'all' || 
+                    (category === 'vk' && item.classList.contains('news-vk')) || 
+                    (category === 'manual' && item.classList.contains('news-manual'))) {
                     item.style.display = 'block';
                 } else {
                     item.style.display = 'none';
                 }
             });
-        }
-        
-        function getCategoryName(category) {
-            const categories = {
-                'competitions': 'Соревнования',
-                'results': 'Результаты',
-                'other': 'Другое'
-            };
-            return categories[category] || 'Без категории';
         }
         
         function showError(message, element) {
@@ -794,52 +861,35 @@
             if (!localStorage.getItem('news')) {
                 const initialNews = [
                     {
-                        id: 'news_1',
-                        title: 'Стартовал весенний этап соревнований по мотокроссу',
-                        category: 'competitions',
-                        content: '15 июня в г. Бор на трассе "Борская горка" пройдет Чемпионат Нижегородской области по мотокроссу. Регистрация участников с 8:00, начало соревнований в 10:00. Приглашаем всех желающих принять участие и поддержать гонщиков!',
+                        id: 'vk_1',
+                        type: 'vk',
+                        title: 'Награждение победителей',
+                        content: 'Награждение победителей чемпионата области по мотокроссу. Видео с церемонии награждения доступно для просмотра в группе ВКонтакте.',
                         date: '2025-05-15T10:30:00',
+                        vkLink: 'https://vk.com/wall-206852382_1234',
                         imageUrl: null,
                         createdAt: new Date().toISOString(),
                         updatedAt: new Date().toISOString()
                     },
                     {
-                        id: 'news_2',
-                        title: 'Открытый кубок по мотоджимхане',
-                        category: 'competitions',
-                        content: 'Открытый кубок по мотоджимхане пройдет 22 июня на Автодроме "Кстово". Приглашаем всех желающих принять участие в соревнованиях! Для регистрации необходимо заполнить заявку на сайте Федерации. Начало соревнований в 11:00.',
-                        date: '2025-05-10T14:20:00',
-                        imageUrl: null,
-                        createdAt: new Date().toISOString(),
-                        updatedAt: new Date().toISOString()
-                    },
-                    {
-                        id: 'news_3',
-                        title: 'KTM SX Cup 2025',
-                        category: 'competitions',
-                        content: 'KTM SX Cup 2025 состоится 6 июля в г. Дзержинск. Это ежегодные соревнования, собравшие лучших гонщиков региона. Призовой фонд - 200 000 рублей. Зрители могут приобрести билеты на трибуны. Начало в 09:00.',
-                        date: '2025-05-05T09:15:00',
-                        imageUrl: null,
-                        createdAt: new Date().toISOString(),
-                        updatedAt: new Date().toISOString()
-                    },
-                    {
-                        id: 'news_4',
-                        title: 'Старт подготовки к новому сезону',
-                        category: 'other',
-                        content: 'Федерация объявляет о старте подготовки к новому сезону. Тренировочные сборы начнутся с 1 июня на базе автодрома "Кстово". Все желающие могут присоединиться к тренировкам. Расписание тренировок будет опубликовано на сайте.',
+                        id: 'vk_2',
+                        type: 'vk',
+                        title: 'Старт B и С Бор',
+                        content: 'Старт B и С классов в Бору прошел успешно! 35 гонщиков приняли участие в соревнованиях. Благодарим всех участников и организаторов за отличную погоду и атмосферу!',
                         date: '2025-04-28T16:45:00',
+                        vkLink: 'https://vk.com/wall-206852382_1233',
                         imageUrl: null,
                         createdAt: new Date().toISOString(),
                         updatedAt: new Date().toISOString()
                     },
                     {
-                        id: 'news_5',
-                        title: 'Результаты прошлого сезона',
-                        category: 'results',
-                        content: 'Подведены итоги прошлого сезона соревнований по мотокроссу. Абсолютным чемпионом стал Иван Петров. Второе место занял Сергей Сидоров, третье - Михаил Козлов. Подробнее с результатами можно ознакомиться в разделе документов.',
-                        date: '2025-04-20T11:30:00',
-                        imageUrl: null,
+                        id: 'manual_1',
+                        type: 'manual',
+                        title: 'Стартовал весенний этап соревнований',
+                        content: '15 июня в г. Бор на трассе "Борская горка" пройдет Чемпионат Нижегородской области по мотокроссу. Регистрация участников с 8:00, начало соревнований в 10:00. Приглашаем всех желающих принять участие и поддержать гонщиков!',
+                        date: '2025-05-10T14:20:00',
+                        imageUrl: 'images/news1.jpg',
+                        vkLink: null,
                         createdAt: new Date().toISOString(),
                         updatedAt: new Date().toISOString()
                     }
