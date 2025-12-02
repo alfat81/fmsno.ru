@@ -103,7 +103,7 @@
                             <div class="achievement-text">Участников в сезоне</div>
                         </div>
                         <div class="achievement-card">
-                            <div class="achievement-number">8</div>
+                            <div class="achievement-number">8+</div>
                             <div class="achievement-text">Лет с Вами</div>
                         </div>
                         <div class="achievement-card">
@@ -169,6 +169,10 @@
             </div>
             <div class="copyright">
                 <p>&copy; 2025 Нижегородская Федерация Мотоциклетного Спорта. Все права защищены.</p>
+                <div class="admin-login-footer" id="admin-login-footer">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Вход для администратора</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -177,11 +181,54 @@
         <i class="fab fa-telegram"></i>
     </a>
 
-    <button class="admin-toggle-btn" id="admin-toggle-btn">
-        <i class="fas fa-user-shield"></i>
-    </button>
-
     <div class="overlay" id="menu-overlay"></div>
+
+    <!-- Всплывающая админ-панель -->
+    <div class="admin-bottom-panel" id="admin-bottom-panel">
+        <div class="admin-panel-header">
+            <h3><i class="fas fa-user-shield"></i> Панель администратора</h3>
+            <button class="admin-close-btn" id="admin-close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="admin-panel-content">
+            <div id="admin-login-form" class="admin-form-section">
+                <h4>Вход в админ-панель</h4>
+                <div id="login-error" class="error hidden"></div>
+                <div class="login-group">
+                    <label for="admin-login">Логин</label>
+                    <input type="text" id="admin-login" placeholder="Введите логин">
+                </div>
+                <div class="login-group">
+                    <label for="admin-password">Пароль</label>
+                    <input type="password" id="admin-password" placeholder="Введите пароль">
+                </div>
+                <button type="button" id="login-btn" class="btn admin-login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Войти
+                </button>
+                <div class="admin-help-text">
+                    <p>Для получения доступа обратитесь к руководству Федерации</p>
+                </div>
+            </div>
+            <div id="admin-controls-panel" class="admin-controls-panel hidden">
+                <div class="admin-welcome">
+                    <h4>Добро пожаловать, администратор!</h4>
+                    <p>Вы вошли в систему как администратор сайта Федерации</p>
+                </div>
+                <div class="admin-actions">
+                    <button id="add-comp-btn" class="btn admin-action-btn">
+                        <i class="fas fa-plus"></i> Добавить соревнование
+                    </button>
+                    <button id="manage-competitions-btn" class="btn admin-action-btn">
+                        <i class="fas fa-list"></i> Управление соревнованиями
+                    </button>
+                    <button id="logout-btn" class="btn admin-logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Выйти
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Простой параллакс-эффект
@@ -203,7 +250,8 @@
             const menuToggle = document.getElementById('menu-toggle');
             const menu = document.getElementById('main-menu');
             const overlay = document.getElementById('menu-overlay');
-            const adminToggleBtn = document.getElementById('admin-toggle-btn');
+            const adminLoginFooter = document.getElementById('admin-login-footer');
+            const adminCloseBtn = document.getElementById('admin-close-btn');
             
             menuToggle.addEventListener('click', function() {
                 menu.classList.toggle('active');
@@ -225,32 +273,26 @@
                 });
             });
             
-            // Отдельный обработчик для кнопки админки
-            adminToggleBtn.addEventListener('click', function(e) {
-                // Останавливаем всплытие события, чтобы не закрывалось меню
-                e.stopPropagation();
-                toggleAdminPanel();
+            // Обработчик для элемента входа в админку в футере
+            adminLoginFooter.addEventListener('click', function() {
+                document.getElementById('admin-bottom-panel').classList.add('visible');
+                document.body.style.overflow = 'hidden';
             });
             
-            // Обработчик для кликов вне админ-панели
-            document.addEventListener('click', function(e) {
-                if (!document.querySelector('.admin-bottom-panel').contains(e.target) && 
-                    !adminToggleBtn.contains(e.target) && 
-                    document.querySelector('.admin-bottom-panel').classList.contains('visible')) {
-                    closeAdminPanel();
+            // Обработчик для закрытия админ-панели
+            adminCloseBtn.addEventListener('click', function() {
+                document.getElementById('admin-bottom-panel').classList.remove('visible');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Закрытие админ-панели по клику на оверлей
+            overlay.addEventListener('click', function() {
+                if (document.getElementById('admin-bottom-panel').classList.contains('visible')) {
+                    document.getElementById('admin-bottom-panel').classList.remove('visible');
+                    document.body.style.overflow = 'auto';
                 }
             });
         });
-        
-        function toggleAdminPanel() {
-            const panel = document.querySelector('.admin-bottom-panel');
-            panel.classList.toggle('visible');
-        }
-        
-        function closeAdminPanel() {
-            const panel = document.querySelector('.admin-bottom-panel');
-            panel.classList.remove('visible');
-        }
         
         function loadUpcomingEvents() {
             const eventsContainer = document.getElementById('upcoming-events');
