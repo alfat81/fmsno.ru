@@ -156,32 +156,6 @@ ul {
     box-shadow: 0 6px 15px rgba(0,0,0,0.4);
 }
 
-/* Кнопка админки - для десктопа в верхнем правом углу */
-.admin-toggle-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--accent-color);
-    color: var(--light-text);
-    border: none;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    font-size: 1.2rem;
-    cursor: pointer;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: var(--transition);
-}
-
-.admin-toggle-btn:hover {
-    background: #c62828;
-    transform: scale(1.1);
-}
-
 /* Всплывающая админ-панель */
 .admin-bottom-panel {
     position: fixed;
@@ -323,6 +297,29 @@ ul {
 
 .admin-logout-btn:hover {
     background: #c62828 !important;
+}
+
+/* Элемент входа в админку в футере */
+.admin-login-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 0;
+    background: rgba(26, 35, 126, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 20px;
+}
+
+.admin-login-footer:hover {
+    background: rgba(26, 35, 126, 0.15);
+}
+
+.admin-login-footer i {
+    font-size: 1.2rem;
+    color: var(--accent-color);
 }
 
 /* Стили для раздела Новостей */
@@ -761,16 +758,6 @@ nav ul li a.active:after {
     .overlay.active {
         opacity: 1;
         visibility: visible;
-    }
-    
-    /* Адаптивная позиция кнопки админки на мобильных устройствах */
-    .admin-toggle-btn {
-        bottom: 20px;
-        top: auto;
-        right: 20px;
-        z-index: 1001;
-        width: 45px;
-        height: 45px;
     }
 }
 
@@ -1363,7 +1350,7 @@ main {
 
 .contacts-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 30px;
     margin-bottom: 40px;
 }
@@ -1415,10 +1402,21 @@ main {
     font-size: 0.9rem;
 }
 
-.contact-map h3 {
-    margin-bottom: 16px;
+.contact-address {
+    background: #e3f2fd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin: 30px 0;
+}
+
+.contact-address h3 {
     color: var(--primary-color);
-    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.contact-map {
+    text-align: center;
 }
 
 .map-placeholder {
@@ -1639,13 +1637,6 @@ footer {
 
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
-    .admin-toggle-btn {
-        top: 15px;
-        right: 15px;
-        width: 45px;
-        height: 45px;
-    }
-    
     .admin-panel-content {
         padding: 15px;
     }
@@ -1675,15 +1666,6 @@ footer {
 }
 
 @media (max-width: 480px) {
-    .admin-toggle-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-        bottom: 15px;
-        top: auto;
-        right: 15px;
-    }
-    
     .admin-panel-header h3 {
         font-size: 1rem;
     }
