@@ -1363,23 +1363,27 @@ main {
     padding: 16px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.08);
     transition: var(--transition);
+    align-items: flex-start;
 }
 
 .contact-card:hover {
     transform: translateX(5px);
 }
 
-.contact-icon {
-    background: #e3f2fd;
-    color: var(--primary-color);
-    width: 50px;
-    height: 50px;
+.contact-photo {
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-    font-size: 1.3rem;
+    margin-right: 16px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.contact-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .contact-details h3 {
@@ -1389,7 +1393,7 @@ main {
 }
 
 .contact-details p {
-    margin: 3px 0;
+    margin: 4px 0;
     display: flex;
     align-items: center;
     font-size: 0.95rem;
@@ -1635,6 +1639,98 @@ footer {
     opacity: 0.8;
 }
 
+/* Стили для автономного виджета ВКонтакте */
+.vk-autonomous-widget {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+.vk-group-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.vk-group-avatar {
+    width: 60px;
+    height: 60px;
+    background: #4c75a3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    margin-right: 15px;
+}
+
+.vk-group-info h4 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+}
+
+.vk-group-members {
+    color: #546e7a;
+    font-size: 0.95rem;
+}
+
+.vk-group-description {
+    background: #e8eaf6;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.vk-recent-posts h5 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.vk-recent-posts ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+/*.vk-recent-posts li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+/*.vk-recent-posts li:last-child {
+    border-bottom: none;
+}*/
+
+/*.vk-group-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+//}
+
+/*.vk-primary-btn {
+    background: #4c75a3;
+//}
+
+/*.vk-primary-btn:hover {
+    background: #395c81;
+//}
+
+/*.vk-secondary-btn {
+    background: #e53935;
+//}
+
+/*.vk-secondary-btn:hover {
+    background: #c62828;
+//}
+
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
     .admin-panel-content {
@@ -1662,6 +1758,16 @@ footer {
     .disciplines-grid,
     .news-container {
         grid-template-columns: 1fr;
+    }
+    
+    .contact-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .contact-photo {
+        margin-right: 0;
+        margin-bottom: 15px;
     }
 }
 
@@ -1777,5 +1883,29 @@ footer {
     
     .section-subtitle {
         font-size: 1.5rem;
+    }
+    
+    .contact-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .contact-photo {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .vk-group-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .vk-group-avatar {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .vk-group-actions {
+        flex-direction: column;
     }
 }
