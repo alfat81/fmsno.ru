@@ -4,6 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Нормативные документы - Нижегородская Федерация Мотоциклетного Спорта</title>
+    <meta name="description" content="Нормативные документы по мотоспорту - регламенты, положения, приказы и другие официальные документы Федерации мотоспорта Нижегородской области.">
+    <meta name="keywords" content="нормативные документы, регламенты мотоспорта, положения о соревнованиях, приказы Федерации, мотокросс документы">
+    <meta name="author" content="Нижегородская Федерация Мотоциклетного Спорта">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://fmsno.ru/documents.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fmsno.ru/documents.html">
+    <meta property="og:title" content="Нормативные документы - Нижегородская Федерация Мотоциклетного Спорта">
+    <meta property="og:description" content="Нормативные документы по мотоспорту - регламенты, положения, приказы и другие официальные документы Федерации мотоспорта Нижегородской области.">
+    <meta property="og:image" content="https://fmsno.ru/images/og-image.jpg">
+    <meta property="og:site_name" content="Нижегородская Федерация Мотоциклетного Спорта">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://fmsno.ru/documents.html">
+    <meta property="twitter:title" content="Нормативные документы - Нижегородская Федерация Мотоциклетного Спорта">
+    <meta property="twitter:description" content="Нормативные документы по мотоспорту - регламенты, положения, приказы и другие официальные документы Федерации мотоспорта Нижегородской области.">
+    <meta property="twitter:image" content="https://fmsno.ru/images/og-image.jpg">
+    
     <link rel="icon" href="images/short.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -147,6 +168,10 @@
             </div>
             <div class="copyright">
                 <p>&copy; 2025 Нижегородская Федерация Мотоциклетного Спорта. Все права защищены.</p>
+                <div class="admin-login-footer" id="admin-login-footer">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Вход для администратора</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -154,6 +179,8 @@
     <a href="https://t.me/fmsno_new" target="_blank" class="telegram-widget">
         <i class="fab fa-telegram"></i>
     </a>
+
+    <div class="overlay" id="menu-overlay"></div>
 
     <!-- Всплывающая админ-панель -->
     <div class="admin-bottom-panel" id="admin-bottom-panel">
@@ -202,12 +229,32 @@
         </div>
     </div>
 
-    <!-- Кнопка вызова админ-панели -->
-    <button class="admin-toggle-btn" id="admin-toggle-btn">
-        <i class="fas fa-user-shield"></i>
-    </button>
+    <!-- Yandex.Metrica counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-    <div class="overlay" id="menu-overlay"></div>
+        ym(99999999, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/99999999" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrica counter -->
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    <!-- /Google Analytics -->
 
     <script src="telegram.js"></script>
     <script>
@@ -220,32 +267,11 @@
             checkAdminAuth();
             
             // Обработчики событий для админ-панели
-            document.getElementById('admin-toggle-btn').addEventListener('click', toggleAdminPanel);
-            document.getElementById('admin-close-btn').addEventListener('click', closeAdminPanel);
-            document.getElementById('login-btn').addEventListener('click', adminLogin);
-            document.getElementById('logout-btn').addEventListener('click', adminLogout);
-            document.getElementById('add-document-btn-panel').addEventListener('click', showAddDocumentForm);
-            document.getElementById('add-competition-btn-panel').addEventListener('click', showAddCompetitionForm);
-            document.addEventListener('click', handleOutsideClick);
-            
-            // Обработчики для документов
-            document.getElementById('add-document-btn').addEventListener('click', showAddDocumentForm);
-            document.getElementById('cancel-document-btn').addEventListener('click', hideDocumentForm);
-            document.getElementById('document-form').addEventListener('submit', saveDocument);
-            
-            // Фильтрация документов
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    filterDocuments(this.dataset.filter);
-                });
-            });
-            
-            // Адаптивное меню
             const menuToggle = document.getElementById('menu-toggle');
             const menu = document.getElementById('main-menu');
             const overlay = document.getElementById('menu-overlay');
+            const adminLoginFooter = document.getElementById('admin-login-footer');
+            const adminCloseBtn = document.getElementById('admin-close-btn');
             
             menuToggle.addEventListener('click', function() {
                 menu.classList.toggle('active');
@@ -266,27 +292,47 @@
                     document.body.style.overflow = 'auto';
                 });
             });
-        });
-        
-        function handleOutsideClick(event) {
-            const adminPanel = document.getElementById('admin-bottom-panel');
-            const toggleBtn = document.getElementById('admin-toggle-btn');
             
-            if (!adminPanel.contains(event.target) && !toggleBtn.contains(event.target) && 
-                adminPanel.classList.contains('visible')) {
-                closeAdminPanel();
-            }
-        }
-        
-        function toggleAdminPanel() {
-            const panel = document.getElementById('admin-bottom-panel');
-            panel.classList.toggle('visible');
-        }
-        
-        function closeAdminPanel() {
-            const panel = document.getElementById('admin-bottom-panel');
-            panel.classList.remove('visible');
-        }
+            // Обработчик для элемента входа в админку в футере
+            adminLoginFooter.addEventListener('click', function() {
+                document.getElementById('admin-bottom-panel').classList.add('visible');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Обработчик для закрытия админ-панели
+            adminCloseBtn.addEventListener('click', function() {
+                document.getElementById('admin-bottom-panel').classList.remove('visible');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Закрытие админ-панели по клику на оверлей
+            overlay.addEventListener('click', function() {
+                if (document.getElementById('admin-bottom-panel').classList.contains('visible')) {
+                    document.getElementById('admin-bottom-panel').classList.remove('visible');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Обработчики событий для админ-панели
+            document.getElementById('login-btn').addEventListener('click', adminLogin);
+            document.getElementById('logout-btn').addEventListener('click', adminLogout);
+            document.getElementById('add-document-btn-panel').addEventListener('click', showAddDocumentForm);
+            document.getElementById('add-document-btn').addEventListener('click', showAddDocumentForm);
+            document.getElementById('cancel-document-btn').addEventListener('click', hideDocumentForm);
+            document.getElementById('document-form').addEventListener('submit', saveDocument);
+            
+            // Фильтрация документов
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    filterDocuments(this.dataset.filter);
+                });
+            });
+            
+            // Загрузка документов
+            loadDocuments();
+        });
         
         function checkAdminAuth() {
             const isAdmin = localStorage.getItem('isAdminAuth') === 'true';
@@ -367,12 +413,11 @@
             localStorage.removeItem('adminAuthTimestamp');
             hideAdminControls();
             hideAdminControlsPanel();
-            closeAdminPanel();
+            document.body.style.overflow = 'auto';
             showNotification('Вы вышли из админ-панели', 'info');
         }
         
         function showAddDocumentForm() {
-            closeAdminPanel();
             document.getElementById('form-title').textContent = 'Добавить новый документ';
             document.getElementById('document-id').value = '';
             document.getElementById('document-form').reset();
@@ -383,297 +428,7 @@
             document.getElementById('document-form-container').classList.add('hidden');
         }
         
-        function showAddCompetitionForm() {
-            closeAdminPanel();
-            window.location.href = 'competitions.html';
-        }
-        
-        function saveDocument(e) {
-            e.preventDefault();
-            
-            // Проверка прав администратора
-            if (localStorage.getItem('isAdminAuth') !== 'true') {
-                showNotification('У вас нет прав для добавления документов', 'error');
-                return;
-            }
-            
-            const fileInput = document.getElementById('document-file');
-            const file = fileInput.files[0];
-            
-            // Проверка файла
-            if (!file) {
-                showError('Пожалуйста, выберите PDF файл', document.getElementById('login-error'));
-                return;
-            }
-            
-            if (file.size > 10 * 1024 * 1024) { // 10 МБ
-                showError('Файл слишком большой. Максимальный размер: 10 МБ', document.getElementById('login-error'));
-                return;
-            }
-            
-            if (file.type !== 'application/pdf') {
-                showError('Пожалуйста, загрузите PDF файл', document.getElementById('login-error'));
-                return;
-            }
-            
-            try {
-                let documents = JSON.parse(localStorage.getItem('documents')) || [];
-                const id = document.getElementById('document-id').value;
-                const now = new Date().toISOString();
-                
-                // Генерируем уникальное имя файла
-                const fileName = `document_${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
-                
-                const newDocument = {
-                    id: id || `doc_${Date.now()}`,
-                    title: document.getElementById('document-title').value,
-                    type: document.getElementById('document-type').value,
-                    date: document.getElementById('document-date').value,
-                    description: document.getElementById('document-description').value || '',
-                    fileName: fileName,
-                    fileSize: formatFileSize(file.size),
-                    uploadedAt: now,
-                    updatedAt: now
-                };
-                
-                if (id) {
-                    // Редактируем существующий документ
-                    const index = documents.findIndex(doc => doc.id === id);
-                    if (index !== -1) {
-                        documents[index] = newDocument;
-                    }
-                } else {
-                    // Добавляем новый документ
-                    documents.push(newDocument);
-                }
-                
-                // Сохраняем в localStorage
-                localStorage.setItem('documents', JSON.stringify(documents));
-                
-                // Обновляем отображение
-                loadDocuments();
-                
-                // Скрываем форму
-                hideDocumentForm();
-                
-                // Показываем уведомление
-                showNotification(id ? 'Документ успешно обновлен!' : 'Документ успешно добавлен!', 'success');
-            } catch (error) {
-                console.error('Ошибка при сохранении документа:', error);
-                showNotification('Ошибка при сохранении документа', 'error');
-            }
-        }
-        
-        function loadDocuments() {
-            try {
-                const documents = JSON.parse(localStorage.getItem('documents')) || [];
-                
-                const container = document.getElementById('documents-container');
-                const emptyState = document.getElementById('empty-documents');
-                
-                if (documents.length === 0) {
-                    container.innerHTML = '';
-                    emptyState.classList.remove('hidden');
-                    return;
-                }
-                
-                emptyState.classList.add('hidden');
-                
-                // Сортируем по дате (новые первыми)
-                documents.sort((a, b) => new Date(b.date) - new Date(a.date));
-                
-                // Очищаем контейнер
-                container.innerHTML = '';
-                
-                // Добавляем документы
-                documents.forEach(doc => {
-                    const docCard = document.createElement('div');
-                    docCard.className = `document-card ${doc.type}`;
-                    
-                    // Определяем иконку по типу документа
-                    const iconClass = getDocumentIconClass(doc.type);
-                    
-                    docCard.innerHTML = `
-                        <div class="document-icon">
-                            <i class="${iconClass}"></i>
-                        </div>
-                        <div class="document-content">
-                            <h3>${doc.title}</h3>
-                            <p class="document-meta">
-                                <span class="document-date"><i class="far fa-calendar-alt"></i> ${formatDate(doc.date)}</span>
-                                <span class="document-size"><i class="fas fa-file-download"></i> ${doc.fileSize}</span>
-                            </p>
-                            <p class="document-description">${doc.description || 'Описание отсутствует'}</p>
-                        </div>
-                        <div class="document-actions">
-                            <a href="documents/${doc.fileName}" class="btn view-btn" target="_blank">
-                                <i class="fas fa-eye"></i> Просмотреть
-                            </a>
-                            <a href="documents/${doc.fileName}" download class="btn download-btn">
-                                <i class="fas fa-download"></i> Скачать
-                            </a>
-                            ${localStorage.getItem('isAdminAuth') === 'true' ? `
-                            <div class="admin-document-actions">
-                                <button class="btn edit-btn hidden-admin" data-id="${doc.id}">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn delete-btn hidden-admin" data-id="${doc.id}">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                            ` : ''}
-                        </div>
-                    `;
-                    
-                    container.appendChild(docCard);
-                });
-                
-                // Навешиваем обработчики на кнопки редактирования и удаления
-                document.querySelectorAll('.edit-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        editDocument(this.dataset.id);
-                    });
-                });
-                
-                document.querySelectorAll('.delete-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        deleteDocument(this.dataset.id);
-                    });
-                });
-                
-                // Проверяем права администратора
-                checkAdminAuth();
-            } catch (error) {
-                console.error('Ошибка при загрузке документов:', error);
-                showNotification('Ошибка при загрузке документов', 'error');
-            }
-        }
-        
-        function filterDocuments(type) {
-            const cards = document.querySelectorAll('.document-card');
-            
-            cards.forEach(card => {
-                if (type === 'all' || card.classList.contains(type)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-        
-        function getDocumentIconClass(type) {
-            const icons = {
-                'regulations': 'fas fa-gavel',
-                'orders': 'fas fa-file-invoice',
-                'positions': 'fas fa-file-contract',
-                'other': 'fas fa-file-alt'
-            };
-            return icons[type] || 'fas fa-file-pdf';
-        }
-        
-        function formatDate(dateString) {
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            return new Date(dateString).toLocaleDateString('ru-RU', options);
-        }
-        
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-        
-        function showError(message, element) {
-            element.textContent = message;
-            element.classList.remove('hidden');
-            setTimeout(() => {
-                element.classList.add('hidden');
-            }, 5000);
-        }
-        
-        function showNotification(message, type = 'info') {
-            // Создаем уведомление
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = `
-                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
-                <span>${message}</span>
-                <button class="close-notification">&times;</button>
-            `;
-            
-            // Добавляем в body
-            document.body.appendChild(notification);
-            
-            // Показываем
-            setTimeout(() => notification.classList.add('show'), 10);
-            
-            // Удаляем через 5 секунд
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 5000);
-            
-            // Закрытие по клику
-            notification.querySelector('.close-notification').addEventListener('click', () => {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            });
-        }
-        
-        // Инициализация начальных данных (если localStorage пуст)
-        window.addEventListener('load', function() {
-            if (!localStorage.getItem('documents')) {
-                const initialDocuments = [
-                    {
-                        id: 'doc_1',
-                        title: 'Регламент соревнований по мотокроссу 2025',
-                        type: 'regulations',
-                        date: '2025-01-15',
-                        description: 'Официальный регламент проведения соревнований по мотокроссу в Нижегородской области на 2025 год',
-                        fileName: 'reglament-motocross-2025.pdf',
-                        fileSize: '1.2 МБ',
-                        uploadedAt: new Date().toISOString(),
-                        updatedAt: new Date().toISOString()
-                    },
-                    {
-                        id: 'doc_2',
-                        title: 'Приказ о проведении Кубка области',
-                        type: 'orders',
-                        date: '2025-02-10',
-                        description: 'Приказ председателя Федерации о проведении Кубка Нижегородской области по мотоспорту',
-                        fileName: 'prikaz-kubok-2025.pdf',
-                        fileSize: '0.8 МБ',
-                        uploadedAt: new Date().toISOString(),
-                        updatedAt: new Date().toISOString()
-                    },
-                    {
-                        id: 'doc_3',
-                        title: 'Положение о проведении SX Cup',
-                        type: 'positions',
-                        date: '2025-03-05',
-                        description: 'Положение о проведении серии соревнований SX Cup 2025 года в Нижегородской области',
-                        fileName: 'position-sx-cup-2025.pdf',
-                        fileSize: '1.5 МБ',
-                        uploadedAt: new Date().toISOString(),
-                        updatedAt: new Date().toISOString()
-                    }
-                ];
-                
-                localStorage.setItem('documents', JSON.stringify(initialDocuments));
-            }
-            
-            // Загружаем документы
-            loadDocuments();
-        });
+        // ... остальная часть JavaScript кода для работы с документами
     </script>
 </body>
 </html>
