@@ -4,6 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Контакты - Нижегородская Федерация Мотоциклетного Спорта</title>
+    <meta name="description" content="Контактная информация Нижегородской Федерации Мотоциклетного Спорта: руководство, комиссии по дисциплинам, юридический адрес, обратная связь.">
+    <meta name="keywords" content="контакты мотоспорта, руководство Федерации, комиссии мотокросса, эндуро, супермото, юридический адрес, обратная связь">
+    <meta name="author" content="Нижегородская Федерация Мотоциклетного Спорта">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://fmsno.ru/contacts.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fmsno.ru/contacts.html">
+    <meta property="og:title" content="Контакты - Нижегородская Федерация Мотоциклетного Спорта">
+    <meta property="og:description" content="Контактная информация Нижегородской Федерации Мотоциклетного Спорта: руководство, комиссии по дисциплинам, юридический адрес, обратная связь.">
+    <meta property="og:image" content="https://fmsno.ru/images/og-image.jpg">
+    <meta property="og:site_name" content="Нижегородская Федерация Мотоциклетного Спорта">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://fmsno.ru/contacts.html">
+    <meta property="twitter:title" content="Контакты - Нижегородская Федерация Мотоциклетного Спорта">
+    <meta property="twitter:description" content="Контактная информация Нижегородской Федерации Мотоциклетного Спорта: руководство, комиссии по дисциплинам, юридический адрес, обратная связь.">
+    <meta property="twitter:image" content="https://fmsno.ru/images/og-image.jpg">
+    
     <link rel="icon" href="images/short.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -207,10 +228,6 @@
             </div>
             <div class="copyright">
                 <p>&copy; 2025 Нижегородская Федерация Мотоциклетного Спорта. Все права защищены.</p>
-                <div class="admin-login-footer" id="admin-login-footer">
-                    <i class="fas fa-user-shield"></i>
-                    <span>Вход для администратора</span>
-                </div>
             </div>
         </div>
     </footer>
@@ -221,46 +238,32 @@
 
     <div class="overlay" id="menu-overlay"></div>
 
-    <!-- Всплывающая админ-панель -->
-    <div class="admin-bottom-panel" id="admin-bottom-panel">
-        <div class="admin-panel-header">
-            <h3><i class="fas fa-user-shield"></i> Панель администратора</h3>
-            <button class="admin-close-btn" id="admin-close-btn">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="admin-panel-content">
-            <div id="admin-login-form" class="admin-form-section">
-                <h4>Вход в админ-панель</h4>
-                <div id="login-error" class="error hidden"></div>
-                <div class="login-group">
-                    <label for="admin-login">Логин</label>
-                    <input type="text" id="admin-login" placeholder="Введите логин">
-                </div>
-                <div class="login-group">
-                    <label for="admin-password">Пароль</label>
-                    <input type="password" id="admin-password" placeholder="Введите пароль">
-                </div>
-                <button type="button" id="login-btn" class="btn admin-login-btn">
-                    <i class="fas fa-sign-in-alt"></i> Войти
-                </button>
-                <div class="admin-help-text">
-                    <p>Для получения доступа обратитесь к руководству Федерации</p>
-                </div>
-            </div>
-            <div id="admin-controls-panel" class="admin-controls-panel hidden">
-                <div class="admin-welcome">
-                    <h4>Добро пожаловать, администратор!</h4>
-                    <p>Вы вошли в систему как администратор сайта Федерации</p>
-                </div>
-                <div class="admin-actions">
-                    <button id="logout-btn" class="btn admin-logout-btn">
-                        <i class="fas fa-sign-out-alt"></i> Выйти
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Yandex.Metrica counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(99999999, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/99999999" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrica counter -->
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    <!-- /Google Analytics -->
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -268,8 +271,6 @@
             const menuToggle = document.getElementById('menu-toggle');
             const menu = document.getElementById('main-menu');
             const overlay = document.getElementById('menu-overlay');
-            const adminLoginFooter = document.getElementById('admin-login-footer');
-            const adminCloseBtn = document.getElementById('admin-close-btn');
             
             menuToggle.addEventListener('click', function() {
                 menu.classList.toggle('active');
@@ -289,26 +290,6 @@
                     overlay.classList.remove('active');
                     document.body.style.overflow = 'auto';
                 });
-            });
-            
-            // Обработчик для элемента входа в админку в футере
-            adminLoginFooter.addEventListener('click', function() {
-                document.getElementById('admin-bottom-panel').classList.add('visible');
-                document.body.style.overflow = 'hidden';
-            });
-            
-            // Обработчик для закрытия админ-панели
-            adminCloseBtn.addEventListener('click', function() {
-                document.getElementById('admin-bottom-panel').classList.remove('visible');
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Закрытие админ-панели по клику на оверлей
-            overlay.addEventListener('click', function() {
-                if (document.getElementById('admin-bottom-panel').classList.contains('visible')) {
-                    document.getElementById('admin-bottom-panel').classList.remove('visible');
-                    document.body.style.overflow = 'auto';
-                }
             });
             
             // Обработка формы обратной связи
