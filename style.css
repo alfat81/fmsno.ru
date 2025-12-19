@@ -156,6 +156,29 @@ ul {
     box-shadow: 0 6px 15px rgba(0,0,0,0.4);
 }
 
+/* Элемент входа в админку в футере */
+.admin-login-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 0;
+    background: rgba(26, 35, 126, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 20px;
+}
+
+.admin-login-footer:hover {
+    background: rgba(26, 35, 126, 0.15);
+}
+
+.admin-login-footer i {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+}
+
 /* Всплывающая админ-панель */
 .admin-bottom-panel {
     position: fixed;
@@ -299,29 +322,6 @@ ul {
     background: #c62828 !important;
 }
 
-/* Элемент входа в админку в футере */
-.admin-login-footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 15px 0;
-    background: rgba(26, 35, 126, 0.1);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: var(--transition);
-    margin-top: 20px;
-}
-
-.admin-login-footer:hover {
-    background: rgba(26, 35, 126, 0.15);
-}
-
-.admin-login-footer i {
-    font-size: 1.2rem;
-    color: var(--accent-color);
-}
-
 /* Стили для раздела Новостей */
 .news-section {
     padding: 80px 0;
@@ -383,6 +383,25 @@ ul {
     border-radius: 4px;
     font-size: 0.85rem;
     margin-left: 10px;
+}
+
+.news-source {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #546e7a;
+}
+
+.news-source.vk {
+    color: #4c75a3;
+}
+
+.news-source.manual {
+    color: #1e88e5;
+}
+
+.news-source i {
+    margin-right: 4px;
 }
 
 .news-title {
@@ -460,6 +479,15 @@ ul {
     padding: 0 20px 20px;
     display: flex;
     gap: 10px;
+}
+
+.hide-btn {
+    background: #6a1b9a !important;
+    margin-left: 5px;
+}
+
+.hide-btn:hover {
+    background: #4a148c !important;
 }
 
 .vk-widget-section {
@@ -553,6 +581,18 @@ ul {
     margin-right: 5px;
 }
 
+.news-full-source {
+    color: #546e7a;
+}
+
+.news-full-source.vk {
+    color: #4c75a3;
+}
+
+.news-full-source.manual {
+    color: #1e88e5;
+}
+
 .news-full-image {
     width: 100%;
     height: 300px;
@@ -586,6 +626,27 @@ ul {
 
 .news-full-footer .btn {
     margin: 0;
+}
+
+.vk-link-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 0 20px 15px 20px;
+    background: #4c75a3;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.vk-link-btn:hover {
+    background: #395c81;
+}
+
+.vk-link-btn.full-width {
+    display: block;
+    margin: 15px 0;
 }
 
 .loading {
@@ -1252,11 +1313,19 @@ main {
     padding: 80px 0;
 }
 
+.section-description {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #546e7a;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
 .disciplines-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
 }
 
 .discipline-card {
@@ -1323,11 +1392,7 @@ main {
     background: linear-gradient(transparent, rgba(229, 57, 53, 0.85));
 }
 
-.supercross .discipline-overlay {
-    background: linear-gradient(transparent, rgba(25, 118, 210, 0.85));
-}
-
-.extreme-enduro .discipline-overlay {
+.enduro .discipline-overlay {
     background: linear-gradient(transparent, rgba(46, 125, 50, 0.85));
 }
 
@@ -1335,12 +1400,78 @@ main {
     background: linear-gradient(transparent, rgba(123, 31, 162, 0.85));
 }
 
-.track-racing .discipline-overlay {
-    background: linear-gradient(transparent, rgba(255, 152, 0, 0.85));
+.shkg .discipline-overlay {
+    background: linear-gradient(transparent, rgba(25, 118, 210, 0.85));
 }
 
 .motorally .discipline-overlay {
     background: linear-gradient(transparent, rgba(74, 20, 140, 0.85));
+}
+
+/* Стили для подробного описания дисциплин */
+.disciplines-details {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+
+.discipline-detail {
+    margin-bottom: 60px;
+}
+
+.discipline-detail:last-child {
+    margin-bottom: 0;
+}
+
+.discipline-detail h3 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: center;
+    position: relative;
+}
+
+.discipline-detail h3:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--accent-color);
+}
+
+.detail-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.detail-image {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.detail-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.detail-text {
+    color: #333;
+    line-height: 1.8;
+}
+
+.detail-text p {
+    margin-bottom: 15px;
+}
+
+.detail-text strong {
+    color: var(--primary-color);
 }
 
 /* Контакты */
@@ -1687,6 +1818,13 @@ footer {
     line-height: 1.5;
 }
 
+.vk-iframe-container {
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
 .vk-recent-posts h5 {
     color: var(--primary-color);
     margin-bottom: 10px;
@@ -1696,40 +1834,48 @@ footer {
 .vk-recent-posts ul {
     list-style: none;
     padding-left: 0;
+    margin: 0;
 }
 
-/*.vk-recent-posts li {
+.vk-recent-posts li {
     padding: 8px 0;
     border-bottom: 1px solid #eee;
     color: #333;
+    font-size: 0.95rem;
 }
 
-/*.vk-recent-posts li:last-child {
+.vk-recent-posts li:last-child {
     border-bottom: none;
-}*/
+}
 
-/*.vk-group-actions {
+.vk-recent-posts li strong {
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 2px;
+}
+
+.vk-group-actions {
     display: flex;
     gap: 10px;
     margin-top: 20px;
     flex-wrap: wrap;
-//}
+}
 
-/*.vk-primary-btn {
+.vk-primary-btn {
     background: #4c75a3;
-//}
+}
 
-/*.vk-primary-btn:hover {
+.vk-primary-btn:hover {
     background: #395c81;
-//}
+}
 
-/*.vk-secondary-btn {
+.vk-secondary-btn {
     background: #e53935;
-//}
+}
 
-/*.vk-secondary-btn:hover {
+.vk-secondary-btn:hover {
     background: #c62828;
-//}
+}
 
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
@@ -1768,6 +1914,28 @@ footer {
     .contact-photo {
         margin-right: 0;
         margin-bottom: 15px;
+    }
+    
+    .detail-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .detail-image {
+        max-height: 300px;
+    }
+    
+    .vk-group-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .vk-group-avatar {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .vk-group-actions {
+        flex-direction: column;
     }
 }
 
@@ -1885,27 +2053,11 @@ footer {
         font-size: 1.5rem;
     }
     
-    .contact-card {
-        flex-direction: column;
-        text-align: center;
+    .section-description {
+        font-size: 1rem;
     }
     
-    .contact-photo {
-        margin-right: 0;
-        margin-bottom: 15px;
-    }
-    
-    .vk-group-header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .vk-group-avatar {
-        margin-right: 0;
-        margin-bottom: 15px;
-    }
-    
-    .vk-group-actions {
-        flex-direction: column;
+    .discipline-detail h3 {
+        font-size: 1.6rem;
     }
 }
