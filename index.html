@@ -1,349 +1,391 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Федерация мотоспорта Нижегородской области — официальный сайт FMSNO</title>
-  <meta name="description" content="Официальный сайт Федерации мотоспорта НО: расписание соревнований по мотокроссу, мотоджимхане, KTM SX Cup, новости, документы и контакты в Нижнем Новгороде.">
-  <meta name="keywords" content="мотоспорт нижний новгород, чемпионат по мотокроссу, мотоджимхана, fmsno, федерация мотоспорта, соревнования 2025">
-  <meta name="author" content="Нижегородская Федерация Мотоциклетного Спорта">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://fmsno.ru/">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://fmsno.ru/">
-  <meta property="og:title" content="Федерация мотоспорта Нижегородской области — официальный сайт">
-  <meta property="og:description" content="Расписание соревнований, новости и документы Федерации мотоспорта НО. Мотокросс, мотоджимхана, KTM SX Cup и другие дисциплины.">
-  <meta property="og:image" content="https://fmsno.ru/images/og-image.jpg">
-  <meta property="og:site_name" content="fmsno.ru">
-
-  <link rel="icon" href="/images/short.png" type="image/png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
-
-  <style>
-    /* Базовые стили */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-    .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 1rem 0; }
-
-    /* Header */
-    header { background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: relative; z-index: 100; padding: 1rem 0; }
-    .logos-container { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; }
-    .logos-container img { height: 60px; object-fit: contain; }
-    h1 { text-align: center; font-size: 2rem; margin: 0.5rem 0 1.5rem; }
-
-    /* Меню */
-    .menu-toggle { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; position: absolute; top: 1rem; right: 1rem; }
-    nav ul { display: flex; justify-content: center; list-style: none; flex-wrap: wrap; gap: 1.2rem; }
-    nav a { text-decoration: none; color: #000; font-weight: 500; padding: 0.3rem 0.6rem; border-radius: 4px; }
-    nav a:hover, nav a.active { background: #eee; }
-
-    /* Параллакс-секции */
-    .parallax-section {
-      position: relative;
-      padding: 6rem 0;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center top;
-      color: white;
-      text-align: center;
-    }
-    .parallax-section .container { position: relative; z-index: 2; }
-    .parallax-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1;
-    }
-    .parallax-section h2,
-    .parallax-section p {
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Остальные секции */
-    main { padding: 2rem 0; }
-    .section-title { text-align: center; margin: 2rem 0 1.5rem; font-size: 1.6rem; }
-    .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-    .event-card { border: 1px solid #ddd; border-radius: 8px; padding: 1.2rem; display: flex; gap: 1rem; }
-    .event-date { text-align: center; min-width: 60px; }
-    .event-date .day { display: block; font-size: 1.8rem; font-weight: bold; color: #d32f2f; }
-    .event-date .month { display: block; text-transform: uppercase; font-size: 0.9rem; color: #555; }
-    .event-content h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
-    .event-location, .event-time { display: flex; align-items: center; gap: 0.3rem; font-size: 0.95rem; color: #555; }
-
-    .achievements { display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; margin: 2rem 0; }
-    .achievement-card { text-align: center; }
-    .achievement-number { font-size: 2.2rem; font-weight: bold; color: #d32f2f; }
-
-    .about { background: #f9f9f9; padding: 2rem 0; }
-    .about-content { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
-    .about-text p { margin-bottom: 1rem; }
-    .about-image img { max-width: 100%; height: auto; border-radius: 8px; }
-
-    /* Footer */
-    footer { background: #333; color: #fff; padding: 2rem 0 1rem; }
-    .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; margin-bottom: 2rem; }
-    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-    .footer-links a { color: #fff; text-decoration: none; }
-    .footer-links a:hover { text-decoration: underline; }
-    .social-icons { display: flex; gap: 1rem; margin-top: 0.5rem; }
-    .social-icon { color: #fff; font-size: 1.5rem; }
-    .footer-logos { display: flex; justify-content: center; gap: 1.5rem; margin: 1.5rem 0; }
-    .footer-logos img { height: 50px; object-fit: contain; }
-    .copyright { text-align: center; font-size: 0.9rem; color: #ccc; }
-
-    /* Telegram widget */
-    .telegram-widget {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #0088cc;
-      color: white;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      text-decoration: none;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    }
-
-    /* Мобильная адаптация */
-    @media (max-width: 768px) {
-      .menu-toggle { display: block; }
-      nav ul {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: #fff;
-        padding: 1rem;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        z-index: 99;
-      }
-      nav ul.active { display: flex; }
-      .event-card { flex-direction: column; text-align: center; }
-      .footer-content { flex-direction: column; }
-      h1 { font-size: 1.6rem; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нижегородская Федерация Мотоциклетного Спорта - официальный сайт</title>
+    <meta name="description" content="Официальный сайт Нижегородской Федерации Мотоциклетного Спорта. Информация о соревнованиях, результатах, документах и дисциплинах мотоспорта в Нижегородской области.">
+    <meta name="keywords" content="мотоспорт, мотокросс, нижний новгород, федерация мотоспорта, соревнования по мотоциклам, чемпионат области">
+    <meta name="author" content="Нижегородская Федерация Мотоциклетного Спорта">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://fmsno.ru/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fmsno.ru/">
+    <meta property="og:title" content="Нижегородская Федерация Мотоциклетного Спорта - официальный сайт">
+    <meta property="og:description" content="Официальный сайт Нижегородской Федерации Мотоциклетного Спорта. Информация о соревнованиях, результатах, документах и дисциплинах мотоспорта в Нижегородской области.">
+    <meta property="og:image" content="https://fmsno.ru/images/og-image.jpg">
+    <meta property="og:site_name" content="Нижегородская Федерация Мотоциклетного Спорта">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://fmsno.ru/">
+    <meta property="twitter:title" content="Нижегородская Федерация Мотоциклетного Спорта - официальный сайт">
+    <meta property="twitter:description" content="Официальный сайт Нижегородской Федерации Мотоциклетного Спорта. Информация о соревнованиях, результатах, документах и дисциплинах мотоспорта в Нижегородской области.">
+    <meta property="twitter:image" content="https://fmsno.ru/images/og-image.jpg">
+    
+    <link rel="icon" href="images/short.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="logos-container">
-        <img src="/images/gerb_nno.png" alt="Герб Нижегородской области" loading="lazy">
-        <img src="/images/mfr_logo.png" alt="Эмблема Мотофедерации России" loading="lazy">
-        <img src="/images/fmsno_logo.png" alt="Эмблема ФМСНО" loading="lazy">
-      </div>
-      <h1>Федерация мотоспорта<br>Нижегородской области</h1>
-      <button class="menu-toggle" id="menu-toggle">
-        <i class="fas fa-bars"></i>
-      </button>
-      <nav>
-        <ul id="main-menu">
-          <li><a href="index.html" class="active">Главная</a></li>
-          <li><a href="competitions.html">Соревнования</a></li>
-          <li><a href="documents.html">Нормативные документы</a></li>
-          <li><a href="disciplines.html">Дисциплины</a></li>
-          <li><a href="news.html">Новости</a></li>
-          <li><a href="contacts.html">Контакты</a></li>
-        </ul>
-      </nav>
+    <header>
+        <div class="container">
+            <div class="logos-container">
+                <img src="images/gerb_nno.png" alt="Герб Нижегородской области">
+                <img src="images/mfr_logo.png" alt="Эмблема Мотофедерации России">
+                <img src="images/fmsno_logo.png" alt="Эмблема ФМСНО">
+            </div>
+            <h1>Нижегородская Федерация<br>Мотоциклетного Спорта</h1>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="main-menu">
+                    <li><a href="index.html" class="active">Главная</a></li>
+                    <li><a href="competitions.html">Соревнования</a></li>
+                    <li><a href="documents.html">Нормативные документы</a></li>
+                    <li><a href="disciplines.html">Дисциплины</a></li>
+                    <li><a href="news.html">Новости</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="parallax-section" data-parallax="0.5" style="background-image: url('images/hero-background.jpg');">
+            <div class="parallax-content">
+                <div class="container">
+                    <h2>Официальный сайт Федерации мотоспорта Нижегородской области</h2>
+                    <p>Информация о соревнованиях, результатах и событиях мотоспорта региона</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="events">
+            <div class="container">
+                <h2 class="section-title">Ближайшие соревнования</h2>
+                <div id="upcoming-events" class="events-grid">
+                    <div class="event-card">
+                        <div class="event-date">
+                            <span class="day">15</span>
+                            <span class="month">июня</span>
+                        </div>
+                        <div class="event-content">
+                            <h3>Чемпионат Нижегородской области по мотокроссу</h3>
+                            <p class="event-location"><i class="fas fa-map-marker-alt"></i> г. Бор, трасса "Борская горка"</p>
+                            <p class="event-time"><i class="far fa-clock"></i> Начало в 10:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">
+                            <span class="day">22</span>
+                            <span class="month">июня</span>
+                        </div>
+                        <div class="event-content">
+                            <h3>Открытый кубок по мотоджимхане</h3>
+                            <p class="event-location"><i class="fas fa-map-marker-alt"></i> Автодром "Кстово"</p>
+                            <p class="event-time"><i class="far fa-clock"></i> Начало в 11:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">
+                            <span class="day">6</span>
+                            <span class="month">июля</span>
+                        </div>
+                        <div class="event-content">
+                            <h3>KTM SX Cup 2025</h3>
+                            <p class="event-location"><i class="fas fa-map-marker-alt"></i> г. Дзержинск</p>
+                            <p class="event-time"><i class="far fa-clock"></i> Начало в 09:00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="more-events">
+                    <a href="competitions.html" class="btn">Все соревнования</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="parallax-section" data-parallax="0.3" style="background-image: url('images/parallax-bg2.jpg');">
+            <div class="parallax-content">
+                <div class="container">
+                    <h2 class="section-title">Достижения Федерации</h2>
+                    <div class="achievements">
+                        <div class="achievement-card">
+                            <div class="achievement-number">15+</div>
+                            <div class="achievement-text">Ежегодных соревнований</div>
+                        </div>
+                        <div class="achievement-card">
+                            <div class="achievement-number">200+</div>
+                            <div class="achievement-text">Участников в сезоне</div>
+                        </div>
+                        <div class="achievement-card">
+                            <div class="achievement-number">8</div>
+                            <div class="achievement-text">Годов на рынке</div>
+                        </div>
+                        <div class="achievement-card">
+                            <div class="achievement-number">4</div>
+                            <div class="achievement-text">Дисциплин</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about">
+            <div class="container">
+                <h2 class="section-title">О Федерации</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Нижегородская Федерация Мотоциклетного Спорта занимается организацией и проведением официальных соревнований по различным дисциплинам мотоспорта в Нижегородской области.</p>
+                        <p>Мы развиваем мотоспорт в регионе, поддерживаем спортсменов и создаем условия для безопасного и качественного проведения соревнований.</p>
+                        <p>Федерация является официальным представителем и членом Федерации мотоциклетного спорта России.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="images/event-placeholder.jpg" alt="Соревнования по мотокроссу">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Нижегородская Федерация<br>Мотоциклетного Спорта</h3>
+                </div>
+                <div class="footer-links">
+                    <h4>Ссылки</h4>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="competitions.html">Соревнования</a></li>
+                        <li><a href="documents.html">Нормативные документы</a></li>
+                        <li><a href="disciplines.html">Дисциплины</a></li>
+                        <li><a href="news.html">Новости</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Мы в соцсетях</h4>
+                    <div class="social-icons">
+                        <a href="https://vk.com/fmsno" target="_blank" class="social-icon vk">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="https://t.me/fmsno_new" target="_blank" class="social-icon telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </div>
+                    <p>4 698 подписчиков</p>
+                </div>
+            </div>
+            <div class="footer-logos">
+                <img src="images/gerb_nno.png" alt="Герб Нижегородской области">
+                <img src="images/mfr_logo.png" alt="Эмблема Мотофедерации России">
+                <img src="images/fmsno_logo.png" alt="Эмблема ФМСНО">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Нижегородская Федерация Мотоциклетного Спорта. Все права защищены.</p>
+                <div class="admin-login-footer" id="admin-login-footer">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Вход для администратора</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://t.me/fmsno_new" target="_blank" class="telegram-widget">
+        <i class="fab fa-telegram"></i>
+    </a>
+
+    <div class="overlay" id="menu-overlay"></div>
+
+    <!-- Всплывающая админ-панель -->
+    <div class="admin-bottom-panel" id="admin-bottom-panel">
+        <div class="admin-panel-header">
+            <h3><i class="fas fa-user-shield"></i> Панель администратора</h3>
+            <button class="admin-close-btn" id="admin-close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="admin-panel-content">
+            <div id="admin-login-form" class="admin-form-section">
+                <h4>Вход в админ-панель</h4>
+                <div id="login-error" class="error hidden"></div>
+                <div class="login-group">
+                    <label for="admin-login">Логин</label>
+                    <input type="text" id="admin-login" placeholder="Введите логин">
+                </div>
+                <div class="login-group">
+                    <label for="admin-password">Пароль</label>
+                    <input type="password" id="admin-password" placeholder="Введите пароль">
+                </div>
+                <button type="button" id="login-btn" class="btn admin-login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Войти
+                </button>
+                <div class="admin-help-text">
+                    <p>Для получения доступа обратитесь к руководству Федерации</p>
+                </div>
+            </div>
+            <div id="admin-controls-panel" class="admin-controls-panel hidden">
+                <div class="admin-welcome">
+                    <h4>Добро пожаловать, администратор!</h4>
+                    <p>Вы вошли в систему как администратор сайта Федерации</p>
+                </div>
+                <div class="admin-actions">
+                    <button id="add-comp-btn" class="btn admin-action-btn">
+                        <i class="fas fa-plus"></i> Добавить соревнование
+                    </button>
+                    <button id="manage-competitions-btn" class="btn admin-action-btn">
+                        <i class="fas fa-list"></i> Управление соревнованиями
+                    </button>
+                    <button id="logout-btn" class="btn admin-logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Выйти
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-  </header>
 
-  <main>
-    <section class="parallax-section" data-parallax="0.5" style="background-image: url('/images/hero-background.jpg');">
-      <div class="container">
-        <h2>Официальный сайт Федерации мотоспорта Нижегородской области</h2>
-        <p>Информация о соревнованиях, результатах и событиях мотоспорта региона</p>
-      </div>
-    </section>
+    <!-- Yandex.Metrica counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-    <section class="events">
-      <div class="container">
-        <h2 class="section-title">Ближайшие соревнования</h2>
-        <div class="events-grid">
-          <div class="event-card">
-            <div class="event-date">
-              <span class="day">15</span>
-              <span class="month">июня</span>
-            </div>
-            <div class="event-content">
-              <h3>Чемпионат Нижегородской области по мотокроссу</h3>
-              <p class="event-location"><i class="fas fa-map-marker-alt"></i> г. Бор, трасса "Борская горка"</p>
-              <p class="event-time"><i class="far fa-clock"></i> Начало в 10:00</p>
-            </div>
-          </div>
-          <div class="event-card">
-            <div class="event-date">
-              <span class="day">22</span>
-              <span class="month">июня</span>
-            </div>
-            <div class="event-content">
-              <h3>Открытый кубок по мотоджимхане</h3>
-              <p class="event-location"><i class="fas fa-map-marker-alt"></i> Автодром "Кстово"</p>
-              <p class="event-time"><i class="far fa-clock"></i> Начало в 11:00</p>
-            </div>
-          </div>
-          <div class="event-card">
-            <div class="event-date">
-              <span class="day">6</span>
-              <span class="month">июля</span>
-            </div>
-            <div class="event-content">
-              <h3>KTM SX Cup 2025</h3>
-              <p class="event-location"><i class="fas fa-map-marker-alt"></i> г. Дзержинск</p>
-              <p class="event-time"><i class="far fa-clock"></i> Начало в 09:00</p>
-            </div>
-          </div>
-        </div>
-        <div style="text-align: center; margin-top: 1.5rem;">
-          <a href="competitions.html" style="display: inline-block; background: #d32f2f; color: white; padding: 0.6rem 1.5rem; text-decoration: none; border-radius: 4px; font-weight: bold;">Все соревнования</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="parallax-section" data-parallax="0.3" style="background-image: url('/images/parallax-bg2.jpg');">
-      <div class="container">
-        <h2 class="section-title">Достижения Федерации</h2>
-        <div class="achievements">
-          <div class="achievement-card">
-            <div class="achievement-number">15+</div>
-            <div class="achievement-text">Ежегодных соревнований</div>
-          </div>
-          <div class="achievement-card">
-            <div class="achievement-number">200+</div>
-            <div class="achievement-text">Участников в сезоне</div>
-          </div>
-          <div class="achievement-card">
-            <div class="achievement-number">8+</div>
-            <div class="achievement-text">Лет с Вами</div>
-          </div>
-          <div class="achievement-card">
-            <div class="achievement-number">6+</div>
-            <div class="achievement-text">Дисциплин</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="about">
-      <div class="container">
-        <h2 class="section-title">О Федерации</h2>
-        <div class="about-content">
-          <div class="about-text">
-            <p>Нижегородская Федерация Мотоциклетного Спорта занимается организацией и проведением официальных соревнований по различным дисциплинам мотоспорта в Нижегородской области.</p>
-            <p>Мы развиваем мотоспорт в регионе, поддерживаем спортсменов и создаем условия для безопасного и качественного проведения соревнований.</p>
-            <p>Федерация является официальным представителем и членом Федерации мотоциклетного спорта России.</p>
-          </div>
-          <div class="about-image">
-            <img src="/images/event-placeholder.jpg" alt="Соревнования по мотокроссу в Нижегородской области" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-logo">
-          <h3>Федерация мотоспорта<br>Нижегородской области</h3>
-        </div>
-        <div class="footer-links">
-          <h4>Ссылки</h4>
-          <ul>
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="competitions.html">Соревнования</a></li>
-            <li><a href="documents.html">Документы</a></li>
-            <li><a href="disciplines.html">Дисциплины</a></li>
-            <li><a href="news.html">Новости</a></li>
-            <li><a href="contacts.html">Контакты</a></li>
-          </ul>
-        </div>
-        <div class="footer-social">
-          <h4>Мы в соцсетях</h4>
-          <div class="social-icons">
-            <a href="https://vk.com/fmsno" target="_blank" rel="noopener" class="social-icon"><i class="fab fa-vk"></i></a>
-            <a href="https://t.me/fmsno_new" target="_blank" rel="noopener" class="social-icon"><i class="fab fa-telegram"></i></a>
-          </div>
-          <p>4 698 подписчиков</p>
-        </div>
-      </div>
-      <div class="footer-logos">
-        <img src="/images/gerb_nno.png" alt="Герб Нижегородской области">
-        <img src="/images/mfr_logo.png" alt="Эмблема Мотофедерации России">
-        <img src="/images/fmsno_logo.png" alt="Эмблема ФМСНО">
-      </div>
-      <div class="copyright">
-        <p>&copy; 2025 Нижегородская Федерация Мотоциклетного Спорта. Все права защищены.</p>
-      </div>
-    </div>
-  </footer>
-
-  <a href="https://t.me/fmsno_new" target="_blank" rel="noopener" class="telegram-widget">
-    <i class="fab fa-telegram"></i>
-  </a>
-
-  <!-- Параллакс-скрипт -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const menuToggle = document.getElementById('menu-toggle');
-      const menu = document.getElementById('main-menu');
-      if (menuToggle && menu) {
-        menuToggle.addEventListener('click', () => {
-          menu.classList.toggle('active');
+        ym(99999999, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
         });
-      }
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/99999999" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrica counter -->
 
-      // Параллакс
-      const parallaxSections = document.querySelectorAll('.parallax-section');
-      window.addEventListener('scroll', function() {
-        parallaxSections.forEach(section => {
-          const speed = parseFloat(section.getAttribute('data-parallax')) || 0.5;
-          const yPos = -(window.scrollY * speed);
-          section.style.backgroundPosition = `center ${yPos}px`;
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    <!-- /Google Analytics -->
+
+    <script>
+        // Простой параллакс-эффект
+        document.addEventListener('DOMContentLoaded', function() {
+            const parallaxSections = document.querySelectorAll('.parallax-section');
+            
+            window.addEventListener('scroll', function() {
+                parallaxSections.forEach(section => {
+                    const speed = section.getAttribute('data-parallax') || 0.5;
+                    const yPos = -(window.scrollY * speed);
+                    section.style.backgroundPosition = `center ${yPos}px`;
+                });
+            });
+            
+            // Загрузка соревнований для главной страницы
+            loadUpcomingEvents();
+            
+            // Адаптивное меню
+            const menuToggle = document.getElementById('menu-toggle');
+            const menu = document.getElementById('main-menu');
+            const overlay = document.getElementById('menu-overlay');
+            const adminLoginFooter = document.getElementById('admin-login-footer');
+            const adminCloseBtn = document.getElementById('admin-close-btn');
+            
+            menuToggle.addEventListener('click', function() {
+                menu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
+            });
+            
+            overlay.addEventListener('click', function() {
+                menu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            document.querySelectorAll('#main-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    menu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Обработчик для элемента входа в админку в футере
+            adminLoginFooter.addEventListener('click', function() {
+                document.getElementById('admin-bottom-panel').classList.add('visible');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Обработчик для закрытия админ-панели
+            adminCloseBtn.addEventListener('click', function() {
+                document.getElementById('admin-bottom-panel').classList.remove('visible');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Закрытие админ-панели по клику на оверлей
+            overlay.addEventListener('click', function() {
+                if (document.getElementById('admin-bottom-panel').classList.contains('visible')) {
+                    document.getElementById('admin-bottom-panel').classList.remove('visible');
+                    document.body.style.overflow = 'auto';
+                }
+            });
         });
-      });
-
-      // Инициализация фона при загрузке
-      parallaxSections.forEach(section => {
-        if (!section.style.backgroundImage || section.style.backgroundImage === 'none') return;
-        section.style.backgroundAttachment = 'scroll';
-        section.style.backgroundRepeat = 'no-repeat';
-        section.style.backgroundSize = 'cover';
-      });
-    });
-  </script>
-
-  <!-- Yandex.Metrika -->
-  <script type="text/javascript">
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=105649209", "ym");
-    ym(105649209, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
-  </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/105649209" style="position:absolute; left:-9999px;" alt=""/></div></noscript>
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZELC5BVQM"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-4ZELC5BVQM');
-  </script>
+        
+        function loadUpcomingEvents() {
+            const eventsContainer = document.getElementById('upcoming-events');
+            if (!eventsContainer) return;
+            
+            try {
+                const competitions = JSON.parse(localStorage.getItem('competitions')) || [];
+                if (competitions.length === 0) return;
+                
+                // Сортируем по дате и берем ближайшие 3 события
+                const upcoming = competitions
+                    .filter(comp => new Date(comp.date) >= new Date())
+                    .sort((a, b) => new Date(a.date) - new Date(b.date))
+                    .slice(0, 3);
+                
+                if (upcoming.length === 0) return;
+                
+                // Очищаем контейнер
+                eventsContainer.innerHTML = '';
+                
+                // Добавляем соревнования
+                upcoming.forEach(comp => {
+                    const eventDate = new Date(comp.date);
+                    const day = eventDate.getDate();
+                    const month = eventDate.toLocaleString('ru-RU', { month: 'long' }).slice(0, 3);
+                    
+                    const eventCard = document.createElement('div');
+                    eventCard.className = 'event-card';
+                    eventCard.innerHTML = `
+                        <div class="event-date">
+                            <span class="day">${day}</span>
+                            <span class="month">${month}</span>
+                        </div>
+                        <div class="event-content">
+                            <h3>${comp.title}</h3>
+                            <p class="event-location"><i class="fas fa-map-marker-alt"></i> ${comp.location}</p>
+                            <p class="event-time"><i class="far fa-clock"></i> ${comp.time}</p>
+                        </div>
+                    `;
+                    eventsContainer.appendChild(eventCard);
+                });
+            } catch (error) {
+                console.error('Ошибка при загрузке соревнований:', error);
+            }
+        }
+    </script>
 </body>
 </html>
