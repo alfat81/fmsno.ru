@@ -18,57 +18,56 @@
   <meta property="og:image" content="https://fmsno.ru/images/og-image.jpg">
   <meta property="og:site_name" content="fmsno.ru">
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://fmsno.ru/">
-  <meta name="twitter:title" content="Федерация мотоспорта Нижегородской области">
-  <meta name="twitter:description" content="Официальный сайт FMSNO: всё о мотоспорте в Нижегородской области.">
-  <meta name="twitter:image" content="https://fmsno.ru/images/og-image.jpg">
-
   <link rel="icon" href="/images/short.png" type="image/png">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 
-  <!-- Schema.org -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SportsOrganization",
-    "name": "Нижегородская Федерация Мотоциклетного Спорта",
-    "url": "https://fmsno.ru/",
-    "logo": "https://fmsno.ru/images/fmsno_logo.png",
-    "sameAs": [
-      "https://vk.com/fmsno",
-      "https://t.me/fmsno_new"
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Нижний Новгород",
-      "addressRegion": "Нижегородская область",
-      "addressCountry": "RU"
-    },
-    "description": "Официальный организатор соревнований по мотоспорту в Нижегородской области."
-  }
-  </script>
-
-  <!-- Базовые стили для меню (временно, пока нет style.css) -->
   <style>
+    /* Базовые стили */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
     .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 1rem 0; }
-    header { background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: relative; z-index: 100; }
+
+    /* Header */
+    header { background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: relative; z-index: 100; padding: 1rem 0; }
     .logos-container { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; }
     .logos-container img { height: 60px; object-fit: contain; }
     h1 { text-align: center; font-size: 2rem; margin: 0.5rem 0 1.5rem; }
+
+    /* Меню */
     .menu-toggle { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; position: absolute; top: 1rem; right: 1rem; }
     nav ul { display: flex; justify-content: center; list-style: none; flex-wrap: wrap; gap: 1.2rem; }
     nav a { text-decoration: none; color: #000; font-weight: 500; padding: 0.3rem 0.6rem; border-radius: 4px; }
     nav a:hover, nav a.active { background: #eee; }
+
+    /* Параллакс-секции */
+    .parallax-section {
+      position: relative;
+      padding: 6rem 0;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center top;
+      color: white;
+      text-align: center;
+    }
+    .parallax-section .container { position: relative; z-index: 2; }
+    .parallax-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+    .parallax-section h2,
+    .parallax-section p {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Остальные секции */
     main { padding: 2rem 0; }
-    .hero { text-align: center; margin-bottom: 3rem; }
-    .hero h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
-    .hero p { color: #555; }
     .section-title { text-align: center; margin: 2rem 0 1.5rem; font-size: 1.6rem; }
     .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
     .event-card { border: 1px solid #ddd; border-radius: 8px; padding: 1.2rem; display: flex; gap: 1rem; }
@@ -77,13 +76,17 @@
     .event-date .month { display: block; text-transform: uppercase; font-size: 0.9rem; color: #555; }
     .event-content h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
     .event-location, .event-time { display: flex; align-items: center; gap: 0.3rem; font-size: 0.95rem; color: #555; }
+
     .achievements { display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; margin: 2rem 0; }
     .achievement-card { text-align: center; }
     .achievement-number { font-size: 2.2rem; font-weight: bold; color: #d32f2f; }
+
     .about { background: #f9f9f9; padding: 2rem 0; }
     .about-content { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
     .about-text p { margin-bottom: 1rem; }
     .about-image img { max-width: 100%; height: auto; border-radius: 8px; }
+
+    /* Footer */
     footer { background: #333; color: #fff; padding: 2rem 0 1rem; }
     .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; margin-bottom: 2rem; }
     .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
@@ -94,14 +97,44 @@
     .footer-logos { display: flex; justify-content: center; gap: 1.5rem; margin: 1.5rem 0; }
     .footer-logos img { height: 50px; object-fit: contain; }
     .copyright { text-align: center; font-size: 0.9rem; color: #ccc; }
-    .telegram-widget { position: fixed; bottom: 20px; right: 20px; background: #0088cc; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; text-decoration: none; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-    
+
+    /* Telegram widget */
+    .telegram-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0088cc;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    /* Мобильная адаптация */
     @media (max-width: 768px) {
       .menu-toggle { display: block; }
-      nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #fff; padding: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        padding: 1rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 99;
+      }
       nav ul.active { display: flex; }
       .event-card { flex-direction: column; text-align: center; }
       .footer-content { flex-direction: column; }
+      h1 { font-size: 1.6rem; }
     }
   </style>
 </head>
@@ -131,7 +164,7 @@
   </header>
 
   <main>
-    <section class="hero">
+    <section class="parallax-section" data-parallax="0.5" style="background-image: url('/images/hero-background.jpg');">
       <div class="container">
         <h2>Официальный сайт Федерации мотоспорта Нижегородской области</h2>
         <p>Информация о соревнованиях, результатах и событиях мотоспорта региона</p>
@@ -182,7 +215,7 @@
       </div>
     </section>
 
-    <section class="achievements-section">
+    <section class="parallax-section" data-parallax="0.3" style="background-image: url('/images/parallax-bg2.jpg');">
       <div class="container">
         <h2 class="section-title">Достижения Федерации</h2>
         <div class="achievements">
@@ -264,12 +297,33 @@
     <i class="fab fa-telegram"></i>
   </a>
 
+  <!-- Параллакс-скрипт -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const menuToggle = document.getElementById('menu-toggle');
       const menu = document.getElementById('main-menu');
-      menuToggle?.addEventListener('click', () => {
-        menu.classList.toggle('active');
+      if (menuToggle && menu) {
+        menuToggle.addEventListener('click', () => {
+          menu.classList.toggle('active');
+        });
+      }
+
+      // Параллакс
+      const parallaxSections = document.querySelectorAll('.parallax-section');
+      window.addEventListener('scroll', function() {
+        parallaxSections.forEach(section => {
+          const speed = parseFloat(section.getAttribute('data-parallax')) || 0.5;
+          const yPos = -(window.scrollY * speed);
+          section.style.backgroundPosition = `center ${yPos}px`;
+        });
+      });
+
+      // Инициализация фона при загрузке
+      parallaxSections.forEach(section => {
+        if (!section.style.backgroundImage || section.style.backgroundImage === 'none') return;
+        section.style.backgroundAttachment = 'scroll';
+        section.style.backgroundRepeat = 'no-repeat';
+        section.style.backgroundSize = 'cover';
       });
     });
   </script>
@@ -282,7 +336,6 @@
     ym(105649209, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/105649209" style="position:absolute; left:-9999px;" alt=""/></div></noscript>
-  <!-- /Yandex.Metrika -->
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZELC5BVQM"></script>
@@ -292,6 +345,5 @@
     gtag('js', new Date());
     gtag('config', 'G-4ZELC5BVQM');
   </script>
-  <!-- /Google Analytics -->
 </body>
 </html>
