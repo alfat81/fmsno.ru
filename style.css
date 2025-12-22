@@ -1517,6 +1517,19 @@ main {
     display: block;
 }
 
+.contact-icon {
+    background: #e3f2fd;
+    color: var(--primary-color);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 1.3rem;
+}
+
 .contact-details h3 {
     color: var(--primary-color);
     margin-bottom: 6px;
@@ -1932,132 +1945,5 @@ footer {
     .vk-group-avatar {
         margin-right: 0;
         margin-bottom: 15px;
-    }
-    
-    .vk-group-actions {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 480px) {
-    .admin-panel-header h3 {
-        font-size: 1rem;
-    }
-    
-    .admin-actions {
-        gap: 8px;
-    }
-    
-    .admin-action-btn {
-        padding: 10px;
-        font-size: 0.9rem;
-    }
-    
-    .logos-container {
-        flex-direction: row;
-        overflow-x: auto;
-        padding: 6px 0;
-        margin: 6px 0;
-        justify-content: flex-start;
-    }
-    
-    .logos-container img {
-        height: 40px;
-        min-width: 65px;
-        margin: 0 6px;
-        flex-shrink: 0;
-    }
-    
-    h1 {
-        font-size: 1.25rem;
-        margin-top: 6px;
-        margin-bottom: 10px;
-    }
-    
-    .parallax-section h2 {
-        font-size: 1.6rem;
-    }
-    
-    .parallax-section p {
-        font-size: 1.1rem;
-    }
-    
-    .section-title {
-        font-size: 1.5rem;
-    }
-    
-    .event-card {
-        flex-direction: column;
-    }
-    
-    .event-date {
-        min-width: 100%;
-    }
-    
-    .competition-actions,
-    .document-actions {
-        flex-direction: column;
-    }
-    
-    .btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .notification {
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-        transform: translateY(120%);
-    }
-    
-    .notification.show {
-        transform: translateY(0);
-    }
-    
-    .discipline-card {
-        height: 300px;
-    }
-    
-    .discipline-name {
-        font-size: 1.6rem;
-    }
-    
-    .discipline-preview {
-        font-size: 1rem;
-    }
-    
-    .news-item {
-        margin-bottom: 20px;
-    }
-    
-    .news-attachment {
-        height: 150px;
-    }
-    
-    .news-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-    
-    .news-date {
-        margin-bottom: 5px;
-    }
-    
-    .admin-news-actions {
-        flex-direction: column;
-    }
-    
-    .section-subtitle {
-        font-size: 1.5rem;
-    }
-    
-    .section-description {
-        font-size: 1rem;
-    }
-    
-    .discipline-detail h3 {
-        font-size: 1.6rem;
     }
 }
