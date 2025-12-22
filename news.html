@@ -48,6 +48,7 @@
                     <li><a href="documents.html">Нормативные документы</a></li>
                     <li><a href="disciplines.html">Дисциплины</a></li>
                     <li><a href="news.html" class="active">Новости</a></li>
+                    <li><a href="partners.html">Партнеры</a></li>
                     <li><a href="contacts.html">Контакты</a></li>
                 </ul>
             </nav>
@@ -119,22 +120,18 @@
                             <p>На этой странице публикуется информация для гонщиков о соревнованиях, фото, видеоотчеты и обсуждаются новости мотоспорта региона.</p>
                         </div>
                         
-                        <div class="vk-recent-posts">
-                            <h5>Последние записи:</h5>
-                            <ul>
-                                <li><strong>Награждение победителей</strong> (видео, 1 456 просмотров)</li>
-                                <li><strong>Старт B и С Бор</strong> (видео, 354 просмотров)</li>
-                                <li><strong>Старт D Бор</strong> (видео, 264 просмотров)</li>
-                                <li><strong>KTM SX Cup 2014</strong> (видео, 2 571 просмотров)</li>
-                            </ul>
+                        <div class="vk-iframe-container">
+                            <iframe src="https://vk.com/widget_community.php?gid=fmsno&width=100%&mode=3&height=400" 
+                                    width="100%" 
+                                    height="400" 
+                                    frameborder="0" 
+                                    allowfullscreen>
+                            </iframe>
                         </div>
                         
                         <div class="vk-group-actions">
                             <a href="https://vk.com/fmsno" target="_blank" class="btn vk-primary-btn">
                                 <i class="fab fa-vk"></i> Перейти в группу
-                            </a>
-                            <a href="https://vk.com/fmsno" target="_blank" class="btn vk-secondary-btn">
-                                <i class="fas fa-rss"></i> Подписаться
                             </a>
                         </div>
                     </div>
@@ -157,6 +154,7 @@
                         <li><a href="documents.html">Нормативные документы</a></li>
                         <li><a href="disciplines.html">Дисциплины</a></li>
                         <li><a href="news.html">Новости</a></li>
+                        <li><a href="partners.html">Партнеры</a></li>
                         <li><a href="contacts.html">Контакты</a></li>
                     </ul>
                 </div>
@@ -240,14 +238,16 @@
 
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){
-            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105649209', 'ym');
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-        ym(105649209, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+        ym(105649209, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/105649209" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
@@ -322,7 +322,7 @@
                 }
             });
             
-            // Обработчики для управления новостями
+            // Основные обработчики
             document.getElementById('add-news-btn').addEventListener('click', showAddNewsForm);
             document.getElementById('add-news-btn-panel').addEventListener('click', showAddNewsForm);
             document.getElementById('cancel-news-btn').addEventListener('click', hideNewsForm);
@@ -911,29 +911,6 @@
             // Загружаем новости
             loadNews();
         });
-        // В конце файла news.html, competitions.html, documents.html
-function notifyIndexNow(urls) {
-    const key = 'f7c8d9e6b5a43210';
-    const data = {
-        host: 'fmsno.ru',
-        key: key,
-        urlList: urls
-    };
-
-    // Отправка в Яндекс
-    fetch('https://yandex.com/indexnow', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('IndexNow notification sent to Yandex successfully');
-        }
-    })
-
     </script>
 </body>
 </html>
