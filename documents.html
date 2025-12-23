@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Нормативные документы - Нижегородская Федерация Мотоциклетного Спорта</title>
-    <meta name="description" content="Нормативные документы по мотоспорту - регламенты, положения, приказы и другие официальные документы Федерации мотоспорта Нижегородской области.">
-    <meta name="keywords" content="нормативные документы, регламенты мотоспорта, положения о соревнованиях, приказы Федерации, мотокросс документы">
+    <meta name="description" content="Официальные нормативные и распорядительные документы Нижегородской Федерации Мотоциклетного Спорта: положения, регламенты, приказы, календарь соревнований.">
+    <meta name="keywords" content="нормативные документы, регламенты мотоспорта, положения о соревнованиях, приказы, календарь соревнований, федерация мотоспорта нижний новгород">
     <meta name="author" content="Нижегородская Федерация Мотоциклетного Спорта">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://fmsno.ru/documents.html">
@@ -14,7 +14,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fmsno.ru/documents.html">
     <meta property="og:title" content="Нормативные документы - Нижегородская Федерация Мотоциклетного Спорта">
-    <meta property="og:description" content="Нормативные документы по мотоспорту - регламенты, положения, приказы и другие официальные документы Федерации мотоспорта Нижегородской области.">
+    <meta property="og:description" content="Официальные нормативные и распорядительные документы Нижегородской Федерации Мотоциклетного Спорта: положения, регламенты, приказы, календарь соревнований.">
     <meta property="og:image" content="https://fmsno.ru/images/og-image.jpg">
     <meta property="og:site_name" content="Нижегородская Федерация Мотоциклетного Спорта">
     
@@ -22,7 +22,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://fmsno.ru/documents.html">
     <meta property="twitter:title" content="Нормативные документы - Нижегородская Федерация Мотоциклетного Спорта">
-    <meta property="twitter:description" content="Нормативные документы по мотоспорту - регламенты, положения, приказы и другие официальные документы Федерации мотоспорта Нижегородской области.">
+    <meta property="twitter:description" content="Официальные нормативные и распорядительные документы Нижегородской Федерации Мотоциклетного Спорта: положения, регламенты, приказы, календарь соревнований.">
     <meta property="twitter:image" content="https://fmsno.ru/images/og-image.jpg">
     
     <link rel="icon" href="images/short.png" type="image/png">
@@ -48,6 +48,7 @@
                     <li><a href="documents.html" class="active">Нормативные документы</a></li>
                     <li><a href="disciplines.html">Дисциплины</a></li>
                     <li><a href="news.html">Новости</a></li>
+                    <li><a href="partners.html">Партнеры</a></li>
                     <li><a href="contacts.html">Контакты</a></li>
                 </ul>
             </nav>
@@ -62,13 +63,13 @@
                 <div class="documents-controls">
                     <div class="documents-filters">
                         <button class="filter-btn active" data-filter="all">Все документы</button>
-                        <button class="filter-btn" data-filter="regulations">Регламенты</button>
-                        <button class="filter-btn" data-filter="orders">Приказы</button>
-                        <button class="filter-btn" data-filter="positions">Положения</button>
-                        <button class="filter-btn" data-filter="other">Прочие</button>
+                        <button class="filter-btn" data-filter="regulation">Положения о соревнованиях</button>
+                        <button class="filter-btn" data-filter="order">Приказы</button>
+                        <button class="filter-btn" data-filter="position">Регламенты</button>
+                        <button class="filter-btn" data-filter="other">Другие документы</button>
                     </div>
-                    <button id="add-document-btn" class="btn hidden-admin">
-                        <i class="fas fa-plus"></i> Добавить документ
+                    <button id="download-all-btn" class="btn">
+                        <i class="fas fa-download"></i> Скачать все документы (ZIP)
                     </button>
                 </div>
                 
@@ -76,55 +77,11 @@
                     <!-- Документы будут загружены здесь -->
                 </div>
                 
-                <div id="document-form-container" class="form-container hidden hidden-admin">
-                    <h3 id="form-title">Добавить новый документ</h3>
-                    <form id="document-form">
-                        <input type="hidden" id="document-id">
-                        <div class="form-group">
-                            <label for="document-title">Название документа*</label>
-                            <input type="text" id="document-title" required>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="document-type">Тип документа*</label>
-                                <select id="document-type" required>
-                                    <option value="">Выберите тип</option>
-                                    <option value="regulations">Регламент</option>
-                                    <option value="orders">Приказ</option>
-                                    <option value="positions">Положение</option>
-                                    <option value="other">Прочий документ</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="document-date">Дата публикации*</label>
-                                <input type="date" id="document-date" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="document-description">Описание</label>
-                            <textarea id="document-description" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="document-file">PDF файл*</label>
-                            <input type="file" id="document-file" accept="application/pdf" required>
-                            <p class="file-hint">Максимальный размер файла: 10 МБ</p>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="btn save-btn">
-                                <i class="fas fa-save"></i> Сохранить
-                            </button>
-                            <button type="button" id="cancel-document-btn" class="btn cancel-btn">
-                                <i class="fas fa-times"></i> Отмена
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                
                 <div class="empty-state hidden" id="empty-documents">
                     <div class="empty-content">
                         <i class="fas fa-file-alt empty-icon"></i>
-                        <h3>Нет нормативных документов</h3>
-                        <p>В настоящий момент в разделе нет документов. Проверьте позже.</p>
+                        <h3>Пока нет документов</h3>
+                        <p>Нормативные документы скоро появятся на сайте. Проверяйте обновления.</p>
                     </div>
                 </div>
             </div>
@@ -145,6 +102,7 @@
                         <li><a href="documents.html">Нормативные документы</a></li>
                         <li><a href="disciplines.html">Дисциплины</a></li>
                         <li><a href="news.html">Новости</a></li>
+                        <li><a href="partners.html">Партнеры</a></li>
                         <li><a href="contacts.html">Контакты</a></li>
                     </ul>
                 </div>
@@ -215,12 +173,6 @@
                     <p>Вы вошли в систему как администратор сайта Федерации</p>
                 </div>
                 <div class="admin-actions">
-                    <button id="add-competition-btn-panel" class="btn admin-action-btn">
-                        <i class="fas fa-plus"></i> Добавить соревнование
-                    </button>
-                    <button id="add-document-btn-panel" class="btn admin-action-btn">
-                        <i class="fas fa-file-pdf"></i> Добавить документ
-                    </button>
                     <button id="logout-btn" class="btn admin-logout-btn">
                         <i class="fas fa-sign-out-alt"></i> Выйти
                     </button>
@@ -229,42 +181,36 @@
         </div>
     </div>
 
-  <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105649209', 'ym');
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-    ym(105649209, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/105649209" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+        ym(105649209, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/105649209" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
     <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZELC5BVQM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZELC5BVQM"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-  gtag('config', 'G-4ZELC5BVQM');
-</script>
-
+        gtag('config', 'G-4ZELC5BVQM');
+    </script>
     <!-- /Google Analytics -->
 
-    <script src="telegram.js"></script>
     <script>
-        // Правильные данные для входа администратора
-        const ADMIN_LOGIN = 'admin';
-        const ADMIN_PASSWORD = 'fmsno2025';
-        
         document.addEventListener('DOMContentLoaded', function() {
-            // Проверка авторизации при загрузке
-            checkAdminAuth();
-            
-            // Обработчики событий для админ-панели
+            // Адаптивное меню
             const menuToggle = document.getElementById('menu-toggle');
             const menu = document.getElementById('main-menu');
             const overlay = document.getElementById('menu-overlay');
@@ -311,13 +257,8 @@
                 }
             });
             
-            // Обработчики событий для админ-панели
-            document.getElementById('login-btn').addEventListener('click', adminLogin);
-            document.getElementById('logout-btn').addEventListener('click', adminLogout);
-            document.getElementById('add-document-btn-panel').addEventListener('click', showAddDocumentForm);
-            document.getElementById('add-document-btn').addEventListener('click', showAddDocumentForm);
-            document.getElementById('cancel-document-btn').addEventListener('click', hideDocumentForm);
-            document.getElementById('document-form').addEventListener('submit', saveDocument);
+            // Загрузка документов
+            loadDocuments();
             
             // Фильтрация документов
             document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -328,9 +269,136 @@
                 });
             });
             
-            // Загрузка документов
-            loadDocuments();
+            // Обработчик для кнопки скачивания всех документов
+            document.getElementById('download-all-btn').addEventListener('click', function() {
+                alert('Функция скачивания всех документов в ZIP-архиве будет доступна в ближайшее время. Пока вы можете скачать документы по одному.');
+            });
         });
+        
+        function loadDocuments() {
+            try {
+                const documents = JSON.parse(localStorage.getItem('documents')) || [];
+                
+                const container = document.getElementById('documents-container');
+                const emptyState = document.getElementById('empty-documents');
+                
+                if (documents.length === 0) {
+                    container.innerHTML = '';
+                    emptyState.classList.remove('hidden');
+                    return;
+                }
+                
+                emptyState.classList.add('hidden');
+                container.innerHTML = '';
+                
+                // Сортируем по дате обновления (новые первыми)
+                documents.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+                
+                // Добавляем документы
+                documents.forEach(doc => {
+                    const docCard = document.createElement('div');
+                    docCard.className = `document-card ${doc.type || 'other'}`;
+                    
+                    const date = new Date(doc.date);
+                    const formattedDate = date.toLocaleDateString('ru-RU', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    });
+                    
+                    docCard.innerHTML = `
+                        <div class="document-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="document-content">
+                            <h3 class="document-title">${doc.title}</h3>
+                            <div class="document-meta">
+                                <span><i class="far fa-calendar-alt"></i> ${formattedDate}</span>
+                                <span><i class="fas fa-user-edit"></i> ${doc.author || 'ФМСНО'}</span>
+                            </div>
+                            <p class="document-description">${doc.description || 'Описание отсутствует'}</p>
+                            <div class="document-actions">
+                                <a href="${doc.fileUrl || '#'}" target="_blank" class="btn view-btn">
+                                    <i class="fas fa-eye"></i> Посмотреть
+                                </a>
+                                <a href="${doc.fileUrl || '#'}" download="${doc.title}.pdf" class="btn download-btn">
+                                    <i class="fas fa-download"></i> Скачать
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    container.appendChild(docCard);
+                });
+            } catch (error) {
+                console.error('Ошибка при загрузке документов:', error);
+                alert('Ошибка при загрузке документов. Попробуйте обновить страницу.');
+            }
+        }
+        
+        function filterDocuments(filterType) {
+            try {
+                const documents = JSON.parse(localStorage.getItem('documents')) || [];
+                const filteredDocs = documents.filter(item => {
+                    if (filterType === 'all') return true;
+                    return item.type === filterType;
+                });
+                
+                const container = document.getElementById('documents-container');
+                const emptyState = document.getElementById('empty-documents');
+                
+                if (filteredDocs.length === 0) {
+                    container.innerHTML = '';
+                    emptyState.classList.remove('hidden');
+                    return;
+                }
+                
+                emptyState.classList.add('hidden');
+                container.innerHTML = '';
+                
+                // Сортируем по дате обновления (новые первыми)
+                filteredDocs.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+                
+                // Добавляем отфильтрованные документы
+                filteredDocs.forEach(doc => {
+                    const docCard = document.createElement('div');
+                    docCard.className = `document-card ${doc.type || 'other'}`;
+                    
+                    const date = new Date(doc.date);
+                    const formattedDate = date.toLocaleDateString('ru-RU', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    });
+                    
+                    docCard.innerHTML = `
+                        <div class="document-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="document-content">
+                            <h3 class="document-title">${doc.title}</h3>
+                            <div class="document-meta">
+                                <span><i class="far fa-calendar-alt"></i> ${formattedDate}</span>
+                                <span><i class="fas fa-user-edit"></i> ${doc.author || 'ФМСНО'}</span>
+                            </div>
+                            <p class="document-description">${doc.description || 'Описание отсутствует'}</p>
+                            <div class="document-actions">
+                                <a href="${doc.fileUrl || '#'}" target="_blank" class="btn view-btn">
+                                    <i class="fas fa-eye"></i> Посмотреть
+                                </a>
+                                <a href="${doc.fileUrl || '#'}" download="${doc.title}.pdf" class="btn download-btn">
+                                    <i class="fas fa-download"></i> Скачать
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    container.appendChild(docCard);
+                });
+            } catch (error) {
+                console.error('Ошибка при фильтрации документов:', error);
+            }
+        }
         
         function checkAdminAuth() {
             const isAdmin = localStorage.getItem('isAdminAuth') === 'true';
@@ -415,41 +483,107 @@
             showNotification('Вы вышли из админ-панели', 'info');
         }
         
-        function showAddDocumentForm() {
-            document.getElementById('form-title').textContent = 'Добавить новый документ';
-            document.getElementById('document-id').value = '';
-            document.getElementById('document-form').reset();
-            document.getElementById('document-form-container').classList.remove('hidden');
+        function showError(message, element) {
+            element.textContent = message;
+            element.classList.remove('hidden');
+            setTimeout(() => {
+                element.classList.add('hidden');
+            }, 5000);
         }
         
-        function hideDocumentForm() {
-            document.getElementById('document-form-container').classList.add('hidden');
+        function showNotification(message, type = 'info') {
+            // Создаем уведомление
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+                <span>${message}</span>
+                <button class="close-notification">&times;</button>
+            `;
+            
+            // Добавляем в body
+            document.body.appendChild(notification);
+            
+            // Показываем
+            setTimeout(() => notification.classList.add('show'), 10);
+            
+            // Удаляем через 5 секунд
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+            
+            // Закрытие по клику
+            notification.querySelector('.close-notification').addEventListener('click', () => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            });
         }
         
-        // ... остальная часть JavaScript кода для работы с документами
-        // В конце файла news.html, competitions.html, documents.html
-function notifyIndexNow(urls) {
-    const key = 'f7c8d9e6b5a43210';
-    const data = {
-        host: 'fmsno.ru',
-        key: key,
-        urlList: urls
-    };
-
-    // Отправка в Яндекс
-    fetch('https://yandex.com/indexnow', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('IndexNow notification sent to Yandex successfully');
-        }
-    })
-
+        // Инициализация начальных данных (если localStorage пуст)
+        window.addEventListener('load', function() {
+            if (!localStorage.getItem('documents')) {
+                const initialDocuments = [
+                    {
+                        id: 'doc_1',
+                        title: 'Календарь соревнований на 2025 год',
+                        type: 'order',
+                        date: '2025-01-15',
+                        fileUrl: '#',
+                        description: 'Официальный календарь соревнований по всем дисциплинам на 2025 год, утвержденный Президентом Федерации',
+                        author: 'Хорев Е.В.',
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString()
+                    },
+                    {
+                        id: 'doc_2',
+                        title: 'Положение о проведении Чемпионата области по мотокроссу',
+                        type: 'regulation',
+                        date: '2025-03-10',
+                        fileUrl: '#',
+                        description: 'Полное положение о проведении Чемпионата Нижегородской области по мотокроссу сезона 2025 года',
+                        author: 'Токарев А.В.',
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString()
+                    },
+                    {
+                        id: 'doc_3',
+                        title: 'Регламент соревнований по мотоджимхане',
+                        type: 'position',
+                        date: '2025-02-20',
+                        fileUrl: '#',
+                        description: 'Единый регламент проведения соревнований по мотоджимхане и фигурному управлению мотоциклом',
+                        author: 'Фатьянов А.А.',
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString()
+                    },
+                    {
+                        id: 'doc_4',
+                        title: 'Порядок аттестации судей',
+                        type: 'other',
+                        date: '2025-04-05',
+                        fileUrl: '#',
+                        description: 'Положение о порядке аттестации и повышения квалификации судейских бригад спортивных соревнований',
+                        author: 'Хорева К.С.',
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString()
+                    }
+                ];
+                
+                localStorage.setItem('documents', JSON.stringify(initialDocuments));
+            }
+            
+            // Загружаем документы
+            loadDocuments();
+        });
     </script>
 </body>
 </html>
