@@ -121,7 +121,7 @@ ${previewText}
     }
 }
 
-// Инициализация бота (замените значения на ваши)
+// Инициализация бота (замените значения на ваши реальные данные)
 const botToken = window.ENV?.TELEGRAM_BOT_TOKEN || 'YOUR_BOT_TOKEN'; // Ваш реальный токен
 const chatId = window.ENV?.TELEGRAM_CHAT_ID || '-1001234567890'; // ID вашего канала
 
