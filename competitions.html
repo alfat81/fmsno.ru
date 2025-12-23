@@ -48,6 +48,7 @@
                     <li><a href="documents.html">Нормативные документы</a></li>
                     <li><a href="disciplines.html">Дисциплины</a></li>
                     <li><a href="news.html">Новости</a></li>
+                    <li><a href="partners.html">Партнеры</a></li>
                     <li><a href="contacts.html">Контакты</a></li>
                 </ul>
             </nav>
@@ -147,6 +148,7 @@
                         <li><a href="documents.html">Нормативные документы</a></li>
                         <li><a href="disciplines.html">Дисциплины</a></li>
                         <li><a href="news.html">Новости</a></li>
+                        <li><a href="partners.html">Партнеры</a></li>
                         <li><a href="contacts.html">Контакты</a></li>
                     </ul>
                 </div>
@@ -232,29 +234,30 @@
     </div>
 
     <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105649209', 'ym');
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-    ym(105649209, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/105649209" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+        ym(105649209, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/105649209" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZELC5BVQM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-  gtag('config', 'G-4ZELC5BVQM');
-</script>
-
+        gtag('config', 'G-4ZELC5BVQM');
+    </script>
     <!-- /Google Analytics -->
 
     <script>
@@ -731,29 +734,6 @@
                 localStorage.setItem('competitions', JSON.stringify(initialCompetitions));
             }
         });
-        // В конце файла news.html, competitions.html, documents.html
-function notifyIndexNow(urls) {
-    const key = 'f7c8d9e6b5a43210';
-    const data = {
-        host: 'fmsno.ru',
-        key: key,
-        urlList: urls
-    };
-
-    // Отправка в Яндекс
-    fetch('https://yandex.com/indexnow', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log('IndexNow notification sent to Yandex successfully');
-        }
-    })
     </script>
 </body>
 </html>
-
