@@ -1,2 +1,15 @@
 User-agent: *
 Sitemap: https://fmsno.ru/sitemap.xml
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+
+# Разрешить индексацию всех страниц
+Allow: /
+
+# Запретить индексацию служебных файлов
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*.min.*
