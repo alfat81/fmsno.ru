@@ -1,1 +1,29 @@
+# Файл .gitignore — FMSNO.ru
+# Не коммитим локальные секреты (если появятся)
 .env.js
+.env.local.js
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+
+# Редакторы и IDE
+.vscode/
+.idea/
+.vs/
+*.sln
+*.slnx
+*.swp
+*.swo
+
+# Кеши и временные файлы
+*.log
+*.tmp
+*.bak
+*.cache
+
+# Резервные копии
+*.orig
+*~

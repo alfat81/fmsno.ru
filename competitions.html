@@ -9,46 +9,42 @@
     <meta name="author" content="Нижегородская Федерация Мотоциклетного Спорта">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://fmsno.ru/competitions.html">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fmsno.ru/competitions.html">
-    <meta property="og:title" content="Соревнования - Нижегородская Федерация Мотоциклетного Спорта">
-    <meta property="og:description" content="Календарь соревнований по мотоспорту в Нижегородской области. Чемпионаты, кубки и открытые соревнования по мотокроссу, супермото, эндуро и другим дисциплинам.">
+    <meta property="og:title" content="Соревнования - ФМСНО">
+    <meta property="og:description" content="Календарь соревнований по мотоспорту в Нижегородской области.">
     <meta property="og:image" content="https://fmsno.ru/images/og-image.jpg">
     <meta property="og:site_name" content="Нижегородская Федерация Мотоциклетного Спорта">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://fmsno.ru/competitions.html">
-    <meta property="twitter:title" content="Соревнования - Нижегородская Федерация Мотоциклетного Спорта">
-    <meta property="twitter:description" content="Календарь соревнований по мотоспорту в Нижегородской области. Чемпионаты, кубки и открытые соревнования по мотокроссу, супермото, эндуро и другим дисциплинам.">
-    <meta property="twitter:image" content="https://fmsno.ru/images/og-image.jpg">
-    
+
     <link rel="icon" href="images/short.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Шапка -->
     <header>
-        <div class="container">
-            <div class="logos-container">
-                <img src="images/gerb_nno.png" alt="Герб Нижегородской области">
-                <img src="images/mfr_logo.png" alt="Эмблема Мотофедерации России">
+        <div class="container header-inner">
+            <a href="index.html" class="logo-main">
                 <img src="images/fmsno_logo.png" alt="Эмблема ФМСНО">
-            </div>
-            <h1>Нижегородская Федерация<br>Мотоциклетного Спорта</h1>
-            <button class="menu-toggle" id="menu-toggle">
+                <div class="logo-text">
+                    <span class="federation-name">ФМСНО</span>
+                   <span class="federation-desc">Нижегородская область</span>
+                </div>
+            </a>
+
+            <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню">
                 <i class="fas fa-bars"></i>
             </button>
             <nav>
                 <ul id="main-menu">
                     <li><a href="index.html">Главная</a></li>
                     <li><a href="competitions.html" class="active">Соревнования</a></li>
-                    <li><a href="documents.html">Нормативные документы</a></li>
+                    <li><a href="documents.html">Документы</a></li>
                     <li><a href="disciplines.html">Дисциплины</a></li>
                     <li><a href="news.html">Новости</a></li>
-                    <li><a href="partners.html">Партнеры</a></li>
+                    <li><a href="partners.html">Партнёрам</a></li>
                     <li><a href="contacts.html">Контакты</a></li>
                 </ul>
             </nav>
@@ -56,32 +52,38 @@
     </header>
 
     <main>
-        <section class="competitions-section">
+        <section class="hero-section" style="background-image: url('images/hero-background.jpg');">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <h2>Календарь. Рекорды. Борьба.</h2>
+                <p>Все старты сезона в одном месте: регистрация, положения и результаты соревнований по мотоспорту</p>
+                <div class="hero-buttons">
+                    <a href="#all-events" class="btn btn-primary">К ближайшим стартам</a>
+                    <a href="#all-events" class="btn btn-secondary">Весь календарь</a>
+                </div>
+            </div>
+        </section>
+        <section class="competitions-section" id="all-events">
             <div class="container">
-                <h2 class="section-title">Все соревнования</h2>
-                
-                <div class="admin-controls" id="admin-controls">
-                    <div class="competitions-controls">
-                        <button id="add-competition-btn" class="btn hidden-admin">
-                            <i class="fas fa-plus"></i> Добавить соревнование
-                        </button>
-                        <button id="refresh-competitions-btn" class="btn">
-                            <i class="fas fa-sync-alt"></i> Обновить
-                        </button>
-                    </div>
+                <h2 class="section-title">Календарь стартов</h2>
+
+                <div class="competitions-controls">
+                    <button id="add-competition-btn" class="btn hidden-admin">
+                        <i class="fas fa-plus"></i> Добавить соревнование
+                    </button>
+                    <button id="refresh-competitions-btn" class="btn">
+                        <i class="fas fa-sync-alt"></i> Обновить
+                    </button>
                 </div>
-                
-                <div id="competitions-container" class="competitions-grid">
-                    <!-- Соревнования будут загружены здесь -->
-                </div>
-                
+
+                <!-- Форма добавления/редактирования -->
                 <div id="competition-form-container" class="form-container hidden hidden-admin">
                     <h3 id="form-title">Добавить новое соревнование</h3>
                     <form id="competition-form">
                         <input type="hidden" id="competition-id">
                         <div class="form-group">
                             <label for="competition-title">Название соревнования*</label>
-                            <input type="text" id="competition-title" required>
+                            <input type="text" id="competition-title" required placeholder="Например: Кубок области по мотокроссу">
                         </div>
                         <div class="form-row">
                             <div class="form-group">
@@ -95,7 +97,7 @@
                         </div>
                         <div class="form-group">
                             <label for="competition-location">Место проведения*</label>
-                            <input type="text" id="competition-location" required>
+                            <input type="text" id="competition-location" required placeholder="Например: г. Бор, трасса Борская горка">
                         </div>
                         <div class="form-group">
                             <label for="competition-discipline">Дисциплина*</label>
@@ -110,7 +112,7 @@
                         </div>
                         <div class="form-group">
                             <label for="competition-description">Описание</label>
-                            <textarea id="competition-description" rows="4"></textarea>
+                            <textarea id="competition-description" rows="4" placeholder="Особенности соревнования, призовой фонд, контакт организатора..."></textarea>
                         </div>
                         <div class="form-actions">
                             <button type="submit" class="btn save-btn">
@@ -122,56 +124,59 @@
                         </div>
                     </form>
                 </div>
-                
+
+                <!-- Сетка соревнований -->
+                <div id="competitions-container" class="competitions-grid">
+                    <!-- Карточки генерируются через JS -->
+                </div>
+
+                <!-- Пустое состояние -->
                 <div class="empty-state hidden" id="empty-state">
                     <div class="empty-content">
                         <i class="fas fa-trophy empty-icon"></i>
                         <h3>Нет запланированных соревнований</h3>
-                        <p>Следите за обновлениями на этой странице</p>
+                        <p>Следите за обновлениями в нашем Telegram-канале</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Подвал -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <h3>Нижегородская Федерация<br>Мотоциклетного Спорта</h3>
+                    <h3>Федерация мотоциклетного спорта<br>Нижегородской области</h3>
                 </div>
                 <div class="footer-links">
-                    <h4>Ссылки</h4>
+                    <h4>Навигация</h4>
                     <ul>
                         <li><a href="index.html">Главная</a></li>
                         <li><a href="competitions.html">Соревнования</a></li>
-                        <li><a href="documents.html">Нормативные документы</a></li>
-                        <li><a href="disciplines.html">Дисциплины</a></li>
-                        <li><a href="news.html">Новости</a></li>
-                        <li><a href="partners.html">Партнеры</a></li>
+                    <li><a href="documents.html">Документы</a></li>
+                    <li><a href="disciplines.html">Дисциплины</a></li>
                         <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="privacy.html">Политика конфиденциальности</a></li>
                     </ul>
                 </div>
                 <div class="footer-social">
                     <h4>Мы в соцсетях</h4>
                     <div class="social-icons">
-                        <a href="https://vk.com/fmsno" target="_blank" class="social-icon vk">
-                            <i class="fab fa-vk"></i>
-                        </a>
-                        <a href="https://t.me/fmsno_new" target="_blank" class="social-icon telegram">
-                            <i class="fab fa-telegram"></i>
-                        </a>
+                        <a href="https://vk.com/fmsno" target="_blank" class="social-icon vk"><i class="fab fa-vk"></i></a>
+                        <a href="https://t.me/fmsno_new" target="_blank" class="social-icon telegram"><i class="fab fa-telegram"></i></a>
                     </div>
-                    <p>4 698 подписчиков</p>
                 </div>
             </div>
+
             <div class="footer-logos">
                 <img src="images/gerb_nno.png" alt="Герб Нижегородской области">
-                <img src="images/mfr_logo.png" alt="Эмблема Мотофедерации России">
-                <img src="images/fmsno_logo.png" alt="Эмблема ФМСНО">
+                <img src="images/mfr_logo.png" alt="Мотофедерация России">
+                <img src="images/fmsno_logo.png" alt="ФМСНО">
             </div>
+
             <div class="copyright">
-                <p>&copy; 2025 Нижегородская Федерация Мотоциклетного Спорта. Все права защищены.</p>
+                <p>&copy; 2026 ФМСНО. Все права защищены.</p>
                 <div class="admin-login-footer" id="admin-login-footer">
                     <i class="fas fa-user-shield"></i>
                     <span>Вход для администратора</span>
@@ -180,19 +185,19 @@
         </div>
     </footer>
 
+    <!-- Кнопка Telegram -->
     <a href="https://t.me/fmsno_new" target="_blank" class="telegram-widget">
         <i class="fab fa-telegram"></i>
     </a>
 
+    <!-- Оверлей для мобильного меню -->
     <div class="overlay" id="menu-overlay"></div>
 
-    <!-- Всплывающая админ-панель -->
+    <!-- Модальное окно админа -->
     <div class="admin-bottom-panel" id="admin-bottom-panel">
         <div class="admin-panel-header">
             <h3><i class="fas fa-user-shield"></i> Панель администратора</h3>
-            <button class="admin-close-btn" id="admin-close-btn">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="admin-close-btn" id="admin-close-btn"><i class="fas fa-times"></i></button>
         </div>
         <div class="admin-panel-content">
             <div id="admin-login-form" class="admin-form-section">
@@ -210,20 +215,17 @@
                     <i class="fas fa-sign-in-alt"></i> Войти
                 </button>
                 <div class="admin-help-text">
-                    <p>Для получения доступа обратитесь к руководству Федерации</p>
+                    <p>Для получения доступа обратитесь к руководству</p>
                 </div>
             </div>
             <div id="admin-controls-panel" class="admin-controls-panel hidden">
                 <div class="admin-welcome">
-                    <h4>Добро пожаловать, администратор!</h4>
-                    <p>Вы вошли в систему как администратор сайта Федерации</p>
+                    <h4>Добро пожаловать!</h4>
+                    <p>Вы авторизованы как администратор.</p>
                 </div>
                 <div class="admin-actions">
-                    <button id="add-comp-btn" class="btn admin-action-btn">
+                    <button id="add-comp-btn" class="btn admin-action-btn hidden-admin">
                         <i class="fas fa-plus"></i> Добавить соревнование
-                    </button>
-                    <button id="manage-competitions-btn" class="btn admin-action-btn">
-                        <i class="fas fa-list"></i> Управление соревнованиями
                     </button>
                     <button id="logout-btn" class="btn admin-logout-btn">
                         <i class="fas fa-sign-out-alt"></i> Выйти
@@ -232,508 +234,38 @@
             </div>
         </div>
     </div>
+    <!-- ВРЕМЕННЫЙ СКРИПТ УДАЛЁН: он переопределял loadCompetitions()
+         хардкодом без админских кнопок (ред./удалить). См. js/events-manager.js -->
 
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-        ym(105649209, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true,
-            webvisor:true
-        });
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(105649209, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/105649209" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZELC5BVQM"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-4ZELC5BVQM');
     </script>
-    <!-- /Google Analytics -->
 
-    <script>
-        // Правильные данные для входа администратора
-        const ADMIN_LOGIN = 'admin';
-        const ADMIN_PASSWORD = 'fmsno2025';
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            // Адаптивное меню
-            const menuToggle = document.getElementById('menu-toggle');
-            const menu = document.getElementById('main-menu');
-            const overlay = document.getElementById('menu-overlay');
-            const adminLoginFooter = document.getElementById('admin-login-footer');
-            const adminCloseBtn = document.getElementById('admin-close-btn');
-            
-            menuToggle.addEventListener('click', function() {
-                menu.classList.toggle('active');
-                overlay.classList.toggle('active');
-                document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
-            });
-            
-            overlay.addEventListener('click', function() {
-                menu.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-            
-            document.querySelectorAll('#main-menu a').forEach(link => {
-                link.addEventListener('click', function() {
-                    menu.classList.remove('active');
-                    overlay.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                });
-            });
-            
-            // Обработчик для элемента входа в админку в футере
-            adminLoginFooter.addEventListener('click', function() {
-                document.getElementById('admin-bottom-panel').classList.add('visible');
-                document.body.style.overflow = 'hidden';
-            });
-            
-            // Обработчик для закрытия админ-панели
-            adminCloseBtn.addEventListener('click', function() {
-                document.getElementById('admin-bottom-panel').classList.remove('visible');
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Закрытие админ-панели по клику на оверлей
-            overlay.addEventListener('click', function() {
-                if (document.getElementById('admin-bottom-panel').classList.contains('visible')) {
-                    document.getElementById('admin-bottom-panel').classList.remove('visible');
-                    document.body.style.overflow = 'auto';
-                }
-            });
-            
-            // Проверка авторизации при загрузке
-            checkAdminAuth();
-            
-            // Инициализация
-            loadCompetitions();
-            
-            // Обработчики событий
-            document.getElementById('refresh-competitions-btn').addEventListener('click', loadCompetitions);
-            document.getElementById('cancel-btn').addEventListener('click', hideForm);
-            document.getElementById('competition-form').addEventListener('submit', saveCompetition);
-            document.getElementById('login-btn').addEventListener('click', adminLogin);
-            document.getElementById('logout-btn').addEventListener('click', adminLogout);
-            document.getElementById('add-comp-btn').addEventListener('click', showAddFormFromPanel);
-            document.getElementById('manage-competitions-btn').addEventListener('click', goToCompetitionsPage);
-        });
-        
-        function checkAdminAuth() {
-            const isAdmin = localStorage.getItem('isAdminAuth') === 'true';
-            const timestamp = localStorage.getItem('adminAuthTimestamp');
-            const now = new Date().getTime();
-            
-            // Проверка срока действия сессии (24 часа)
-            if (isAdmin && timestamp && (now - timestamp) < 24 * 60 * 60 * 1000) {
-                showAdminControls();
-                showAdminControlsPanel();
-            } else {
-                hideAdminControls();
-                hideAdminControlsPanel();
-                localStorage.removeItem('isAdminAuth');
-                localStorage.removeItem('adminAuthTimestamp');
-            }
-        }
-        
-        function showAdminControls() {
-            document.querySelectorAll('.hidden-admin').forEach(el => {
-                el.classList.remove('hidden');
-            });
-        }
-        
-        function hideAdminControls() {
-            document.querySelectorAll('.hidden-admin').forEach(el => {
-                el.classList.add('hidden');
-            });
-        }
-        
-        function showAdminControlsPanel() {
-            document.getElementById('admin-login-form').classList.add('hidden');
-            document.getElementById('admin-controls-panel').classList.remove('hidden');
-        }
-        
-        function hideAdminControlsPanel() {
-            document.getElementById('admin-login-form').classList.remove('hidden');
-            document.getElementById('admin-controls-panel').classList.add('hidden');
-        }
-        
-        function adminLogin() {
-            const login = document.getElementById('admin-login').value.trim();
-            const password = document.getElementById('admin-password').value.trim();
-            const errorEl = document.getElementById('login-error');
-            
-            // Простая валидация
-            if (!login || !password) {
-                showError('Введите логин и пароль', errorEl);
-                return;
-            }
-            
-            if (login !== ADMIN_LOGIN) {
-                showError('Неверный логин', errorEl);
-                return;
-            }
-            
-            if (password !== ADMIN_PASSWORD) {
-                showError('Неверный пароль', errorEl);
-                return;
-            }
-            
-            // Авторизация успешна
-            localStorage.setItem('isAdminAuth', 'true');
-            localStorage.setItem('adminAuthTimestamp', new Date().getTime().toString());
-            
-            showAdminControls();
-            showAdminControlsPanel();
-            showNotification('Вы успешно вошли в админ-панель!', 'success');
-            
-            // Очищаем поля
-            document.getElementById('admin-login').value = '';
-            document.getElementById('admin-password').value = '';
-            document.getElementById('login-error').classList.add('hidden');
-        }
-        
-        function adminLogout() {
-            localStorage.removeItem('isAdminAuth');
-            localStorage.removeItem('adminAuthTimestamp');
-            hideAdminControls();
-            hideAdminControlsPanel();
-            document.body.style.overflow = 'auto';
-            showNotification('Вы вышли из админ-панели', 'info');
-        }
-        
-        function goToCompetitionsPage() {
-            window.location.href = 'competitions.html';
-        }
-        
-        function showAddFormFromPanel() {
-            document.getElementById('admin-bottom-panel').classList.remove('visible');
-            document.body.style.overflow = 'auto';
-            showAddForm();
-        }
-        
-        function loadCompetitions() {
-            try {
-                const competitions = JSON.parse(localStorage.getItem('competitions')) || [];
-                
-                const container = document.getElementById('competitions-container');
-                const emptyState = document.getElementById('empty-state');
-                
-                if (competitions.length === 0) {
-                    container.innerHTML = '';
-                    emptyState.classList.remove('hidden');
-                    return;
-                }
-                
-                emptyState.classList.add('hidden');
-                container.innerHTML = '';
-                
-                // Сортируем по дате
-                competitions.sort((a, b) => new Date(a.date) - new Date(b.date));
-                
-                // Создаем карточки для каждого соревнования
-                competitions.forEach(comp => {
-                    const compCard = document.createElement('div');
-                    compCard.className = 'competition-card';
-                    compCard.dataset.id = comp.id;
-                    
-                    const compDate = new Date(comp.date);
-                    const day = compDate.getDate();
-                    const month = compDate.toLocaleString('ru-RU', { month: 'long' });
-                    const year = compDate.getFullYear();
-                    
-                    let actionsHTML = `
-                        <a href="https://vk.com/fmsno" target="_blank" class="btn more-btn">
-                            <i class="fab fa-vk"></i> Подробнее в VK
-                        </a>
-                    `;
-                    
-                    // Добавляем кнопки действий только для администраторов
-                    const isAdmin = localStorage.getItem('isAdminAuth') === 'true';
-                    if (isAdmin) {
-                        actionsHTML = `
-                            <button class="btn edit-btn hidden-admin" data-id="${comp.id}">
-                                <i class="fas fa-edit"></i> Редактировать
-                            </button>
-                            <button class="btn delete-btn hidden-admin" data-id="${comp.id}">
-                                <i class="fas fa-trash"></i> Удалить
-                            </button>
-                            ${actionsHTML}
-                        `;
-                    }
-                    
-                    compCard.innerHTML = `
-                        <div class="competition-header">
-                            <div class="competition-date">
-                                <span class="day">${day}</span>
-                                <span class="month-year">${month} ${year}</span>
-                            </div>
-                            <div class="competition-label ${getDisciplineClass(comp.discipline)}">
-                                ${getDisciplineName(comp.discipline)}
-                            </div>
-                        </div>
-                        <h3 class="competition-title">${comp.title}</h3>
-                        <div class="competition-details">
-                            <p><i class="fas fa-map-marker-alt"></i> ${comp.location}</p>
-                            <p><i class="far fa-clock"></i> ${comp.time}</p>
-                        </div>
-                        <div class="competition-description">
-                            ${comp.description || 'Описание отсутствует'}
-                        </div>
-                        <div class="competition-actions">
-                            ${actionsHTML}
-                        </div>
-                    `;
-                    
-                    container.appendChild(compCard);
-                });
-                
-                // Показываем/скрываем элементы управления в зависимости от прав
-                checkAdminAuth();
-                
-                // Навешиваем обработчики на кнопки (только если они видны)
-                document.querySelectorAll('.edit-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const id = this.dataset.id;
-                        editCompetition(id);
-                    });
-                });
-                
-                document.querySelectorAll('.delete-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const id = this.dataset.id;
-                        deleteCompetition(id);
-                    });
-                });
-                
-            } catch (error) {
-                console.error('Ошибка при загрузке соревнований:', error);
-                alert('Ошибка при загрузке соревнований. Попробуйте обновить страницу.');
-            }
-        }
-        
-        function showAddForm() {
-            document.getElementById('form-title').textContent = 'Добавить новое соревнование';
-            document.getElementById('competition-id').value = '';
-            document.getElementById('competition-form').reset();
-            document.getElementById('competition-form-container').classList.remove('hidden');
-        }
-        
-        function hideForm() {
-            document.getElementById('competition-form-container').classList.add('hidden');
-        }
-        
-        function editCompetition(id) {
-            try {
-                const competitions = JSON.parse(localStorage.getItem('competitions')) || [];
-                const competition = competitions.find(comp => comp.id === id);
-                
-                if (!competition) return;
-                
-                // Заполняем форму данными
-                document.getElementById('form-title').textContent = 'Редактировать соревнование';
-                document.getElementById('competition-id').value = competition.id;
-                document.getElementById('competition-title').value = competition.title;
-                document.getElementById('competition-date').value = competition.date;
-                document.getElementById('competition-time').value = competition.time;
-                document.getElementById('competition-location').value = competition.location;
-                document.getElementById('competition-discipline').value = competition.discipline;
-                document.getElementById('competition-description').value = competition.description || '';
-                
-                // Показываем форму
-                document.getElementById('competition-form-container').classList.remove('hidden');
-            } catch (error) {
-                console.error('Ошибка при редактировании соревнования:', error);
-            }
-        }
-        
-        function saveCompetition(e) {
-            e.preventDefault();
-            
-            // Проверка прав администратора
-            if (localStorage.getItem('isAdminAuth') !== 'true') {
-                showNotification('У вас нет прав для сохранения соревнований', 'error');
-                return;
-            }
-            
-            try {
-                let competitions = JSON.parse(localStorage.getItem('competitions')) || [];
-                const id = document.getElementById('competition-id').value;
-                const now = new Date().toISOString();
-                
-                const newCompetition = {
-                    id: id || `comp_${Date.now()}`,
-                    title: document.getElementById('competition-title').value,
-                    date: document.getElementById('competition-date').value,
-                    time: document.getElementById('competition-time').value,
-                    location: document.getElementById('competition-location').value,
-                    discipline: document.getElementById('competition-discipline').value,
-                    description: document.getElementById('competition-description').value,
-                    createdAt: id ? null : now,
-                    updatedAt: now
-                };
-                
-                if (id) {
-                    // Редактируем существующее соревнование
-                    const index = competitions.findIndex(comp => comp.id === id);
-                    if (index !== -1) {
-                        competitions[index] = newCompetition;
-                    }
-                } else {
-                    // Добавляем новое соревнование
-                    competitions.push(newCompetition);
-                }
-                
-                // Сохраняем в localStorage
-                localStorage.setItem('competitions', JSON.stringify(competitions));
-                
-                // Обновляем отображение
-                loadCompetitions();
-                
-                // Скрываем форму
-                hideForm();
-                
-                // Показываем уведомление
-                showNotification(id ? 'Соревнование успешно обновлено!' : 'Соревнование успешно добавлено!', 'success');
-            } catch (error) {
-                console.error('Ошибка при сохранении соревнования:', error);
-                showNotification('Ошибка при сохранении соревнования', 'error');
-            }
-        }
-        
-        function deleteCompetition(id) {
-            // Проверка прав администратора
-            if (localStorage.getItem('isAdminAuth') !== 'true') {
-                showNotification('У вас нет прав для удаления соревнований', 'error');
-                return;
-            }
-            
-            if (!confirm('Вы уверены, что хотите удалить это соревнование?')) return;
-            
-            try {
-                let competitions = JSON.parse(localStorage.getItem('competitions')) || [];
-                competitions = competitions.filter(comp => comp.id !== id);
-                localStorage.setItem('competitions', JSON.stringify(competitions));
-                loadCompetitions();
-                showNotification('Соревнование успешно удалено!', 'success');
-            } catch (error) {
-                console.error('Ошибка при удалении соревнования:', error);
-                showNotification('Ошибка при удалении соревнования', 'error');
-            }
-        }
-        
-        function getDisciplineName(discipline) {
-            const names = {
-                'motocross': 'Мотокросс',
-                'supermoto': 'Супермото',
-                'motodzhimkhana': 'Мотоджимхана',
-                'enduro': 'Эндуро',
-                'sxcup': 'SX Cup'
-            };
-            return names[discipline] || 'Другое';
-        }
-        
-        function getDisciplineClass(discipline) {
-            return discipline || 'other';
-        }
-        
-        function showError(message, element) {
-            element.textContent = message;
-            element.classList.remove('hidden');
-            setTimeout(() => {
-                element.classList.add('hidden');
-            }, 5000);
-        }
-        
-        function showNotification(message, type = 'info') {
-            // Создаем уведомление
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = `
-                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
-                <span>${message}</span>
-                <button class="close-notification">&times;</button>
-            `;
-            
-            // Добавляем в body
-            document.body.appendChild(notification);
-            
-            // Показываем
-            setTimeout(() => notification.classList.add('show'), 10);
-            
-            // Удаляем через 5 секунд
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 5000);
-            
-            // Закрытие по клику
-            notification.querySelector('.close-notification').addEventListener('click', () => {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            });
-        }
-        
-        // Инициализация начальных данных (если localStorage пуст)
-        window.addEventListener('load', function() {
-            if (!localStorage.getItem('competitions')) {
-                const initialCompetitions = [
-                    {
-                        id: 'comp_1',
-                        title: 'Чемпионат Нижегородской области по мотокроссу',
-                        date: '2025-06-15',
-                        time: '10:00',
-                        location: 'г. Бор, трасса "Борская горка"',
-                        discipline: 'motocross',
-                        description: 'Главное соревнование региона по мотокроссу. Призовой фонд 150 000 рублей.',
-                        createdAt: new Date().toISOString(),
-                        updatedAt: new Date().toISOString()
-                    },
-                    {
-                        id: 'comp_2',
-                        title: 'Открытый кубок по мотоджимхане',
-                        date: '2025-06-22',
-                        time: '11:00',
-                        location: 'Автодром "Кстово"',
-                        discipline: 'motodzhimkhana',
-                        description: 'Традиционный кубок по фигурному вождению мотоциклов.',
-                        createdAt: new Date().toISOString(),
-                        updatedAt: new Date().toISOString()
-                    },
-                    {
-                        id: 'comp_3',
-                        title: 'KTM SX Cup 2025',
-                        date: '2025-07-06',
-                        time: '09:00',
-                        location: 'г. Дзержинск',
-                        discipline: 'sxcup',
-                        description: 'Ежегодные соревнования на мотоциклах KTM.',
-                        createdAt: new Date().toISOString(),
-                        updatedAt: new Date().toISOString()
-                    }
-                ];
-                
-                localStorage.setItem('competitions', JSON.stringify(initialCompetitions));
-            }
-        });
-    </script>
+    <!-- Подключение скриптов -->
+            <!-- env.js задаёт переменные окружения (токены) — ПЕРВЫМ -->
+    <script src="env.js"></script>
+    <!-- telegram.js — функции для отправки в Telegram-канал -->
+    <script src="telegram.js"></script>
+
+    <script src="js/notifications.js"></script>
+<script src="js/app.js"></script>
+    <script src="js/events-manager.js"></script>
+    <script src="js/feedback.js"></script>
 </body>
 </html>

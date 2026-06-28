@@ -4,51 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Дисциплины - Нижегородская Федерация Мотоциклетного Спорта</title>
-    <meta name="description" content="Официальные дисциплины мотоспорта в Нижегородской области: мотокросс, суперкросс, эндуро, мотоджимхана, ШКГ и мотопробеги. Подробная информация о каждой дисциплине.">
-    <meta name="keywords" content="мотоспорт, мотокросс, суперкросс, эндуро, мотоджимхана, ШКГ, мотопробеги, нижний новгород, федерация мотоспорта">
+    <meta name="description" content="Официальные дисциплины мотоспорта в Нижегородской области: мотокросс, суперкросс, эндуро, мотоджимхана, ШКГ и мотопробеги.">
+    <meta name="keywords" content="мотоспорт, мотокросс, эндуро, мотоджимхана, ШКГ, нижний новгород">
     <meta name="author" content="Нижегородская Федерация Мотоциклетного Спорта">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://fmsno.ru/disciplines.html">
-    
-    <!-- Open Graph / Facebook -->
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fmsno.ru/disciplines.html">
-    <meta property="og:title" content="Дисциплины - Нижегородская Федерация Мотоциклетного Спорта">
-    <meta property="og:description" content="Официальные дисциплины мотоспорта в Нижегородской области: мотокросс, суперкросс, эндуро, мотоджимхана, ШКГ и мотопробеги. Подробная информация о каждой дисциплине.">
+    <meta property="og:title" content="Дисциплины - ФМСНО">
+    <meta property="og:description" content="Официальные дисциплины мотоспорта в Нижегородской области.">
     <meta property="og:image" content="https://fmsno.ru/images/og-image.jpg">
-    <meta property="og:site_name" content="Нижегородская Федерация Мотоциклетного Спорта">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://fmsno.ru/disciplines.html">
-    <meta property="twitter:title" content="Дисциплины - Нижегородская Федерация Мотоциклетного Спорта">
-    <meta property="twitter:description" content="Официальные дисциплины мотоспорта в Нижегородской области: мотокросс, суперкросс, эндуро, мотоджимхана, ШКГ и мотопробеги. Подробная информация о каждой дисциплине.">
-    <meta property="twitter:image" content="https://fmsno.ru/images/og-image.jpg">
-    
+
     <link rel="icon" href="images/short.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Шапка -->
     <header>
-        <div class="container">
-            <div class="logos-container">
-                <img src="images/gerb_nno.png" alt="Герб Нижегородской области">
-                <img src="images/mfr_logo.png" alt="Эмблема Мотофедерации России">
+        <div class="container header-inner">
+            <a href="index.html" class="logo-main">
                 <img src="images/fmsno_logo.png" alt="Эмблема ФМСНО">
-            </div>
-            <h1>Нижегородская Федерация<br>Мотоциклетного Спорта</h1>
-            <button class="menu-toggle" id="menu-toggle">
+                <div class="logo-text">
+                    <span class="federation-name">ФМСНО</span>
+                   <span class="federation-desc">Нижегородская область</span>
+                </div>
+            </a>
+
+            <button class="menu-toggle" id="menu-toggle" aria-label="Открыть меню">
                 <i class="fas fa-bars"></i>
             </button>
             <nav>
                 <ul id="main-menu">
                     <li><a href="index.html">Главная</a></li>
                     <li><a href="competitions.html">Соревнования</a></li>
-                    <li><a href="documents.html">Нормативные документы</a></li>
+                    <li><a href="documents.html">Документы</a></li>
                     <li><a href="disciplines.html" class="active">Дисциплины</a></li>
                     <li><a href="news.html">Новости</a></li>
-                    <li><a href="partners.html">Партнеры</a></li>
+                    <li><a href="partners.html">Партнёрам</a></li>
                     <li><a href="contacts.html">Контакты</a></li>
                 </ul>
             </nav>
@@ -56,165 +51,105 @@
     </header>
 
     <main>
+        <section class="hero-section" style="background-image: url('images/hero-background.jpg');">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <h2>Адреналин. Техника. Мастерство.</h2>
+                <p>Мотокросс, эндуро, мотоджимхана и другие официальные дисциплины мотоспорта в Нижегородской области</p>
+                <div class="hero-buttons">
+                    <a href="#disciplines-grid" class="btn btn-primary">Узнать больше</a>
+                    <a href="contacts.html" class="btn btn-secondary">Как начать участвовать</a>
+                </div>
+            </div>
+        </section>
+        <!-- Карточки -->
         <section class="disciplines-section">
             <div class="container">
-                <h2 class="section-title">Мотоспортивные дисциплины</h2>
-                <p class="section-description">В Нижегородской Федерации Мотоциклетного Спорта развивается несколько официальных дисциплин, каждая из которых имеет свои особенности и правила проведения соревнований.</p>
-                
+                <h2 class="section-title">Дисциплины</h2>
+                <p class="section-description">В Нижегородской Федерации развиваются несколько официальных дисциплин. Каждая из них уникальна, требует специальной подготовки и испытывает характер спортсмена.</p>
+
                 <div class="disciplines-grid">
-                    <div class="discipline-card motocross">
+                    <div class="discipline-card" data-discipline="motocross">
                         <div class="discipline-image" style="background-image: url('images/motocross.jpg');"></div>
                         <div class="discipline-overlay">
                             <h3 class="discipline-name">Мотокросс / Суперкросс</h3>
-                            <p class="discipline-preview">Гонки на внедорожных трассах с естественными и искусственными препятствиями</p>
+                            <p class="discipline-preview">Гоночная дисциплина на внедорожных мотоциклах с естественным и искусственным рельефом трассы</p>
+                            <span class="discipline-more-hint"><i class="fas fa-search-plus"></i> Подробнее</span>
                         </div>
                     </div>
-                    
-                    <div class="discipline-card enduro">
+
+                    <div class="discipline-card" data-discipline="enduro">
                         <div class="discipline-image" style="background-image: url('images/hardenduro.jpg');"></div>
                         <div class="discipline-overlay">
                             <h3 class="discipline-name">Эндуро / Хардэндуро</h3>
-                            <p class="discipline-preview">Многодневные соревнования на сложных пересеченных маршрутах</p>
+                            <p class="discipline-preview">Дисциплина на пересечённой местности с контрольными пунктами и временным регламентом</p>
+                            <span class="discipline-more-hint"><i class="fas fa-search-plus"></i> Подробнее</span>
                         </div>
                     </div>
-                    
-                    <div class="discipline-card motodzhimkhana">
+
+                    <div class="discipline-card" data-discipline="motodzhimkhana">
                         <div class="discipline-image" style="background-image: url('images/motogymkhana.jpg');"></div>
                         <div class="discipline-overlay">
-                            <h3 class="discipline-name">Мотоджимхана / ФУМ</h3>
-                            <p class="discipline-preview">Точность управления мотоциклом на ограниченном пространстве</p>
+                            <h3 class="discipline-name">Мотоджимхана (ФУМ)</h3>
+                            <p class="discipline-preview">Техническая дисциплина на точность и скорость прохождения фигурных элементов</p>
+                            <span class="discipline-more-hint"><i class="fas fa-search-plus"></i> Подробнее</span>
                         </div>
                     </div>
-                    
-                    <div class="discipline-card shkg">
+
+                    <div class="discipline-card" data-discipline="shkg">
                         <div class="discipline-image" style="background-image: url('images/shkg.jpg');"></div>
                         <div class="discipline-overlay">
                             <h3 class="discipline-name">Шоссейно-кольцевые гонки</h3>
-                            <p class="discipline-preview">Гонки на асфальтированных трассах по замкнутому кругу</p>
+                            <p class="discipline-preview">Соревнования на спортивных мотоциклах по замкнутому асфальтированному кольцу</p>
+                            <span class="discipline-more-hint"><i class="fas fa-search-plus"></i> Подробнее</span>
                         </div>
                     </div>
-                    
-                    <div class="discipline-card motorally">
+
+                    <div class="discipline-card" data-discipline="motoprobegi">
                         <div class="discipline-image" style="background-image: url('images/motoprob.jpg');"></div>
                         <div class="discipline-overlay">
                             <h3 class="discipline-name">Мотопробеги</h3>
-                            <p class="discipline-preview">Туристические поездки</p>
+                            <p class="discipline-preview">Дисциплина с прохождением протяжённого маршрута по графику и контрольными пунктами</p>
+                            <span class="discipline-more-hint"><i class="fas fa-search-plus"></i> Подробнее</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="disciplines-details">
-            <div class="container">
-                <div class="discipline-detail" id="motocross-detail">
-                    <h3>Мотокросс / Суперкросс</h3>
-                    <div class="detail-content">
-                        <div class="detail-image">
-                            <img src="images/motocross-detail.jpg" alt="Соревнования по мотокроссу">
-                        </div>
-                        <div class="detail-text">
-                            <p><strong>Мотокросс</strong> — это гонки на специально подготовленных внедорожных трассах с естественными и искусственными препятствиями. Соревнования проводятся на участках трассы длиной от 800 метров до 1,5 километров по пересеченной местности.</p>
-                            <p>Гонщики стартуют одновременно и совершают определенное количество кругов. Победителем становится первым, кто пересечет финишную черту после завершения запланированного количества кругов.</p>
-                            <p>В нашей Федерации мотокросс является одной из самых популярных и массовых дисциплин. Ежегодно проводятся Чемпионат и Первенство Нижегородской области, а также кубковые этапы и открытые соревнования, в которых принимают участие сотни спортсменов разных возрастных категорий.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="discipline-detail" id="enduro-detail">
-                    <h3>Эндуро / Хардэндуро</h3>
-                    <div class="detail-content">
-                        <div class="detail-image">
-                            <img src="images/enduro-detail.jpg" alt="Соревнования по эндуро">
-                        </div>
-                        <div class="detail-text">
-                            <p><strong>Эндуро</strong> — это многодневные соревнования по мотоциклетному спорту, проводимые на сложных пересеченных маршрутах, сочетающих различные типы местности: лесные дороги, поля, болота, овраги и горные склоны.</p>
-                            <p>Основная задача гонщиков — преодолеть маршрут за минимальное время, соблюдая специальный график движения между контрольными точками. Соревнования требуют от спортсменов не только высокой скорости, но и выносливости, а также умения ориентироваться на местности и работать с картами.</p>
-                            <p><strong>Хардэндуро</strong> представляет собой наиболее экстремальный вариант эндуро, где основное внимание уделяется преодолению сложных препятствий и технических участков. Это дисциплина для самых сильных и опытных спортсменов, готовых к преодолению любых трудностей на пути к победе.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="discipline-detail" id="motodzhimkhana-detail">
-                    <h3>Мотоджимхана / ФУМ</h3>
-                    <div class="detail-content">
-                        <div class="detail-image">
-                            <img src="images/motodzhimkhana-detail.jpg" alt="Соревнования по мотоджимхане">
-                        </div>
-                        <div class="detail-text">
-                            <p><strong>Мотоджимхана</strong> — это дисциплина, в которой важны точность, скорость реакции и мастерство управления мотоциклом на ограниченном пространстве. Соревнования проводятся на ровной площадке с размеченными конусами, которые спортсмен должен объехать согласно заданной траектории.</p>
-                            <p>Гонщикам требуется выполнять сложные фигуры: восьмерки, змейки, повороты на 180 градусов и другие элементы, демонстрируя полный контроль над техникой. Судейство ведется по времени прохождения упражнения и количеству сбитых конусов.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="discipline-detail" id="shkg-detail">
-                    <h3>Шоссейно-кольцевые гонки</h3>
-                    <div class="detail-content">
-                        <div class="detail-image">
-                            <img src="images/shkg-detail.jpg" alt="Шоссейно-кольцевые гонки">
-                        </div>
-                        <div class="detail-text">
-                            <p><strong>Шоссейно-кольцевые гонки (ШКГ)</strong> — вид мотоспорта, проводимый на специально оборудованных асфальтированных трассах по замкнутому маршруту. Соревнования предполагают высокую скорость, аэродинамику и технические характеристики мотоциклов.</p>
-                            <p>Гонки проводятся на трассах длиной от 1,5 до 5 километров, участники совершают определенное количество кругов. Победителем становится гонщик, первым пересекший финишную черту.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="discipline-detail" id="motorally-detail">
-                    <h3>Мотопробеги</h3>
-                    <div class="detail-content">
-                        <div class="detail-image">
-                            <img src="images/motorally-detail.jpg" alt="Мотопробеги">
-                        </div>
-                        <div class="detail-text">
-                            <p><strong>Мотопробеги</strong> — это туристические поездки, проводимые по заранее намеченному маршруту. Участники должны преодолеть расстояние в установленные сроки.</p>
-                            <p>Мотопробеги сочетают в себе спортивный аспект и туристический интерес. Это возможность увидеть красивые места Нижегородской области, познакомиться с другими любителями мотоспорта и получить незабываемые впечатления от путешествий на мотоцикле.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
+    <!-- Подвал -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
-                    <h3>Нижегородская Федерация<br>Мотоциклетного Спорта</h3>
-                </div>
+                <div class="footer-logo"><h3>Федерация мотоциклетного спорта<br>Нижегородской области</h3></div>
                 <div class="footer-links">
-                    <h4>Ссылки</h4>
+                    <h4>Навигация</h4>
                     <ul>
                         <li><a href="index.html">Главная</a></li>
                         <li><a href="competitions.html">Соревнования</a></li>
-                        <li><a href="documents.html">Нормативные документы</a></li>
-                        <li><a href="disciplines.html">Дисциплины</a></li>
-                        <li><a href="news.html">Новости</a></li>
-                        <li><a href="partners.html">Партнеры</a></li>
+                    <li><a href="documents.html">Документы</a></li>
+                    <li><a href="disciplines.html">Дисциплины</a></li>
                         <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="privacy.html">Политика конфиденциальности</a></li>
                     </ul>
                 </div>
                 <div class="footer-social">
                     <h4>Мы в соцсетях</h4>
                     <div class="social-icons">
-                        <a href="https://vk.com/fmsno" target="_blank" class="social-icon vk">
-                            <i class="fab fa-vk"></i>
-                        </a>
-                        <a href="https://t.me/fmsno_new" target="_blank" class="social-icon telegram">
-                            <i class="fab fa-telegram"></i>
-                        </a>
+                        <a href="https://vk.com/fmsno" target="_blank" class="social-icon vk"><i class="fab fa-vk"></i></a>
+                        <a href="https://t.me/fmsno_new" target="_blank" class="social-icon telegram"><i class="fab fa-telegram"></i></a>
                     </div>
-                    <p>4 698 подписчиков</p>
                 </div>
             </div>
             <div class="footer-logos">
                 <img src="images/gerb_nno.png" alt="Герб Нижегородской области">
-                <img src="images/mfr_logo.png" alt="Эмблема Мотофедерации России">
-                <img src="images/fmsno_logo.png" alt="Эмблема ФМСНО">
+                <img src="images/mfr_logo.png" alt="Мотофедерация России">
+                <img src="images/fmsno_logo.png" alt="ФМСНО">
             </div>
             <div class="copyright">
-                <p>&copy; 2025 Нижегородская Федерация Мотоциклетного Спорта. Все права защищены.</p>
+                <p>&copy; 2026 ФМСНО. Все права защищены.</p>
                 <div class="admin-login-footer" id="admin-login-footer">
                     <i class="fas fa-user-shield"></i>
                     <span>Вход для администратора</span>
@@ -223,260 +158,61 @@
         </div>
     </footer>
 
-    <a href="https://t.me/fmsno_new" target="_blank" class="telegram-widget">
-        <i class="fab fa-telegram"></i>
-    </a>
-
+    <a href="https://t.me/fmsno_new" target="_blank" class="telegram-widget"><i class="fab fa-telegram"></i></a>
     <div class="overlay" id="menu-overlay"></div>
 
-    <!-- Всплывающая админ-панель -->
+    <!-- Модальное окно админа -->
     <div class="admin-bottom-panel" id="admin-bottom-panel">
         <div class="admin-panel-header">
             <h3><i class="fas fa-user-shield"></i> Панель администратора</h3>
-            <button class="admin-close-btn" id="admin-close-btn">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="admin-close-btn" id="admin-close-btn"><i class="fas fa-times"></i></button>
         </div>
         <div class="admin-panel-content">
             <div id="admin-login-form" class="admin-form-section">
                 <h4>Вход в админ-панель</h4>
                 <div id="login-error" class="error hidden"></div>
-                <div class="login-group">
-                    <label for="admin-login">Логин</label>
-                    <input type="text" id="admin-login" placeholder="Введите логин">
-                </div>
-                <div class="login-group">
-                    <label for="admin-password">Пароль</label>
-                    <input type="password" id="admin-password" placeholder="Введите пароль">
-                </div>
-                <button type="button" id="login-btn" class="btn admin-login-btn">
-                    <i class="fas fa-sign-in-alt"></i> Войти
-                </button>
-                <div class="admin-help-text">
-                    <p>Для получения доступа обратитесь к руководству Федерации</p>
-                </div>
+                <div class="login-group"><label for="admin-login">Логин</label><input type="text" id="admin-login" placeholder="Введите логин"></div>
+                <div class="login-group"><label for="admin-password">Пароль</label><input type="password" id="admin-password" placeholder="Введите пароль"></div>
+                <button type="button" id="login-btn" class="btn admin-login-btn"><i class="fas fa-sign-in-alt"></i> Войти</button>
+                <div class="admin-help-text"><p>Для получения доступа обратитесь к руководству</p></div>
             </div>
             <div id="admin-controls-panel" class="admin-controls-panel hidden">
-                <div class="admin-welcome">
-                    <h4>Добро пожаловать, администратор!</h4>
-                    <p>Вы вошли в систему как администратор сайта Федерации</p>
-                </div>
-                <div class="admin-actions">
-                    <button id="logout-btn" class="btn admin-logout-btn">
-                        <i class="fas fa-sign-out-alt"></i> Выйти
-                    </button>
-                </div>
+                <div class="admin-welcome"><h4>Добро пожаловать!</h4><p>Вы авторизованы как администратор.</p></div>
+                <div class="admin-actions"><button id="logout-btn" class="btn admin-logout-btn"><i class="fas fa-sign-out-alt"></i> Выйти</button></div>
             </div>
         </div>
     </div>
 
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-        ym(105649209, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true,
-            webvisor:true
-        });
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(105649209, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/105649209" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZELC5BVQM"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-4ZELC5BVQM');
     </script>
-    <!-- /Google Analytics -->
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Адаптивное меню
-            const menuToggle = document.getElementById('menu-toggle');
-            const menu = document.getElementById('main-menu');
-            const overlay = document.getElementById('menu-overlay');
-            const adminLoginFooter = document.getElementById('admin-login-footer');
-            const adminCloseBtn = document.getElementById('admin-close-btn');
-            
-            menuToggle.addEventListener('click', function() {
-                menu.classList.toggle('active');
-                overlay.classList.toggle('active');
-                document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
-            });
-            
-            overlay.addEventListener('click', function() {
-                menu.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-            
-            document.querySelectorAll('#main-menu a').forEach(link => {
-                link.addEventListener('click', function() {
-                    menu.classList.remove('active');
-                    overlay.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                });
-            });
-            
-            // Обработчик для элемента входа в админку в футере
-            adminLoginFooter.addEventListener('click', function() {
-                document.getElementById('admin-bottom-panel').classList.add('visible');
-                document.body.style.overflow = 'hidden';
-            });
-            
-            // Обработчик для закрытия админ-панели
-            adminCloseBtn.addEventListener('click', function() {
-                document.getElementById('admin-bottom-panel').classList.remove('visible');
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Закрытие админ-панели по клику на оверлей
-            overlay.addEventListener('click', function() {
-                if (document.getElementById('admin-bottom-panel').classList.contains('visible')) {
-                    document.getElementById('admin-bottom-panel').classList.remove('visible');
-                    document.body.style.overflow = 'auto';
-                }
-            });
-            
-            // Проверка авторизации при загрузке
-            checkAdminAuth();
-        });
-        
-        function checkAdminAuth() {
-            const isAdmin = localStorage.getItem('isAdminAuth') === 'true';
-            const timestamp = localStorage.getItem('adminAuthTimestamp');
-            const now = new Date().getTime();
-            
-            // Проверка срока действия сессии (24 часа)
-            if (isAdmin && timestamp && (now - timestamp) < 24 * 60 * 60 * 1000) {
-                showAdminControls();
-                showAdminControlsPanel();
-            } else {
-                hideAdminControls();
-                hideAdminControlsPanel();
-                localStorage.removeItem('isAdminAuth');
-                localStorage.removeItem('adminAuthTimestamp');
-            }
-        }
-        
-        function showAdminControls() {
-            document.querySelectorAll('.hidden-admin').forEach(el => {
-                el.classList.remove('hidden');
-            });
-        }
-        
-        function hideAdminControls() {
-            document.querySelectorAll('.hidden-admin').forEach(el => {
-                el.classList.add('hidden');
-            });
-        }
-        
-        function showAdminControlsPanel() {
-            document.getElementById('admin-login-form').classList.add('hidden');
-            document.getElementById('admin-controls-panel').classList.remove('hidden');
-        }
-        
-        function hideAdminControlsPanel() {
-            document.getElementById('admin-login-form').classList.remove('hidden');
-            document.getElementById('admin-controls-panel').classList.add('hidden');
-        }
-        
-        function adminLogin() {
-            const login = document.getElementById('admin-login').value.trim();
-            const password = document.getElementById('admin-password').value.trim();
-            const errorEl = document.getElementById('login-error');
-            
-            // Простая валидация
-            if (!login || !password) {
-                showError('Введите логин и пароль', errorEl);
-                return;
-            }
-            
-            if (login !== ADMIN_LOGIN) {
-                showError('Неверный логин', errorEl);
-                return;
-            }
-            
-            if (password !== ADMIN_PASSWORD) {
-                showError('Неверный пароль', errorEl);
-                return;
-            }
-            
-            // Авторизация успешна
-            localStorage.setItem('isAdminAuth', 'true');
-            localStorage.setItem('adminAuthTimestamp', new Date().getTime().toString());
-            
-            showAdminControls();
-            showAdminControlsPanel();
-            showNotification('Вы успешно вошли в админ-панель!', 'success');
-            
-            // Очищаем поля
-            document.getElementById('admin-login').value = '';
-            document.getElementById('admin-password').value = '';
-            document.getElementById('login-error').classList.add('hidden');
-        }
-        
-        function adminLogout() {
-            localStorage.removeItem('isAdminAuth');
-            localStorage.removeItem('adminAuthTimestamp');
-            hideAdminControls();
-            hideAdminControlsPanel();
-            document.body.style.overflow = 'auto';
-            showNotification('Вы вышли из админ-панели', 'info');
-        }
-        
-        function showError(message, element) {
-            element.textContent = message;
-            element.classList.remove('hidden');
-            setTimeout(() => {
-                element.classList.add('hidden');
-            }, 5000);
-        }
-        
-        function showNotification(message, type = 'info') {
-            // Создаем уведомление
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = `
-                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
-                <span>${message}</span>
-                <button class="close-notification">&times;</button>
-            `;
-            
-            // Добавляем в body
-            document.body.appendChild(notification);
-            
-            // Показываем
-            setTimeout(() => notification.classList.add('show'), 10);
-            
-            // Удаляем через 5 секунд
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 5000);
-            
-            // Закрытие по клику
-            notification.querySelector('.close-notification').addEventListener('click', () => {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            });
-        }
-    </script>
+    <!-- Подключение скриптов -->
+            <!-- env.js задаёт переменные окружения (токены) — ПЕРВЫМ -->
+    <script src="env.js"></script>
+    <!-- telegram.js — функции для отправки в Telegram-канал -->
+    <script src="telegram.js"></script>
+
+    <script src="js/notifications.js"></script>
+<script src="js/app.js"></script>
+    <script src="js/events-manager.js"></script>
+    <script src="js/feedback.js"></script>
+    <script src="js/disciplines.js"></script>
 </body>
 </html>
