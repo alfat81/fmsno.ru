@@ -78,7 +78,7 @@
                         <div class="contact-photo"><i class="fas fa-user-tie"></i></div>
                         <div class="contact-details">
                             <h3>Президент ФМСНО</h3>
-                            <p>Хорев Евгений</p>
+                            <p>Хорев Евгений Алексеевич</p>
                             <p><i class="fas fa-phone"></i> <a href="tel:+79527826787">+7 (952) 782-67-87</a></p>
                             <p><i class="fas fa-envelope"></i> <a href="mailto:OO_FMSNO@bk.ru">OO_FMSNO@bk.ru</a></p>
                         </div>
@@ -201,6 +201,23 @@
                 <div class="admin-login-footer" id="admin-login-footer"><i class="fas fa-user-shield"></i><span>Вход для администратора</span></div>
             </div>
         </div>
+    
+            <div class="footer-legal">
+                <div class="footer-legal-row">
+                    <span class="age-marker-label">Возрастная маркировка:</span>
+                    <span class="age-marker" title="Информационная продукция для детей, не достигших 6 лет">0+</span>
+                    <span class="footer-legal-divider">|</span>
+                    <span>Федеральный закон №436-ФЗ «О защите детей от информации, причиняющей вред их здоровью и развитию»</span>
+                </div>
+                <div class="footer-legal-org">
+                    Общественная организация «Федерация мотоциклетного спорта Нижегородской области» (ОО «ФМСНО»)<br>
+                    ОГРН 1175275071509 &nbsp;·&nbsp; ИНН 5263133296 &nbsp;·&nbsp; КПП 526301001<br>
+                    Юридический адрес: 603051, г. Нижний Новгород, ул. Трансформаторная, д. 41
+                </div>
+                <div>
+                    © 2026 ФМСНО. Все права защищены. Использование материалов сайта возможно только с письменного разрешения правообладателя.
+                </div>
+            </div>
     </footer>
 
     <a href="https://t.me/fmsno_new" target="_blank" class="telegram-widget"><i class="fab fa-telegram"></i></a>
@@ -226,13 +243,38 @@
         </div>
     </div>
 
+    <!-- Yandex.Metrika counter (загружается только после согласия cookies, см. cookie-banner.js) -->
     <script type="text/javascript">
-        (function (m, e, t, r, i, k, a) { m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) }; m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a) })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-        ym(105649209, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
+        window.initYandexMetrika = function () {
+            if (window.__ymInitialized) return;
+            window.__ymInitialized = true;
+            (function (m, e, t, r, i, k, a) {
+                m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+                m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+            })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+            ym(105649209, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true, triggerEvent: true });
+        };
+        if (typeof window.FmsnoConsent !== 'undefined' && window.FmsnoConsent.get() === 'accepted') {
+            window.initYandexMetrika();
+        }
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/105649209" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+    <!-- Google Analytics (Consent Mode v2) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZELC5BVQM"></script>
-    <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-4ZELC5BVQM');</script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('consent', 'default', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'wait_for_update': 500
+        });
+        gtag('js', new Date());
+        gtag('config', 'G-4ZELC5BVQM', { 'anonymize_ip': true });
+    </script>
 
             <!-- env.js задаёт переменные окружения (токены) — ПЕРВЫМ -->
     <script src="env.js"></script>
@@ -240,6 +282,7 @@
     <script src="telegram.js"></script>
 
     <script src="js/notifications.js"></script>
+    <script src="js/cookie-banner.js"></script>
 <script src="js/app.js"></script>
     <script src="js/events-manager.js"></script>
     <script src="js/feedback.js"></script>
