@@ -10,24 +10,68 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://fmsno.ru/">
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://fmsno.ru/">
-    <meta property="og:title" content="Нижегородская Федерация Мотоциклетного Спорта - официальный сайт">
-    <meta property="og:description" content="Официальный сайт Федерация Мотоциклетного Спорта Нижегородской Области. Информация о соревнованиях, результатах, документах и дисциплинах мотоспорта в Нижегородской области.">
-    <meta property="og:image" content="https://fmsno.ru/images/og-image.jpg">
-    <meta property="og:site_name" content="Нижегородская Федерация Мотоциклетного Спорта">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://fmsno.ru/">
-    <meta property="twitter:title" content="Нижегородская Федерация Мотоциклетного Спорта - официальный сайт">
-    <meta property="twitter:description" content="Официальный сайт Федерация Мотоциклетного Спорта Нижегородской Области. Информация о соревнованиях, результатах, документах и дисциплинах мотоспорта в Нижегородской области.">
-    <meta property="twitter:image" content="https://fmsno.ru/images/og-image.jpg">
-
     <link rel="icon" href="images/short.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fmsno.ru/">
+    <meta property="og:title" content="Нижегородская Федерация Мотоциклетного Спорта — официальный сайт">
+    <meta property="og:description" content="Официальный сайт Федерации мотоциклетного спорта Нижегородской области. Соревнования, новости, документы, дисциплины мотоспорта.">
+    <meta property="og:image" content="https://fmsno.ru/images/og-image.jpg">
+    <meta property="og:site_name" content="ФМСНО">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://fmsno.ru/">
+    <meta name="twitter:title" content="Нижегородская Федерация Мотоциклетного Спорта — официальный сайт">
+    <meta name="twitter:description" content="Официальный сайт Федерации мотоциклетного спорта Нижегородской области. Соревнования, новости, документы, дисциплины мотоспорта.">
+    <meta name="twitter:image" content="https://fmsno.ru/images/og-image.jpg">
+
+
+    <!-- Structured Data: Organization + WebSite -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "SportsOrganization",
+                "@id": "https://fmsno.ru/#organization",
+                "name": "Федерация мотоциклетного спорта Нижегородской области",
+                "alternateName": "ФМСНО",
+                "url": "https://fmsno.ru/",
+                "logo": "https://fmsno.ru/images/fmsno_logo.png",
+                "description": "Официальная спортивная федерация мотоциклетного спорта Нижегородской области.",
+                "address": {
+                    "@type": "PostalAddress",
+                    "postalCode": "603051",
+                    "addressLocality": "Нижний Новгород",
+                    "streetAddress": "ул. Трансформаторная, д. 41",
+                    "addressRegion": "Нижегородская область",
+                    "addressCountry": "RU"
+                },
+                "email": "OO_FMSNO@bk.ru",
+                "telephone": "+7-952-782-67-87",
+                "sameAs": [
+                    "https://vk.com/fmsno",
+                    "https://t.me/fmsno_new"
+                ]
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://fmsno.ru/#website",
+                "url": "https://fmsno.ru/",
+                "name": "ФМСНО — официальный сайт",
+                "description": "Официальный сайт Федерации мотоциклетного спорта Нижегородской области",
+                "publisher": { "@id": "https://fmsno.ru/#organization" },
+                "inLanguage": "ru-RU"
+            }
+        ]
+    }
+    </script>
+
 </head>
 <body>
     <!-- Шапка -->
@@ -59,6 +103,8 @@
     </header>
 
     <main>
+        <h1 class="seo-h1">Нижегородская Федерация Мотоциклетного Спорта — официальный сайт</h1>
+
         <!-- Главный экран -->
         <section class="hero-section" style="background-image: url('images/hero-background.jpg');">
             <div class="hero-overlay"></div>
